@@ -25,6 +25,36 @@ js代码在js解释器运行时，分两个阶段：
     在JS中基本数据类型存储在栈区  number string boolean  undefiend  null
     引用数据类型存储在堆区 object function array
 
+=========================================
+上午几讲的几个概念：
+    EC
+        VO 变量对象 全局中的叫VO 
+        AO 活动对象 函数的叫AO
+    GO   window
+    ECStack
+
+    栈区 基本数据类型存储在栈区
+    堆区 引用数据类型存储在堆区 
+
+当找一个数据时，先去自己的上下文中找，如果自己的没有，
+就去它的父函数的所对应的上下文中的
+
+=========================================
+使用let或const声明变量有什么优势：
+
+在ES6中，为了弥补var声明变量的不足，ES6提出了let关键字。
+
+可以使用let关键字声明一个变量。
+
+var fs = require("fs")
+let fs = require("fs")
+const fs = require("fs")
+
+
+
+
+
+
 
 
 

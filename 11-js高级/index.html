@@ -263,54 +263,154 @@
 // }
 // var arr = [1,2,3]
 
+// function f(a){
+//     console.log(a) // 形参a 可以当作是函数内部的局部变量
+// }
+// f(1)
+// console.log(a)
+</script>
+
+
+<!-- ----------------------------------- -->
+
+<script>
 // 画下面的题的图
-var arr = [11,22];
-function f(ary){
-    console.log(ary)
-    ary[0] = 100;
-    ary = [666];
-    ary[0] = 0;
-    console.log(ary)
-}
-f(arr)
-console.log(arr)
+// var arr = [11,22];
+// function f(ary){
+//     // console.log(ary)
+//     ary[0] = 100;
+//     // console.log(ary)
+//     ary = [666];
+//     // console.log(ary)
+//     ary[0] = 0;
+//     console.log(ary)
+// }
+// f(arr)
+// console.log(arr)
 
+// 看到题  脑子里开始画图分析  画的多了  脑子里自然就有图了
+// var arr = [11,22];
+// function f(ary){
+//     console.log(ary)
+//     ary[0] = 100;
+//     ary = [666];
+//     ary[0] = 0;
+//     console.log(ary)
+// }
+// f(arr)
+// console.log(arr)
+</script>
 
+<!-- ----------------------------------- -->
+
+<script>
+//  直接看图
+// function f(){
+//     console.log(a)
+//     var a = 1;
+//     console.log(a)
+// }
+// f()
+
+// var a = 1;
+// var b = 2;
+
+// var a = b = 2; // var a = 2; b = 2;
+// delete a;
+// console.log(a) // 2
+// delete b;
+// console.log(b) //  b is not defined
+
+// var a = 1, b = 2; // var a = 1; var b = 2;
+// delete a;
+// console.log(a)
+// delete b;
+// console.log(b)
+
+// var a = 1;  也有对应的图  直接看图
+// var b = 1;
+// function f(){
+//     console.log(a, b)  // undefined 1
+//     var a = b = 2;
+//     console.log(a, b) // 2 2
+// }
+// f()
+// console.log(a, b) // 1 2
 </script>
 
 <!-- ----------------------------------- -->
 
 <script>
 
+// 父函数  // 全局代码是没有父函数的
+// function f(){  // f的父函数就是全局代码
+//     function g(){  // g的父函数就f
+
+//     }
+// }
 </script>
 
 <!-- ----------------------------------- -->
 
 <script>
-
+// var a = 1;
+// var obj = {
+//     name:"wangcai"
+// }
+// function f(){
+//     var a2 = a;
+//     obj2 = obj;
+//     a2 = a;
+//     obj2.name = "xiaoqiang"
+// }
+// f();
+// console.log(a)
+// console.log(obj)
 </script>
 
 <!-- ----------------------------------- -->
 
 <script>
+// 使用let或const声明变量有什么优势
+// 1）let 声明的变量没有提升
+// console.log(a) // 理解1）let声明的变量是不会提升    2）let声明的变量提升  但是没有赋值  没有赋值  你是不能获取
+// let a = 1; // ReferenceError: Cannot access 'a' before initialization
 
-</script>
+// 2）let+{}会形成块级作用域
+// if(true){ var a = 100; }  console.log(a) // 100  a全局变量
+// 由于let外面包了一个{}  只能在这个{}内部访问a 
+// {}内部叫块级作用域  在块级作用域之外是不能访问它里面的数据
+// if(true){ let a = 100; }  console.log(a) // a is not defined
 
-<!-- ----------------------------------- -->
+// 3）let声明的变量不会挂载到GO上
+// let a = 1;
+// console.log(window.a) // undefined
 
-<script>
+// 4）let不能重复声明
+// var a = 1;  重复声明是不足
+// var a = 2;
+// let a = 1;
+// let a = 2;
+// console.log(a); // 'a' has already been declared
 
-</script>
+// 开发中基本都是let来声明变量   const来声明常量
 
-<!-- ----------------------------------- -->
+// const声明的变量是不能修改的，所以说也叫常量
+// let a = 1;
+// a = 2;
+// a = 3;
+// console.log(a);// 3 变量
 
-<script>
+// const b = 1;  // const声明的变量是不能修改（常量）
+// b = 2;
+// console.log(b) // Assignment to constant variable.
 
-</script>
+// const也不能重复声明  
+// const也不能提声
 
-<!-- ----------------------------------- -->
+// const和let的区别：const不能修改变量的值（常量）
 
-<script>
+
 
 </script>
 
