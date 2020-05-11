@@ -1,0 +1,364 @@
+<script>
+    // js高级    之前听过的    就当复习了  
+    
+    // 目的：
+    //  1）笔试   
+    //  2）能看懂一些源码   jq   vue-router   vuex    minivuerouter   minivuex
+    //  3）更有利于学习vue  react
+
+    // js代码在js解释器运行时，分两个阶段：
+    //  1）js代码预编译   
+    //  2）js代码执行
+
+    // 编程语言分类：
+    // 1）编译性     代码--》计算可以识别的代码   c   c++  只需要编译一次
+    //        需要有一个编译器   以后运行的都是编译后的代码  性能高
+    // 2）解释性    有一个解释器    代码--》计算可以识别的代码  js  python
+    //        每一次运行代码都是要重新进行解释   性能低
+
+    // js代码段：一个script就是一个js代码段 
+
+    // 每一个阶段做的事情是不一样的
+    // 预编译阶段：
+    //     把加var的变量进行提升  变量的声明提升了  赋值是没有的提升  提升到了代码段最前面
+    //     把function声明的函数也进行提升  和变量的提升不一样   函数名和函数值都进行提升
+
+
+    // var a = 110; // 变量的声明+变量的赋值
+    // var a;  变量的声明    提升的都是变量的声明
+    // a = 110;  变量的赋值  不会提升
+    // var name = "xxx";
+
+    // function f(){  // 使用function关键字声明了一个函数 函数名是f  函数的值就是函数体
+    //     console.log("f....")
+    // }
+
+    // 现在写代码基本上不会用加var变量   一般要么是let   要第是const
+    // 但是有些面试题中有加var变量
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // 下面的代码在解释器运行时，分与两个阶段
+    //   1）预编译  把加var的变量提升   提升到代码段最前面    把function声明的函数（函数名和函数值）都进行提升
+    //   2）执行 代码一行一行执行
+    // var a = 1;
+    // var b = 2;
+    // function f(){
+    //     console.log("f...")
+    // }
+    // var g = function(){  // 不是函数声明   函数表达式  本质还是变量 
+    //     console.log("g...")
+    // }
+
+    // --------------------- 提升
+    // var a;
+    // var b;
+    // function f(){console.log("f...")}
+    // var g;
+
+    // --------------------- 执行  该赋值就赋值   该执行就执行
+    // a = 1;  // 赋值
+    // b = 2;  // 赋值
+    // g = function(){console.log("g...")}
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // 看几个题目
+    // console.log(a);  // undefiend   js解释器在运行代码时分成两个阶段：预编译  执行
+    // var a = 111;
+    // console.log(a);  // 111
+
+    // console.log(i);
+    // for(var i=0; i<2; i++){
+    //     console.log("for....")
+    // }
+    // console.log(i)
+
+    // console.log(a,b)  // un  un 
+    // for(var a=1; a<2; a++){
+    //     for(var b=1; b<2; b++){
+
+    //     }
+    // }
+    // console.log(a,b)  // 2 2
+
+    // 是加var的变量才会提升  没有var的变量不会提升
+    // 代码是一行一行执行的 执行91行时  内存中并没有存储a
+    // 打印a时，报了a没有定义
+    // 记住：undefiend 是 定义了 没有赋值  
+    //       not defined  是 压根就没有定义
+    // console.log(a)  // a is not defined  报错了  有的报错  后面的代码就不再执行
+    // a = 1;
+    // console.log(a)
+
+    // 总结：
+    // 1）什么是声明：在js中 可以使用var声明一个变量  使用function声明一个函数
+    // 2）提升声明：加var   function
+    // 3）预编译  执行
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // 全局代码和局部代码
+    // 一个函数就是一个局部代码，函数之外的代码叫全局代码
+
+    // var a = 1;  // 在函数之外写的代码叫全局代码
+    // function f(){  // 函数声明f就是一个函数代码
+    //     console.log("f...")
+    // }
+
+    // 全局代码在执行时会产生全局的执行上下文（Execution context）（EC）
+    // 局部代码在执行时会产生局部的执行上下文（Execution context）
+
+    // 执行上下文都放在执行上下文栈中  栈是先进后出的结构  （杯子中放鸡蛋） ECStack
+
+    // var a = 1;  // 全局代码肯定要产生全局的执行下文
+    // function g(){
+    //     console.log("g....")
+    // }
+    // function f(){
+    //     g(); // 函数调用  肯定会产生一个局部执行上下文
+    //     console.log("f...")
+    // }
+    // f(); // 是函数执行时才能产生函数的执行上下文  声明是不会产生的
+
+    // ECStack  Execution context Stack  执行上下文栈
+    // EC 执行上下文  包含两个东西：VO（变量对象）  AO（活动对象）
+    //   全局EC   EC(G)
+    //   局部EC
+    // Scope 作用域 
+    // Scope Chain 作用域链
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// 加var的变量和不加var的变量到底有什么区别
+// 1）在全局代码中  加var的变量会提升  没有var的变量不会提升
+// console.log(a); // a is not defiend
+// a = 1;
+
+// 2）在全局代码中  加var的变量和不加var的变量都会作为window对象的属性
+// var a = 1;  // 全局变量
+// b = 2;  // 全局变量
+// console.log(window.a)
+// console.log(window.b)
+
+// 3)在局部代码，没有var的变量也是全局变量，也会作为window的属性
+// function f(){
+//     a = 1; // 全局变量  也会作为window的属性
+// }
+// f();
+// console.log(window.a)
+
+// 4) 在局部代码，加var的变量是局部变量，不会作为window的属性
+// function f(){
+//     var a = 1; // 全局局部  不会作为window的属性
+// }
+// f();
+// // 访问一个对象上没有属性得到的是undefiend
+// console.log(window.a) // 你尝试访问一个对象上面不存在的属性 结果？
+
+// 5）没有var的变量都是全局变量  都会作为window的属性
+//    一定要避免使用没有var的变量  js 7天时间   灵活
+
+// 6）手动删除一个对象上的属性  加var的变量不能被删除  不加var的可以被删除
+// var a = 1; 
+// b = 2;
+// delete a;
+// delete b;
+// console.log(a) // 1  加var的变量通过delete是删除不掉的
+// console.log(b) // b is not defined  删除了 内存就没有了  
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// 做一个小题目
+// var n = 100;
+// console.log(n); 
+// console.log(window.n);
+// m = 200;
+// console.log(m)
+// console.log(x)
+
+// 函数内部的局部变量，不会提升到代码段的最前面，仅仅提升到函数代码块的最前面
+// console.log(a); // a is not defined a是局部变量   在全局代码中是不能访问局部变量的
+// function f(){
+//     console.log(a)
+//     var a = 1;  // 此处的a也会提升  提升到了函数代码块的最前面
+//     console.log(a)
+// }
+// f()
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// 不管什么条件，只要是的全局加var的变量 都会进行提升
+// console.log(a, b)
+// if(true){
+//     var a = 1;
+// }else{
+//     var b = 2;
+// }
+// console.log(a, b)
+
+// let obj = {
+//     name:"wangcai",
+//     age:100
+// }
+// in 仅仅是一个运算符  和 typeof一样
+// console.log("name" in obj)  // in是一个运算符 用来判断一个对象有没有这个属性
+
+// var a; 
+// console.log(a)  // und 
+// if(("a" in window)){
+//     a = 110;
+// }
+// console.log(a) // 100
+
+// console.log(a)  //und
+// if(("a" in window)){
+//     var a = 110;
+// }
+// console.log(a) // 100
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // var a = 110; // 全局变量  它会作为GO的属性
+    // console.log(a)
+    // console.log(window.a)
+
+    // function f(){    // 也是全局的函数
+    //     console.log("f...")
+    //     function g(){  // 函数里面的函数是不能挂载到GO上的
+    //         console.log("g...")
+    //     }
+    // }
+    // f() // 先不考虑函数的执行上下文
+    // window.f(); // f也会作为window的方法 
+    // 尝试去GO中找g  g没有 是undeined   undefiend()
+    // g is not a function 
+    // window.g(); // g is not a function
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// 在JS中基本数据类型存储在栈区  引用数据类型存储在堆区
+// var a = 1;   // 画图分析了  看分析的图片
+// var b = "hello";
+// function f(){
+//     console.log("f....")
+// }
+// var arr = [1,2,3]
+
+// 画下面的题的图
+var arr = [11,22];
+function f(ary){
+    console.log(ary)
+    ary[0] = 100;
+    ary = [666];
+    ary[0] = 0;
+    console.log(ary)
+}
+f(arr)
+console.log(arr)
+
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
