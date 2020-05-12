@@ -538,33 +538,167 @@
 <!-- ----------------------------------- -->
 
 <script>
-    let a = {
-        n:110
+    // let a = {
+    //     n:110
+    // }
+    // let b = a;
+    // b = b.m = {
+    //     n:666
+    // }
+    // console.log(a)
+    // console.log(b)
+
+    // console.log(f)
+    // console.log(a)
+    // var a = 10;
+    // function f(){
+    //     console.log(b)
+    //     var b = 20;
+    //     console.log(b)
+    // }
+    // f()  
+    // console.log(a)
+    // console.log(f)
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // // 先声明一个函数  然后调用
+    // function f(){
+    //     console.log("f...")
+    // }
+    // f(); // 调用 在任何地方手动调用
+
+    // 自执行函数  
+    // (function f(){
+    //     console.log(".....")
+    // })()
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// -------- 题目1
+// console.log(a)
+// if(!('a' in window)){
+//     var a = 1;
+// }
+// console.log(a)
+
+// -------- 题目2
+// 在js中有的代码出错了，后面的代码不会执行
+// console.log(f)  // 由于下面的funciton是在条件中  仅仅是把函数名提升  值是没有提升  und
+// f() // und()  报错   因为und不能当作函数   f is not funciotn
+// // 由于下面的报错了  下面的代码就不再执行了
+// // 当然JS中有的错误，不影响后面代码的执行
+// if('f' in window){
+//     f()
+//     function f(){ // 在一个条件中 仅仅提升函数名 可以把f当成变量
+//         console.log("f...")
+//     }
+// }
+// f()
+
+// -------- 题目3  先放一下
+// f = function(){ return true; }
+// g = function(){ return false; }
+// (function(){
+//     if(g() && [] == ![]){
+//         f = function(){ return false; }
+//         function g(){ return true}
+//     }
+// })();
+// console.log(f())
+// console.log(g())
+
+// -------- 题目4
+// console.log(a,b)
+// var a = 12, 
+//     b = 12;
+// function fn(){
+//     console.log(a, b);
+//     var a = b = 13;
+//     console.log(a, b)
+// }
+// fn()
+// console.log(a, b)
+
+// -------- 题目5  不画了
+// console.log(a, b, c)
+// var a = 12, 
+//     b = 13, 
+//     c = 14;
+// function fn(a){  // 形参是函数内部的局部变量
+//     console.log(a, b, c)
+//     a = 100;  // 是函数内部的局部变量a
+//     c = 200;  // 全局的c
+//     console.log(a, b, c)
+// }
+// b = fn(10);
+// console.log(a, b, c)
+
+// -------- 题目6
+// function sum(a){  // 形参是函数内部的局部变量
+//     console.log(a);  // SyntaxError: Identifier 'a' has already been declared
+//     let a = 100;  // let不能重复声明 
+//     console.log(a);
+// }
+// sum(200)
+
+// -------- 题目7
+// var ary = [12,23]
+// function fn(ary){
+//     console.log(ary)
+//     ary[0] = 100;
+//     ary = [100]
+//     ary[0] = 0;
+//     console.log(ary)
+// }
+// fn(ary)
+// console.log(ary)
+
+// -------- 题目8
+// var i = 0;
+// function A(){
+//     var i = 10;
+//     function x(){
+//         console.log(i)
+//     }
+//     return x;
+// }
+// var y = A();
+// y();
+// function B(){
+//     var i = 20;
+//     y()
+// }
+// B()
+
+// -------- 题目9
+
+
+// -------- 题目10
+// -------- 题目11
+// -------- 题目12
+// -------- 题目13
+// -------- 题目14
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// ======================  作业
+let a = 0; 
+    b = 0; 
+function A(a){
+    A = function(b){
+        alert(a+b++)
     }
-    let b = a;
-    b.m = b = {
-        n:666
-    }
-    console.log(a)
-    console.log(b)
-</script>
-
-<!-- ----------------------------------- -->
-
-<script>
-
-</script>
-
-<!-- ----------------------------------- -->
-
-<script>
-
-</script>
-
-<!-- ----------------------------------- -->
-
-<script>
-
+    alert(a++)
+}
+A(1);
+A(2);
 </script>
 
 <!-- ----------------------------------- -->
