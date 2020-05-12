@@ -417,7 +417,136 @@
 <!-- ----------------------------------- -->
 
 <script>
+    // f()  // 之所以可以在这里调用函数  原因在下面的函数声明和赋值都提升
+    // function f(){
+    //     console.log("f....")
+    // }
 
+    // g()
+    // console.log(a)
+    // var a = 110;
+    // function g(){
+    //     k()
+    //     console.log(b)
+    //     console.log("g..")
+    //     var b = 2;
+    //     console.log(b)
+
+    //     function k(){
+    //         console.log("k....")
+    //     }
+    // }
+    // g();
+
+    // 函数表达式  本质是一个变量  这个变量的值是函数
+    // 提升仅仅是变量的声明  var f 后面值是不会提升
+    // f() // 在函数表达式上面调用，不OK，因为你仅仅是提升f
+    //     // f这个值还是und   und()  f is not a function
+    // var f = function(){
+    //     console.log("f...")
+    // }
+    // f()
+        
+    // 函数表达式可以指定函数名  但是外面不能通过这个函数名调用这个函数
+    // 这个函数名是可以在函数内部使用
+    // var k = function x(){  // 函数表达式也可以指定函数名
+    //     console.log(x) // var a = 110;  x是函数名  
+    //     console.log("666")   
+    // }
+    // // x() // x is not defined
+    // k()
+
+    // console.log(x) // x is not defined
+    // var k = function x(){
+    // }
+
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // console.log(fn)  // 函数
+    // // window.fn() // window.fn is not a function
+    // // console.log(window.fn)  // undefined
+    // // fn()  // fn...
+    // // 对于函数声明的提升  如果有条件  结果是什么？
+    // if("fn" in window){
+    //     fn()  // fn...
+    //     function fn(){
+    //         console.log("fn...")
+    //     }
+    // }
+    // // fn() // fn...
+
+
+    // console.log(fn) 
+    // fn() 
+    // if("fn" in window){
+    //     fn()  
+    //     function fn(){
+    //         console.log("fn...")
+    //     }
+    // }
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // fn()
+    // function fn(){ console.log(1) }
+    // fn()
+    // function fn(){ console.log(2) }
+    // fn()
+    // var fn = function(){ console.log(3) }
+    // fn()
+    // function fn(){ console.log(4) }
+    // fn()
+    // function fn(){ console.log(5) }
+    // fn()
+
+    // function g(){
+    //     console.log("111")
+    // }
+    // var g = function(){
+    //     console.log("222")
+    // }
+    // g()
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    // 画图
+    // let a = 12;
+    // var b = a;
+    // b = 13;
+    // console.log(a)
+
+    // let a = {n:12}
+    // let b = a; 
+    // b['n'] = 13;
+    // console.log(a.n)
+
+    // let a = {n:12}
+    // let b = a; 
+    // b = {n:13}
+    // console.log(a.n)
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+    let a = {
+        n:110
+    }
+    let b = a;
+    b.m = b = {
+        n:666
+    }
+    console.log(a)
+    console.log(b)
 </script>
 
 <!-- ----------------------------------- -->
@@ -438,6 +567,11 @@
 
 </script>
 
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
 
 
 
