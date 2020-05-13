@@ -689,16 +689,74 @@
 
 <script>
 // ======================  作业
-let a = 0; 
-    b = 0; 
-function A(a){
-    A = function(b){
-        alert(a+b++)
-    }
-    alert(a++)
-}
-A(1);
-A(2);
+// let a = 0; 
+//     b = 0; 
+// function A(a){
+//     A = function(b){
+//         alert(a+b++)
+//     }
+//     alert(a++)
+// }
+// A(1);
+// A(2);
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// var a 肯定会提升  
+// 代码从上到下开始执行  ECStack EC(全局) 
+// var a  VO  声明的全局变量会保存到VO
+// 声明的全局变量也会保存到GO一份，把全局变量作为window的一个属性
+// var a = 12;  12赋值给a所指向的内存空间
+// VO中的a里面就保存了12
+// 一旦VO中的a发生了改变   GO中的a也会跟着改变
+// console.log(a)
+// var a = 12;
+// a = 13;  // 把13赋值给a所指定的内存空间  VO中的a所对应栈内存空间中数据就变成了13
+// // GO中的a所对应的数据也会发生改变 
+// console.log(a)
+// console.log(window.a)
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// 预编译：看没有没var   看有没有function  过
+// 代码开始执行：ECStack  EC(G)  VO  VO中没有保存数据
+// console.log(a)  // a is not defined   找a 先去VO中找  找不到  然后去GO中找  由于下面的代码还没有执行  GO中也没有数据   就报错了
+// window.a = 13;
+
+ 
+// window.a = 13;  // 相当于给GO中放了一个a属性
+// console.log(a) // 13  // 先去VO中找，找不到，就去GO中找 
+
+// var a = 110; // 把a放VO一份  然后放到GO一份   其中a的值变了   VO和GO中的值都会改变
+// window.a = 110; // 此时a仅仅是window的属性  a仅存在GO中的  VO中是没有的
+
+// 预编译：var  function  过
+// window.a = 13;  // 向GO中放一个a
+// console.log(a)  // 先去VO（加var的全局变量才会放到vo中）中找  然后去GO中找  找到了  a的值是13
+// a = 14; // 14赋值给a所对应的内存空间  找a  先去VO中找  找不到  再才GO中找  GO中有a  14赋值给GO中a所对应的内存空间
+// console.log(window.a)  // 直接去GO中找  14
+// console.log(a)  // a 先去VO中找  找不到  再去GO中找  找到了  14
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// let和var最大区别？
+//    let/const创建的变量，不存在变量的提升
+//    只有var 和 funciotn声明变量和函数才有提升
+
+// import xx from "vue"  也是创建了一个变量xx  xx也不会提升
+
+// let声明的是全局变量  放到VO中一份
+// let声明的变量 不会放到GO的
+// let a = 12;
+// a = 13;  // 13赋值给a所对应的内存空间  找a  先去VO中找  找到了  13
+// console.log(a)  // 先去VO中找   找到了  13 
+// console.log(window.a) // 明确了要去GO中找   GO中是没有的
 </script>
 
 <!-- ----------------------------------- -->
@@ -708,8 +766,224 @@ A(2);
 </script>
 
 
+<!-- ----------------------------------- -->
+
+<script>
+// 提升   x   y   fn 
+// EC(G)
+//    VO
+//       x = 100 ==> 1000
+//       y = 100
+//       fn = 0xabc
+// GO
+//    x = 100 ==> 1000
+//    y = 100
+//    z = 300
+// var x = 100,
+//     y = 100;
+// function fn(){   // fn的父函数是全局代码产生的EC  就是EC(G)
+//     // EC(fn)  入栈
+//     //   AO
+//     //     y = 200
+//     var y = 200;
+//     console.log(x); // 100 // 找x  先在自己的EC中找 就去父函数所对应的EC中的
+//     x = 1000;  // 把1000赋给x所对应栈内存  找x   就去父函数所对应的EC中的
+//     console.log(y); // 200 // 找y   先在自己的EC中找  有  就使用自己EC中的y
+//     // console.log(z); // 找z     先在自己的EC中找  没有  就去父函数所对应的EC中的 也没有  然后去GO中的  GO中也没有z  就报错
+//     z = 300 // 把300赋值给z所指向的内存空间  找z  自己EC 没有   找父EC  没有  把z挂到GO上，作为window的一属性
+// }
+// fn()
+// console.log(z)
+// console.log(window.z)
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// EC(G)
+//   VO
+//     var a  1
+//     fn  0xabc
+// GO
+//     var a  1
+//     fn
+// var a = 1;  
+// function fn(a){
+//     // EC(fn)  1)形参赋值
+//     //   形参也是局部变量
+//     //   AO
+//     //      a = 1
+//     //        = 函数
+//     //        = 函数 ===>  2
+//     //  执行
+//     console.log(a)  // 函数
+//     var a = 2;  // AO中有a  就不再提升  
+//     function a(){}
+//     console.log(a)  // 2
+// }
+// fn(a)
+// console.log(a) // 1
+
+// 如果变量名和函数名是相同的 函数先提升
+// 预编译：
+//    f ==》函数
+//       var f也要提升  由于f之前提升过了  就不会提升
+// 执行：
+//    f = 2  
+//    funciton f(){}  在预编译期间就处理过了  过
+//    log(f)  ==> 2 
+// var f = 2;
+// function f(){}
+// console.log(f)
 
 
+// var a = 1;  
+// function fn(a){
+//     console.log(a)  
+//     var a = 2; 
+//     function a(){}
+//     console.log(a)  
+// }
+// fn(a)
+// console.log(a) 
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+// EC(G)
+//    VO
+//       var a 1
+//       func b  0x123
+// GO
+//    var a 1
+//    func b 0x123
+// var a = 1;
+// function b(){
+//     // EC(b)
+//     //   AO
+//     //     var a und
+//     if(!a){  // und默认转成false 
+//         var a = 2;  // 赋值操作  
+//     }
+//     console.log(a)  // 2
+// }
+// b()
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<!-- <script>
+// EC(G)
+//    VO
+//      var a  und ==> 10
+//      var b  und ==> 11
+//      var c  und ==> 12 ==> 3
+//      f  0x113
+var a = 10, b = 11, c = 12;
+function f(a){
+    // EC(f)
+    //    AO
+    //     a  10 ==> 1
+    //     b  und ==> 2 
+    a = 1;
+    var b = 2;
+    c = 3; // 把3赋给c所对应的内存空间  找c  EC(f)没有  就去EC(G)找
+}
+f(10)
+console.log(a)
+console.log(b)
+console.log(c)
+</script> -->
+
+<!-- ----------------------------------- -->
+
+<!-- <script>
+// EC(G)
+//    VO
+//       var a  und 
+// GO
+//    a  und
+// 
+if(!('a' in window)){
+    var a = 110;
+}
+console.log(a)
+</script> -->
+<!-- ----------------------------------- -->
+
+<!-- <script>
+    // arguments  
+    // 在每一个函数内部都有一个arguments 用收集实参
+    // 只能在函数内部使用arguemnts 
+    function f(x,y,z){
+        console.log(x,y,z)
+        // arguments会收集实参  实参你不只赋值给了形参
+        // 你也把实参扔到arugments中
+        // argumetns是一个伪数组 不是真正的数据
+        console.log(arguments)
+    }
+    // arguments is not defined
+    console.log(arguments)
+    f(1,2,3)
+</script> -->
+
+
+<!-- ----------------------------------- -->
+
+<!-- <script>
+function f(x,y,z){
+    // console.log(x,y,z,arguments)
+    // 虽然arguments是一个伪数组，也可以通过下标进行访问和设置
+    // arguments[0] = 100; 
+
+    // argumentst和形参之间有一一对应的关系  一个改变另一个也会改变
+    // console.log(arguments)
+    // console.log(x)
+
+    // 改变了形参肯定会影响arguments  改变了argumetns肯定也会影响形参的值
+    // y = 200;
+    // console.log(y)
+    // console.log(arguments)
+
+    // arguments[2] = 300;
+    // console.log(x,y,z)
+}
+f(1,2,3)
+</script> -->
+
+<!-- ----------------------------------- -->
+
+<!-- <script>
+var a = 4;
+function f(x,y,a){
+    console.log(a)
+    arguments[2] = 10;
+    console.log(a)
+}
+a = f(1,2,3);
+console.log(a)
+</script> -->
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
+
+<!-- ----------------------------------- -->
+
+<script>
+
+</script>
 
 
 
