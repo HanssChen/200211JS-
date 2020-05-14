@@ -135,7 +135,7 @@
     console.log(x)
 </script> -->
 
-<script>
+<!-- <script>
     let a = 0,b = 0;
     function A(a){
         A = function(b){
@@ -145,7 +145,19 @@
     }
     A(1);
     A(2);
-</script>
+</script> -->
+<!-- 
+<script>
+    let a = 0,b = 0;
+    function A(a){
+        A = function(b){
+            alert(a+b++)
+        }
+        alert(a++)
+        return A
+    }
+    A(1)(2)
+</script> -->
 
 <!-- <script>
     var n = 0;
@@ -162,6 +174,30 @@
     c();
     console.log(n);
 </script> -->
+
+<script>
+    // (function f(){
+    //     console.log("xxx")
+    // })()
+
+    // (function f(){
+    //     console.log("xxx")
+    // }())
+
+    // +function f(){
+    //     console.log("xxx")
+    // }()
+</script>
+
+<script>
+    // 立即调用函数表达式（IIFE）
+    var test = (function(i){
+        return function(){
+            alert(i *= 2)
+        }
+    })(2);
+    test(5);
+</script>
 
 
 

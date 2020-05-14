@@ -239,6 +239,55 @@ AO和VO一样，如果在函数内存，存储的局部变量，都是存储在A
 
 
 =========================================
+立即执行函数表达式 IIFE
+写法一：
+    (function f(){
+        console.log("xxx")
+    })()
+
+写法二：
+    (function f(){
+        console.log("xxx")
+    }())
+写法三：  + - ! 
+    +function f(){
+        console.log("xxx")
+    }()
+
+=========================================
+JS高级：
+    JS高级特性  
+        Stack
+        Heap
+        ECStack  
+        EC  
+        VO   
+        AO   
+        GO  
+        SCOPE  
+        ScopeChain  
+        Closure
+        Let   Var   Const   ES6的内容  
+    JS OOP
+        .... 
+
+Vue:
+    高级（基本重新复习）
+    elm  
+    后台管理系统    1周多  
+
+React:
+    比vue会难一点 
+
+Webpack打包  2天 
+
+小程序员开发：
+    uniapp   vue语法  
+
+大量的面试题讲解  
+
+
+
 
 
 
