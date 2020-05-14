@@ -30,7 +30,7 @@
     具体浏览器的垃圾回收机制，自己去看看掘进。
 
 -->
-<script>
+<!-- <script>
     var i = 5;
     function fn(i){
         return function(n){
@@ -88,4 +88,97 @@
     // console.log(i)
 
     
+</script> -->
+
+
+<!-- <script>
+    // 函数每一次执行都会形成全新的上下文，和之前的形成的没有必然关系
+    var i = 20;
+    function fn(){
+        i -= 2;
+        var i = 10;
+        return function(n){
+            console.log((++i)-n)
+        }
+    }
+    var f = fn();  // 这个样小函数没有释放掉
+    f(1);
+    f(2);
+    fn()(3); // 直接调用也不会让小函数释放掉
+</script> -->
+
+<!-- <script>
+    let x = 5;
+    function fn(x){
+        return function(y){
+            console.log(y+(++x))
+        }
+    }
+    let f = fn(6);
+    f(7);
+    fn(8)(9);
+    f(10);
+    console.log(x)
+</script> -->
+
+<!-- <script>
+    let x = 5;
+    function fn(){
+        return function(y){
+            console.log(y+(++x))
+        }
+    }
+    let f = fn(6);
+    f(7);
+    fn(8)(9);
+    f(10);
+    console.log(x)
+</script> -->
+
+<script>
+    let a = 0,b = 0;
+    function A(a){
+        A = function(b){
+            alert(a+b++)
+        }
+        alert(a++)
+    }
+    A(1);
+    A(2);
 </script>
+
+<!-- <script>
+    var n = 0;
+    function a(){
+        var n = 10;
+        function b(){
+            n++;
+            console.log(n);
+        }
+        b();
+        return b;
+    }
+    var c = a();
+    c();
+    console.log(n);
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
