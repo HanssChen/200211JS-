@@ -1,0 +1,163 @@
+<!-- 闭包：https://www.cnblogs.com/malinlin/p/6028842.html -->
+
+<!-- 
+    进行协作开发，A程序员和B程序员开发完后，要进行代码的合并。可以就会遇到
+    变量名和函数名同名的问题，这种叫全局变量污染。
+
+    如何不让它污染：
+        把A程序员的代码放到一个局部的EC，把B程序员的代码放到一个局部的EC。
+        由于EC是独立，这样就可以避免它们变量的污染。
+
+        A:
+            function f(){
+                var a = 110;
+            }
+
+        B:
+            function f(){
+                var a = 110;
+            }
+        
+        此时，又面临了二个问题：
+            1）函数名还可能同名
+            2）你需要手动调用函数
+
+        解决上面的问题，可以把A和B的代码放到一个IIFE中，如下：
+            A：
+                (function(){
+                    var a = 1;
+                })()
+
+            B：
+                (function(){
+                    var a = 1;
+                })()
+
+    为了保护一些变量（数据），防止它们被污染，我们可以放到一个EC(IIFE),
+    比如，我们封装一些插件，类库，为了防止我们定义的变量名和方法名与用户
+    定义的冲突，我们就可以把代码放到一个EC(IIFE)。
+
+    这个独立执行上下文，就可以对里面变量或函数进行保护，避免了和外面的
+    变量名和函数名冲突了，这个独立的执行上下文，有些人就叫它闭包（不太准确）
+
+    jq源码：
+        (function(global, factory){
+            "use strict";
+
+        })(window, function(window,xxx){
+            // jq的源码
+
+            var name = "wangcai";
+            functon f(){
+
+            }
+        })
+
+    如何去使用一个闭包中的数据数据？或 如何把一个闭包中的数据暴露到外面？
+        方式一：
+             var obj = (function(){
+                var myname = "wangcai";
+                function sayName(){
+                    console.log("sayName...")
+                }
+                return {
+                    myname,
+                    sayName
+                }
+             })()
+
+            //  console.log(myname)  // myname is not defined
+            console.log(obj.myname)
+            console.log(obj.sayName())
+
+ -->
+<!-- <script>
+     // 下面的局部执行上下文中的栈内存和堆内存并不能释放掉
+     // 一个没有被释放掉内存的独立的EC，叫闭包
+     var obj = (function(){
+         var myname = "wangcai";
+         function sayName(){
+             console.log("sayName...")
+         }
+         return {
+             myname,
+             sayName
+         }
+     })()
+
+    //  console.log(myname)  // myname is not defined
+    console.log(obj.myname)
+    console.log(obj.sayName())
+ </script> -->
+
+<!-- 
+     什么是闭包：
+        1）一个局部EC，可以对它里面数据进行保护，这个EC就是闭包
+            (function(){
+                var a =110
+            })()  // 这个EC就是闭包  一小部分人这样认为的  不太对
+
+        2）一个没有被释放内存的EC，就是一个闭包
+            var obj = (function(){
+                var myname = "wangcai";
+                function sayName(){
+                    console.log("sayName...")
+                }
+                return {
+                    myname,
+                    sayName
+                }
+            })()  // 一个没有释放内存的EC，才叫闭包  这也是一小部分人认为  也有点不太对
+        
+        上面的两种说法都有点不太对。
+  -->
+
+<!-- 
+    如何去使用一个闭包中的数据数据？或 如何把一个闭包中的数据暴露到外面？
+        方式二：
+           (function () {
+                var myname = "wangcai";
+                function sayName() {
+                    console.log("sayName...")
+                }
+                // 把数据挂载到GO上  你挂载到了GO上   就可以访问  
+                window.myname = myname;
+                window.sayName = sayName;
+            })()
+            console.log(myname)
+            sayName()
+          
+ -->
+<!-- <script>
+    (function () {
+        var myname = "wangcai";
+        function sayName() {
+            console.log("sayName...")
+        }
+        // 把数据挂载到GO上  你挂载到了GO上   就可以访问  
+        // GO中本身就有很多变量名和方法名   你挂载的可以会和人家本有的冲突
+        // window.alert = 123;  // 把人家的alert赋盖掉了
+        window.myname = myname;
+        window.sayName = sayName;
+    })()
+    console.log(myname)
+    sayName()
+    alert("xxx") // alert is not a function
+</script> -->
+
+<!-- 
+    到底什么才是闭包？
+      1）首先在形成一个函数的执行上下文，这个函数的执行上文，可以对它里面数据进行保护，避免和外界的数据冲突。
+      2）需要去延长它内部数据的生命周期
+         A，可以返回一个对象，把数据放到对象中也可以，外面引用这个对象，也可以达到延长函数内部数据的生命周期的目的。
+         B，一般认为，返回一个函数，这个函数引用外面函数中的数据，全局中引用这个函数，从而达到两个目录：保护，保存
+
+    一个没有被销毁的函数执行上下文就是一个闭包（函数嵌套）。
+
+    low说法：一个大函数里面嵌套了一个小函数，小函数引用了大函数中的数据，里面的小函数叫闭包。
+-->
+
+<script>
+    // 写一个选项卡加深对闭包的理解
+    
+</script>

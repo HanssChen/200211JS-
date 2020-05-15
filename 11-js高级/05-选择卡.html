@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./reset.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tabBox{
+            width: 500px;
+            margin: 20px auto;
+        }
+        .tabBox .tab{
+            position: relative;
+            top: 1px;
+        }
+        .tabBox .tab li{
+            float: left;
+            margin-right: 10px;
+            padding: 0 10px;
+            height: 35px;
+            line-height: 35px;
+            font-size: 14px;
+            border: 1px solid #aaa;
+            background-color: beige;
+            cursor: pointer;
+        }
+        .tabBox .tab li.active{
+            background: white;
+            border-bottom: white;
+        }
+        .clearfix{
+            overflow: hidden;
+        }
+        .tabBox div{
+            display: none;
+            border: 1px solid #aaa;
+            background: #fff;
+            height: 100px;
+            padding: 10px;
+        }
+        .tabBox div.active{
+            display: block;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="tabBox" id="tabBox">
+        <ul class="tab clearfix">
+            <li class="active">html</li>
+            <li>css</li>
+            <li>js</li>
+        </ul>
+        <div class="active">html是超文本标签语言</div>
+        <div>css是层叠样式表</div>
+        <div>javascript是一门脚本语言</div>
+    </div>
+    <script src="./tabbar.js"></script>
+</body>
+</html>
