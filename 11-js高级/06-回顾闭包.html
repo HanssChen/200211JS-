@@ -1,0 +1,66 @@
+<div id="btn">
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+</div>
+
+<script>
+    var btnBox = document.getElementById("btn"),
+        btns = btnBox.getElementsByTagName("button");
+
+    // 这样写不OK
+    // for(var i=0; i<btns.length; i++){
+    //     btns[i].onclick = function(){
+    //        alert(i)
+    //     }
+    // }
+
+    // 解决办法1： 使用自定义属性
+    // for(var i=0; i<btns.length; i++){
+    //     // console.log(i)
+    //     btns[i].index = i
+    //     // console.log(btns[i].index)
+    //     btns[i].onclick = function(){
+    //         alert(this.index)
+    //     }
+    // }
+
+    // // 解决办法2：闭包
+    // for(var i=0; i<btns.length; i++){
+    //     btns[i].onclick = (function(i){
+    //         // console.log(i)
+    //         return function(){
+    //             alert(i)
+    //         }
+    //     })(i)
+    // }
+
+    // 解决办法3：let  let+{}块级作用域（EC）
+    for(let i=0; i<btns.length; i++){
+        btns[i].onclick = function(){
+            alert(i)
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

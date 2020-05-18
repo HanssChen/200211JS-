@@ -1,0 +1,250 @@
+<!-- 
+    this总结：
+        1）对于一个普通函数，当调用这个函数后，这个函数中的this表示window，不管你是直接调用，还是通过window打点来调用，里面的this都表示window
+        2）对于事件绑定来说，监听器是浏览器帮我们调用，只有浏览器调用了这个函数，这个函数内部的this才表示事件源
+        3）在一个对象的方法中，如果是通过这个对象调用这个方法，那么this表示这个对象
+        4）对于一个IIFE来说，this普通表示window
+        5）前面说的都是在非严格模式下面，在严格模式下面调用一个普通的函数this表示und 对于IIFE来说，里面的this也表示und
+
+
+-->
+<div id="box" style="width: 100px; height: 100px; background-color: skyblue;"></div>
+
+<!-- <script>
+    let box = document.getElementById("box");
+    // box叫事件源   click叫事件   function(){} 叫监听器
+    // 在监听器中this表示事件源
+    // 你就写了一个this，这个this在代码执行的时候，你是不知道你是什么
+    // 只有等到代码执行时，this指向才能确定
+    box.onclick = function(){
+        // 函数没有执行，this指向不能随便说，this的指向是不确实的
+        // 只有点击了box，让监听器执行，监听器中的this才表示box事件源
+        console.log(this)
+    }
+</script> -->
+
+<!-- <script>
+    let box = document.getElementById("box");
+    // 问：当点击了box，后面的函数，是谁调用了？
+    // 答：当点击了box时，浏览器会帮我们调用后面的监听器
+    // 问：自己调的时候，可以传递实参给形参，浏览器帮我们调用时能传递参数
+    // 答：我们自己写的实参是不有传递给这个函数的，浏览器调用这个函数，会给这个函数传递一个叫事件对象的东西
+    box.onclick = function(e){  // e是形参
+        console.log(e); // e是用来接收浏览器调用这个函数传递的事件对象参数
+        console.log(this)
+    }
+
+    // function f(a,b){ }  // 通过形参也可以接收调用时传递的数据
+    // f(1,2) // 程序员调用了上面的函数
+</script> -->
+
+<!-- <script>
+    let box = document.getElementById("box");
+
+    function f(a,b){
+        console.log(a,b)
+        return function niming(){ console.log("...") }  // 返回一个niming函数
+    }
+    // 问：当点击box时，浏览器调用的是哪个函数
+    // 答：浏览器调用提niming函数
+    // f(1,2)  这叫程序员自己手动调用函数  手动调用可以传递实参
+    // 在点击之前，f()这个函数就调用了  我们是把f()后的结果赋给值btn的onclick属性
+    box.onclick = f(1,2);
+</script> -->
+
+<!-- <script>
+    // 也会把这个k放到GO中一份
+    function k(){  // 全局函数  也是window的属性
+        console.log(this)  // window
+    }
+    // 对于一个全局的普通函数 谁调用这个普通函数
+    // 是window它调用了  就说这个普通函数内部的this表示window
+    // window.k()
+    k()  // 找中  先去VO中找k   找到了调用之  // window
+    window.k() // 表示直接调用GO中k   谁调用了k  this就是谁
+</script> -->
+
+<!-- <script>
+    let box = document.getElementById("box");
+
+    function f(){
+        // console.log(this)  // window
+        // 对于事件绑定来说，监听器是浏览器帮我们调用，只有浏览器调用了这个函数，这个函数内部的this才表示事件源
+        return function niming(){ console.log(this) }  // 返回一个niming函数
+    }
+    // f() 自己调用了一个普通函数  这个函数中的this就表示window
+    box.onclick = f();
+</script> -->
+
+<!-- <script>
+    // function f(){
+    //     console.log(this)  // window
+    // }
+    // f()
+    // window.f() 
+
+    // 在一个对象的方法中，如果是通过这个对象调用这个方法，那么this表示这个对象
+    function g(){
+        console.log(this)
+    }
+    var wangcai = {
+        f:g
+    }
+    // g()  // 这个调用  this表示
+    // wangcai.f()  // 这样调用  谁调用了f  看.前面是谁  这个函数中的this就是谁
+</script> -->
+
+<!-- <script>
+    // 这个代码不叫IIFE
+    // (function(){
+    //     console.log(this)
+    // })
+
+    // 这才叫IIFE
+    (function(){
+        console.log(this)   // IIFE中的this也表示window
+    })()  
+</script> -->
+
+<!-- <script>
+    "use strict"; // 启用js中的严格模式
+
+    // (function(){
+    //     console.log(this) // undefiend  // 在严格模式下面this表示und
+    // })()
+
+    // function f(){
+    //     console.log(this) // undefiend
+    // }
+    // f()  // und
+    // window.f()  // 表示调用GO中的f  谁调用了f  this就是谁
+</script> -->
+
+<!-- <script>
+    /*  
+        function f(){} 提升
+        栈区保存了f    堆区保存了函数体
+    */
+    function f(){
+        // 在一个函数中有一个this，这个this谁都不知道它是谁
+        console.log(this.name)
+    }
+    // box没有提升  document.getElementById("box")是对象  保存在堆区
+    let box = document.getElementById("box");
+    // 把一个字符串"box"赋值给box这个对象的name属性  添加一个name属性
+    box.name = "box"
+    // EC(G)  VO 中 name   GO 中 name  提升
+    var name = "window~" 
+    // obj 提升   {} 保存在堆区  
+    var obj = {
+        name:"wangcai",
+        f
+    } 
+    // f()  // 调用f()  里面的this表示window  
+    // obj.f() // obj调用了f   那么f中的this表示obj  this.name就表示去obj中找name  obj中有name   name的值是wangcai
+    // f 这不叫函数调用  f()叫函数调用  f是监听器  浏览器调用
+    // box.onclick = f;  // 点击的时候输出box
+    // function(){ f() } 是监听器  鼠标移入到box时，浏览器会帮我们调用这个监听器
+    // 但在在这个监听器 写了一个f()  f()这叫做手动调用一个函数
+    // 这个函数中的this表示window
+    box.onmouseenter = function(){
+        f() 
+    }
+
+    // btn.onclick = function(){}
+    // function f(){}
+    // btn.onclick = f
+</script> -->
+
+<!-- <script>
+    function f(){
+        console.log(this.name)
+    }
+    let box = document.getElementById("box");
+    box.name = "box"
+    var name = "window~" 
+    var obj = {
+        name:"wangcai",
+        f
+    } 
+    f()  // this===> window  "window~"
+    obj.f()   // this===> obj   "wangcai"
+    box.onclick = f;   // this===> 事件源  "box"
+    box.onmouseenter = function(){
+        f()  // this===> window  "window~"
+    }
+</script> -->
+
+<!-- <script>
+   var num = 10;
+   var obj = {
+       num:20
+   }
+   // obj.fn = 里面的小函数
+   obj.fn = (function(num){  // num 20  num是一个局部变量
+     this.num = num*3  // num*3 = 60  window.num = 60 
+     num++; // num++  找num  AO中有  num++ 21====>22
+     //  console.log(num)   // 21
+     return function(n){
+        //  EC(小函数)  AO  n 5
+        // this.num = this.num + n  window.num=60   65 
+        // GO window num 65
+         this.num += n; 
+        //  num++  找num  里面这个EC中没有  去父函数所在的执行上下文中找
+        // 里面这个小函数的父函数就是IIFE 找到21  21++   22
+         num++;
+         console.log(num) // 找num  22
+     }
+   })(obj.num) // obj.num = 20
+   var fn = obj.fn;  // EC(G)中有一个fn  fn指向了里面的小函数
+   fn(5)  // 调用里面这个小函数  就会产生EC
+</script> -->
+
+<!-- <script>
+    var num = 10;
+    var obj = {
+        num:20  // ===> 30
+    }
+    obj.fn = (function(num){  // num 20  AO中num
+      this.num = num*3  // window.num = 60
+      num++; // 找num AO有 num是20  ++后是21====>22====>23
+    //   return function(n){  // n 5 AO中有n  
+    //       this.num += n;  // 5+ this.num  window.num  65
+    //       num++; // 找num AO中没有  父的AO中有 是21 ++ 变成22
+    //       console.log(num) // 找num 父 22
+    //   }
+        return function(n){  // n 10 AO中有n  
+            this.num += n;  // 10+this.num  this是obj 10+20 30
+            num++; // 找num 自己没有 父中找 22 ++后  变成23
+            console.log(num) // 找num 父 23
+      }
+    })(obj.num) // 20
+    var fn = obj.fn;  
+    fn(5)  // 22
+    obj.fn(10) // 23
+    // VO中有一个num=10   GO中也有一个num   当改变了一个，另一个也会改变
+    // window.num  65   也就是VO中的num也是65
+    console.log(num,obj.num) // 65 30  // 直接num是访问的是VO中的num
+    console.log(window.num) // window.num访问的是GO中的num 
+ </script> -->
+
+<script>
+    (function(){
+        var a = 1;
+        var obj = {
+            a:10,
+            f:function(){
+                a *= 2;
+            }
+        }
+        obj.f()
+        alert(obj.a+a)
+    })();
+</script>
+
+
+
+
+
+
+
