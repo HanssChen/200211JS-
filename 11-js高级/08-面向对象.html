@@ -1,0 +1,149 @@
+<!-- <script>
+    计算机语言：
+        编程语言：
+            OOP 面向对象编程
+                C++   类  ==>  new一个对象
+                Java   类  ==>  new一个对象
+                Php   类  ==>  new一个对象
+                Python   类  ==>  new一个对象
+                Go   类  ==>  new一个对象
+                JS  类    ==>  new一个对象 / { }就可以表示一个对象
+                    let d1 = new Date()
+            POP 面向过程编程
+                C语言
+        标签语言：HTML  XML  XHTML
+        样式语言：CSS
+
+    什么是对象？
+        对象是属性或方法的无序集合。
+        如：d1.getFullYear()....
+        {
+            name:"wangcai", // 属性 = 属性名+属性值
+            age:100,  // 属性 = 属性名+属性值
+            shwo:function(){ // 属性（方法）
+                console.log("show...")
+            }
+        }
+        在JS中，一个对象可以new出来，也可以通过{}来表示。
+
+    几个概念：
+        1）类   类别  一个对象是属性某个类别   抽象地  类的首字母要大写
+        2）对象   具体存在的事件  在JS一切都是对象
+        3）实例  就是对象
+
+    JS中默认就有很多类，默认的类，叫内置类，常见的内置类如下：
+        1）Number类   1 2 3 4 表示Number类具体实例（对象）
+        2）String类   "hello" 表示String类具体实例（对象）
+        3）Boolean类   true  false 
+        4）Null类 / Undefied类  浏览器得不到这两个类
+        5）Object类   所有引用数据类型都是这个类的实例
+            函数是Object类的实例
+            数组是Objtct类的实例
+            new出来一个对象也是Object类的实例 
+            换句话说：
+                Array类  [1,2,3] 属于Array类  也属于Object类
+                Date类   var d = new Date()   d属性Date类  d也属性Object类
+                Function类  function f(){}  f属于Function类  f也属于Object类
+                ... 
+        JS中对类的概念强调的不多，像JAVA中，强调类的概念非常多。JS中强调最多的是对象。
+</script> -->
+
+<!-- <script>
+    DOM元素也有自己的内置类
+    Node节点类
+        Element元素标签类
+            HTMLElement  HTML元素标签类
+                HTMLDivElement  每一个div元素都属性这个类的实例
+                HTMLAnchorElement 每一个a元素是这个类的实例
+                ....   p
+            XMLElement 
+            ... 
+        Text  文本节点类  123
+        Document 文档节点类
+            HTMLDocument 每一个document都是它的一个实例
+        .... 
+    HTMLCollection 元素集合类  btns 对象  通过getElementByTagName等方法获取到的元素集合都是它是实例
+    ... 
+</script> -->
+
+<!-- <div id="box">这是一个div</div>
+<a href="" id="xxx">百度</a>
+<script>
+    // box中存储的是一个堆区的地址  box指向这个堆内存
+    // 为了描述更加简洁  直接说 box是一个对象
+    let box = document.getElementById("box")  // 得到一个元素节点 是一个对象 存在堆区
+    console.dir(box); // box是一个对象   对象是属性的无序集合
+
+    // 在JS中，一个元素中有ID，可以通过ID直接获取，不建议这么用
+    console.log(xxx)
+</script> -->
+
+<!-- <script>
+    let arr = [1,2,3]
+    console.dir(arr); // arr中有很多属性和方法  可以通过打点调用
+    // 那么我们就说arr是对象  对象是属性的无序集合
+    arr.push(4)
+    console.log(arr)
+    // arr是对象 这个对象属性于一个类  Array类 
+
+    // arguemnt不是一个真正的数组，是伪数组，就不是Array类的实例
+    // 既然不是一个数组，那么就使用不了数组对象上的方法，如push
+    function f(a,b){
+        // arguments.push is not a function
+        arguments.push(3)
+        console.log(arguments)
+    }
+    f(1,2)
+</script> -->
+
+<!-- <script>
+    // Number 也是一个类  只要是类 就可以new
+    // 为了简洁描述  a就是一个对象  属于Number类
+    let a = new Number(123); // new出来的都是对象  存储在堆区
+    console.log(a)
+    console.log(typeof a) // object
+    console.log(a.toFixed(2))
+
+    let b = 666;  // b不能叫对象
+    console.log(b)
+    // b不是对象  当你调用toFixed时 它会瞬间包装成对象
+    console.log(b.toFixed(2))  // 666.00  b在某个时候也会对象
+</script> -->
+
+<!-- <script>
+    // String 是一个类  new一个类  创建一个对象 
+    let s1 = new String("hello"); // 对象  存储在堆区 
+    console.log(s1) 
+    console.log(typeof s1)  // object
+    console.log(s1.toLocaleUpperCase())
+
+    let s2 = "world";  // 按理说不能叫对象 
+    console.log(s2)
+    console.log(typeof s2) // string
+    // s2在调用方法时，它会瞬间包装成一个对象   s2在某个时候也是一个对象
+    console.log(s2.toLocaleUpperCase())  // WORLD
+</script> -->
+
+<!-- <script>
+    // Function 是类  肯定可以new 
+    let f = new Function("a","b","return a+b");
+    console.dir(f)
+    console.log(typeof f) // function  使用typeof查看一个function类型就是function
+    console.log(f(1,2)) // 3
+    // 函数也是对象   对象是属性的无序集合
+    // 如函数对象中有call  bind  aplly.... 
+
+    function g(){
+        console.log("g...")
+    }
+    console.dir(g) // g是一个函数名  g也是一个对象
+    g.call()
+    g.apply()
+    g.bind()
+</script> -->
+
+
+
+
+
+
