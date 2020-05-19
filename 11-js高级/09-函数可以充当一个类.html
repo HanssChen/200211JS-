@@ -1,0 +1,289 @@
+<!-- <script>
+    // this  
+    // 面向对象  类  对象  内置类
+    // 自己去创建一个类   自定义类
+
+    // java中定义一个类通过class来定义的
+    // 在es3中，js是通过函数定义一个类
+
+    // 在js中，一个函数有三种角色 
+    //   1）普通函数
+    //   2）对象中的方法  arr.push()
+    //   3）类（构造器）
+</script> -->
+
+<!-- <script>
+    /*
+        在ES3中语法中，函数可以充当一个类，其它语言中是new 类（class），
+        在js中可以new一个函数（类）。
+    */
+
+    /* // --------------- 把函数当作一个普通函数
+    function f(){ // 此时是把f当作是普通的函数
+        console.log("xxx")
+    }
+    f() // 调用上面的普通函数 */
+
+    /* // -------------- 把函数当作是一个方法 位于一个对象中的
+    let obj = {
+        say:function(){
+            console.log("say...")
+        },
+        sleep(){
+            console.log("sleep...")
+        }
+    }
+    obj.say();
+    obj.sleep(); */
+
+    function f(){
+        console.log("f....")
+    }
+    // 只要你new了一个类，得到的肯定是对象
+    let o = new f();
+</script> -->
+
+<!-- <script>
+    // 如果把函数当作类，通常会把函数名大写
+
+    // 首字母大写，大概率是要把它当作是一个类
+    function Func(){
+        console.log("xxx")
+    }
+    // Func() // 普通函数调用
+    let o = new Func();
+</script> -->
+
+<!-- <script>
+    // 如果说把一个函数当作一个类，此时这个函数最好不要叫函数
+    // 你可以叫它为类或构造器，这就是自定的类
+
+    // 如果new了一个类，你不要再想着函数的那一套用逻辑
+    // new有自己的一套逻辑
+    // 1）只要new了一个函数，最终不管你返回值是什么，肯定会返回一个对象
+    function Func(a,b){
+        return a+b;
+    }
+    let o = new Func(1,2)
+    console.log(o) // {}  new出来的是对象
+</script> -->
+
+<!-- <script>
+    // 如何给o对象上添加属性  对象是属性的无序集合
+    function Func(name,age){
+        // 1）只要new  代码进来后，它先创建一个对象（堆内存）
+        // 2）this指向这个对象
+        this.name = name;  // this.xxx = xxx 给对象设置私有属性或方法
+        this.age = age;
+        // 3）会返回这个对象
+    }
+    // new做了很多事情 看不见 内部封装好了
+    let o = new Func("wangcai",100)
+    console.log(o) // {name:"wangcai",age:100}
+    console.log(typeof o)  // object
+</script> -->
+
+<!-- <script>
+    function Student(name,id){
+        // 1)  创建一个对象  {}
+        // 2)  让this指向这个对象 
+        // 3)  返回这个对象
+        this.name = name;  // {name:"z3"}
+        this.id = id; // {name:"z3",id:"001"}
+    }
+    let s1 = new Student("z3",'001')
+    console.log(s1) // {name: "z3", id: "001"}
+    // 每new一次内部都会创建一个新的对象  
+    // 让this指向这个新的对象
+    // 返回这个新对象
+    let s2 = new Student("w5",'002')
+    console.log(s2) // {name: "w5", id: "002"}
+
+    // 每new一次，创建出来的对象都是独立的，互相之间是不冲突的
+
+    // function Vue(){}     new Vue()
+</script> -->
+
+<!-- <script>
+    function Go(name,age){
+        this.name = name;
+        this.age = age;
+    }
+    // 没有返回值  默认返回und
+    // 没有加new  Go就是一个普通函数调用
+    let g1 = Go("wangcai",100); // 普通函数调用
+    console.log(window.name,window.age)
+    // new Vue()
+</script> -->
+
+<!-- <script>
+    function Go(name,age){
+        // 1）创建一个对象
+        // 2）this指向这个对象
+        // 3）返回这个对象
+        this.name = name;  // 给对象上面设置属性
+        this.age = age; // 给对象上面设置属性
+    }
+    // 加了new和不加new完全不一样
+    // 加了new Go就是一个类了
+    let g1 = new Go("wangcai",100); 
+    console.log(g1)  //  {name: "wangcai", age: 100}
+
+    // 有类了，可以new出来N个对象  N个对象之间都是独立
+
+    // let vm = new Vue()    
+    // let vm2 = new Vue()
+</script> -->
+
+<!-- <script>
+    // 在JS中，一个函数可以充当一个类，此时这个函数也可以叫构造器
+
+    // 构造器的执行和普通函数的执行不太一样，但是它具备普通函数执行的特征，
+    // 构造器执行也会产生私有的EC，它内部也可以出现一些局部变量，
+    // 但是这个局部变量和最终的对象没有必然联系
+
+    function F(){
+        var a = 110; // 一个类中也可以出现局部变量，但是局部变量和最终new出来的对象没有必然的联系
+        this.b = 1;
+        this.c = 2;
+        this.d = 3
+    }
+    let o = new F()
+    console.log(o) // {b: 1, c: 2, d: 3}
+</script> -->
+
+<!-- <script>
+    // 1）类中的局部变量和最终生成的对象中的属性不是一样东西
+    // 2）每一次new都会产生一个新的对象，对象与对象之间是独立的
+    // 3）new出来的对象中的属性都是私有，不会和其它对象中的属性冲突
+    function F(){
+        var a = 110; // 一个类中也可以出现局部变量，但是局部变量和最终new出来的对象没有必然的联系
+        this.b = 1;
+        this.c = 2;
+        this.d = 3
+    }
+    let o1 = new F()
+    console.log(o1) // {b: 1, c: 2, d: 3}
+    let o2 = new F()
+    console.log(o2) // {b: 1, c: 2, d: 3}
+    let o3 = new F()
+    console.log(o3) // {b: 1, c: 2, d: 3}
+</script> -->
+
+<!-- <script>
+    function Fn(x){
+        let y = 20;
+        this.total = x+y;
+        this.say = function(){
+            console.log(`${x}+${y} = ${this.total}`)
+        }
+    }
+    
+
+    // let f1 = Fn(10);  // f1 ??? und
+
+    // let f2 = new Fn(10)  // f2 ??? 对象
+    // f2.say();  // 10+20 = 30
+    // console.log(f2.total)  // 30
+
+    // let f2 = new Fn(10) // f2上面没有x属性和y属性
+    // console.log(f2.x) // 访问一个对象上没有的属性得到und
+    // console.log(f2.y)// 访问一个对象上没有的属性得到und
+
+    // let f1 = Fn(10);
+    // console.log(f1.total) // Cannot read property 'total' of undefined
+
+    // let f2 = new Fn(10)  // new一下，创建出一个新的对象   
+    // let f3 = new Fn(20)  // 创建出来的对象是独立的
+    // console.log(f2 === f3) // 比较两个对象  比较的是堆区的地址
+
+    // let f1 = Fn(10); // 普通函数调用  函数中的this表示window 
+    // console.log(window.total)
+</script> -->
+
+<!-- <script>
+    // 普通函数
+    //    f 表示这个普通函数  
+    //    f()  表示调用这个函数     f   f()
+    // function f(){
+    //     console.log("f...")
+    // }
+
+    // 类
+    //    new Fn()  创建一个对象  加() 表示可以传递参数
+    //    new Fn  创建一个对象  不加() 表示不可以传递参数
+    //    如果不需要传递参数  加() 和 不加()含意是一样的
+    function Fn(){
+        
+    }
+</script> -->
+
+<!-- <script>
+    // 如果构造器中什么也没有返回  默认肯定返回一个对象
+    // function Fn(){
+    //     this.x = 1;
+    //     this.y = 2;
+    // }
+    // let o = new Fn();
+    // console.log(o)  // {x: 1, y: 2}
+    // console.log(typeof o)  // object
+
+    // // 如果构造器返回了基本类型的数据，直接忽略
+    // function Fn(){
+    //     this.x = 1;
+    //     this.y = 2;
+    //     return "ok"
+    // }
+    // let o = new Fn();
+    // console.log(o)  // {x: 1, y: 2}
+    // console.log(typeof o)  // object
+
+    // 如果构造器返回了一个对象,会把把默认返回的对象覆盖掉
+    // 这个的话，o指向返回的对象   this还指向它里面创建的对象 
+    function Fn(){
+        this.x = 1;
+        this.y = 2;
+        return {
+            a:6,
+            b:8
+        }
+    }
+    // 每一new 肯定要返回一个对象 返回的对象这间独立这个不会变的
+    let o1 = new Fn();
+    console.log(o1)  // {a: 6, b: 8}
+    console.log(typeof o1)  // object
+    let o2 = new Fn();
+    console.log(o2)  // {a: 6, b: 8}
+    console.log(typeof o2)  // object
+    console.log(o1 === o2)
+</script> -->
+
+<!-- <script>
+    // 运算符 instanceof  检测一个对象是否属性某个类
+    //    对象 instanceof 类    true/false
+
+    function Fn(){}
+    let f1 = new Fn;
+    console.log(f1 instanceof Fn)  // true
+    console.log(f1 instanceof Array) // Array是内置类 false
+
+    // 不足：不适用于基本数据类型的检测  主要用来检测引用数据类型
+    console.log(123 instanceof Number) // false
+
+    let arr = [1,2,3]
+    console.log(arr instanceof Array) // true
+    
+    let reg = /123/;
+    console.log(reg instanceof RegExp) // true
+
+    // 对于一个引用数据类型，可以通过instanceof快速检测它是否属于某个类
+
+</script> -->
+
+
+
+
+
+
+
+
