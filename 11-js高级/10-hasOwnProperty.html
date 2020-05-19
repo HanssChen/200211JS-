@@ -1,0 +1,72 @@
+<!-- <script>
+    // 在JS中，一个函数也可以充当一个类
+    // 类
+    function Fn(){
+        // 1)创建一个空对象   2)类中的this指向空对象   3)返回这个对象
+        // 下面的x y say是这个对象的私有属性  记死  通过this.xx = xx 是设置私有属性
+        this.x = 100;
+        this.y = 200;
+        this.say = function(){
+            // f1.say()   f1调用了say方法
+            // say方法中的this表示f1
+            console.log(this.x+this.y)
+        }
+    }
+    // new Fn  创建出一个对象
+    let f1 = new Fn;
+    console.log(f1.x)
+    console.log(f1.y)
+    console.log(f1.say())
+</script> -->
+
+<!-- <script>
+    // 一个对象上面的属性分私有属性和公有属性
+    // 通过this.xx = xx 设置的都是私有属性
+    // 如何设置公有属性，暂时不用管
+
+    function Fn(){
+        this.x = 100;
+        this.y = 200;
+        this.say = function(){
+            console.log(this.x+this.y)
+        }
+    }
+    let f1 = new Fn();
+    // hasOwnProperty   property是属性的意思
+    // 检测某一个属性是否为一个对象的私有属性
+    console.log(f1.hasOwnProperty('x')); // true 检测x是不是f1对象上面的私有属性
+    console.log(f1.hasOwnProperty('y')); // true 检测y是不是f1对象上面的私有属性
+    console.log(f1.hasOwnProperty('say')); // true 检测say是不是f1对象上面的私有属性
+
+    // in 检测一个属性是否为一个对象的属性
+    // in 检测不管是私有还是公共有的
+    console.log(f1.toString()) // [object Object]  f1这个对象上面有一个toSring方法
+    // toString我们并没有通过this.xx = xx给对象设置
+    console.log(f1.hasOwnProperty(toString)); // false  toStirng并不是f1对象上的私有属性
+    console.log("toString" in f1) // true  
+
+    // hasOwnProperty  检测的是对象的私有属性
+    // in 检测的是对象的属性（属性包含私有属性和公共属性）
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

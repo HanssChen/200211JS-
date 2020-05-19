@@ -1,0 +1,93 @@
+<!-- <script>
+    // 前面证明过了，一个函数也是一个对象，每一个函数天生具备一个属性，叫prototype
+    // 翻译过来，叫原型  prototype是一个属性  它的值是一个对象  这个对象叫原型对象
+
+    // 每一个函数都有一个叫prototype的属性，属性值是对象，叫原型对象
+    // 平常我们说的原型就是指原型对象
+
+    // 原型对象上面有非常多的属性，这些属性就是当前类实例所调用的公有属性和方法
+
+    // 通过this.xx = xx 设置一个对象的私有属性
+    // 一个对象公有属性位于这个对象所对应类（构造器材）中的原型对象
+
+    // 在类的prototype原型对象中，默认还有一个内置属性，叫constructor，这个constructor就是当前类本身。
+
+    function Fn(a,b){
+        this.a = 1;
+        this.b = 2;
+    }
+    let f1 = new Fn();
+    console.log(f1.toString()) // [object Object]
+    console.dir(Fn)
+</script> -->
+
+<!-- <script>
+    // 前面说每一个函数都有一个prototype属性
+    // 每一个对象都一个叫__proto__属性  __proto__叫隐式原型
+
+    // 原型是prototype  对应的值是一个对象  叫原型对象
+    // 隐式原型__proto__    每一个对象上面都有一个隐式原型
+    // __proto__是一个属性，属性值是当前实例所属类的prototype属性
+</script> -->
+
+<!-- <script>
+    // 对象都是属于某个类  Array内置类
+    let arr1 = [1,2,3]; // 在js中 数组也是对象
+    let arr2 = [6,7,8]; // 对象
+
+    console.log(arr1 instanceof Array)  // true
+    // arr1是一个对象，对象是属性的无序集合，属性包含私有属性和公有属性
+    // 对于arr1来说，哪些是私有属性  0  1  2 length  都属性
+    // 对于arr1来说，哪些是公有属性 prototype上面的属性
+    // arr1是一个对象，每一个对象上面都有一个叫__proto__的属性，指向创建这个对象
+    //   的类的原型对象  __proto__指向原型对象  公有属性都位于原型对象中
+    // console.dir(arr1)
+
+    // 玩私有属性
+    // console.log(arr1.length)
+
+    // 玩一个公有属性
+    arr1.push(4)
+    console.log(arr1)
+
+    // 检测push是不是arr1这个对象的私有属性
+    console.log(arr1.hasOwnProperty("push")); // false
+    // 检测length是不是arr1这个对象的私有属性
+    console.log(arr1.hasOwnProperty("length")); // true
+
+    // 公有属性表示所有的对象都使用的是同一个
+    console.log(arr1.push === arr2.push) // true
+</script> -->
+
+<!-- <script>
+    let arr1 = new Array(1,2,3)
+    let arr2 = new Array(4,5,6)
+
+    // console.dir(Array)
+    console.log(Array.prototype.constructor === Array) // true
+    console.log(arr1.__proto__.__proto__ === Object.prototype) // true
+</script> -->
+
+<script>
+    // 画图   只需要画出堆内存就OK
+    function Fn(){
+        this.x = 100;
+        this.y = 200;
+        this.getX = function(){
+            console.log(this.x)
+        }
+    }
+    Fn.prototype.getX = function(){
+        console.log(this.x)
+    }
+    Fn.prototype.getY = function(){
+        console.log(this.y)
+    }
+    let f1 = new Fn;
+    let f2 = new Fn;
+    console.log(f1.getX())
+    console.log(f1.getY())
+</script>
+
+
+
