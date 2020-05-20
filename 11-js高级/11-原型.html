@@ -68,7 +68,7 @@
     console.log(arr1.__proto__.__proto__ === Object.prototype) // true
 </script> -->
 
-<script>
+<!-- <script>
     // 画图   只需要画出堆内存就OK
     function Fn(){
         this.x = 100;
@@ -87,7 +87,173 @@
     let f2 = new Fn;
     console.log(f1.getX())
     console.log(f1.getY())
+</script> -->
+
+<!-- <script>
+    // 每一个构造器上面都有一个中原型的东西 prototype
+    function Fn(num){
+        // 1)创建一个空对象
+        // 2)this指向这个空对象
+        // 3)返回这个对象
+        // this.y = num; 给对象上面添加私有属性y
+        // this.x = 10;  给对象上面添加私有属性x
+        this.x = this.y = num;
+    }
+    // 第一个对象上面都有一个隐式原型东西  __proto__
+    let f1 = new Fn(10);
+</script> -->
+
+<!-- <script>
+    function Fn(num){
+        this.x = this.y = num;
+    }
+    Fn.prototype = {
+        x:20,
+        sum:function(){
+            console.log(this.x+this.y)
+        }
+    }
+    Fn.prototype.constructor = Fn;
+    let f1 = new Fn(10);
+    console.log(f1.sum === Fn.prototype.sum) // true
+    f1.sum()
+    Fn.prototype.sum()
+    console.log(f1.constructor) // Object()
+
+    // 通过我写一个对象  这个对象是哪个个构造器创建的
+    // 通常我们写的{}  这种对象叫字面量对象
+    // 字面量对象由Object构造器创建
+    // let wc = {
+    //     name:"wangcai"
+    // }
+</script> -->
+
+<!-- <script>
+    function Fn(num){
+        // 给对象设置私有属性  私有属性是每个对象私有的
+        this.x = this.y = num;
+    }
+    // Fn.prototype.xxx = xxx;  表示给对象设置公有属性
+    // 公有属性是所有的对象共同拥有的
+    // 这样写，原型对象还是浏览器帮我们墨认创建的那个对象
+    // 浏览器帮我们生成的原型对象默认就有constructor属性
+    // Fn.prototype.a = 1;  // 给浏览器创建的原型对象添加属性
+    // Fn.prototype.b = 2;
+
+    // 让Fn的prototype重新指向一个新的对象
+    // 指向的新的对象默认是没有constructor属性
+    // 为了保证结构的严谨，需要手动设置constructor属性
+    Fn.prototype = {
+        a:1,
+        b:2
+    }
+    Fn.prototype.constructor = Fn; // 手动修改新的原型对象上的constructor属性
+    
+    let f1 = new Fn(10);
+    let f2 = new Fn(10);
+    console.log(f1.a)
+    console.log(f2.a)
+</script> -->
+
+<!-- <script>
+    function Fn(num){
+        this.x = this.y = num;
+    }
+    // Fn.prototype.a = 1;  
+    // Fn.prototype.b = 2;
+
+    Fn.prototype = {
+        a:1,
+        b:2
+    }
+    Fn.prototype.constructor = Fn; 
+    
+    let f1 = new Fn(10);
+    let f2 = new Fn(10);
+    console.log(f1.a)
+    console.log(f2.a)
+    // function Vue(){}   Vue.prototye.f1 = function(){}
+    // let vm = new Vue()   vm.f1()
+</script> -->
+
+<!-- <script>
+    function Fn(n, m) {
+        n = n || 0;
+        m = m || 0;
+        this.x = n;
+        this.y = m;
+        this.getX = function(){
+            console.log(this.x)
+        }
+        return n+m;
+    }
+    Fn.prototype.sum = function(){
+        console.log(this.x+this.y)
+    }
+    Fn.prototype = {
+        getX:function(){
+            this.x += 1;
+            console.log(this.x)
+        },
+        getY:function(){
+            this.y -= 1;
+            console.log(this.y)
+        }
+    }
+    let f1 = new Fn(10,20);
+    let f2 = new Fn;
+    f1.getX()
+    f1.getY()
+    f2.getX()
+    f2.getY();
+    console.log(f1.xxx) // undefined  这叫访问一个对象上面不存在的属性
+    // f1.sum is not a function
+    f1.sum(); // 访问一个对象上不存在的sum属性，你又当作函数调用，报错
+    f2.sum(); // 不执行 因为上面报错了
+
+    // 正确：10 19 0 -1  sum is not a function 
+
+
+</script> -->
+
+<!-- <script>
+    function Fn() {
+        let a = 1;
+        this.a = a;
+    }
+    Fn.prototype.say = function(){
+        this.a = 2;
+    }
+    Fn.prototype = new Fn;
+    let f1 = new Fn;
+    Fn.prototype.b = function(){
+        this.a = 3;
+    }
+    console.log(f1.a) 
+    f1.say();
+    console.log(f1.a)  
+    f1.b()
+    console.log(f1.a)
+</script> -->
+
+<script>
+    function fun() {
+        this.a = 0;
+        this.b = function () {
+            alert(this.a)
+        }
+    }
+    fun.prototype = {
+        b:function(){
+            this.a = 20;
+            alert(this.a)
+        },
+        c:function(){
+            this.a = 30;
+            alert(this.a)
+        }
+    }
+    var my_fun = new fun();
+    my_fun.b();
+    my_fun.c();
 </script>
-
-
-
