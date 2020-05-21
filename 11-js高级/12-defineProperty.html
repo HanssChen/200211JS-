@@ -1,0 +1,92 @@
+<!-- <script>
+    // Object是一个内置类 内置构造器 说白了 就是一个函数
+    // 前面说过了，在JS中，一切都是对象，函数也是对象
+
+    // 构造器是一个函数，它必有一个属性叫prototype
+    // 函数也是对象，它必有一个属性叫__proto__
+
+    // Object是一个对象，对象是属性的无序集合，意味着这个对象上面有很多的属性
+    // 其中有一个非常重要，叫defineProperty，Vue源码中使用这个属性非常非常多
+
+    // 对于Object来说，它的这个defineProperty是用来做什么呢？
+    // 答：监听某个对象上的某个属性，可以在获取或设置属性值的时候，监听到，做一些自己要做的事情
+    //     Vue框架MVVM实现原理就是基于definedProperty。
+
+    // 使用definedProperty给一个对象上添加一个属性
+    let wc = {name:"wangcai"}
+    // 下面的代码仅仅是给一个对象添加属性
+    Object.defineProperty(wc,'age',{
+        value:100
+    });
+    console.log(wc.age) // 100
+</script> -->
+
+<!-- <script>
+    // 精细化设置一个对象上面的属性
+    let wc = {name:"wangcai"}
+    Object.defineProperty(wc,"age",{
+        value:100, // 设置age属性的默认值  
+        configurable:false , // age属性是否可以删除  false表示不能删除  true表示可以删除 
+    })
+    delete wc.age  // 删除age属性  
+    console.log(wc.age) // undefined
+</script> -->
+
+<!-- <script>
+    let wc = {name:"wangcai"}
+    Object.defineProperty(wc,"age",{
+        value:100, 
+        configurable:false , 
+        enumerable:false // 这个属性是否可以枚举  打印  false表示不能被枚举  true表示可以
+    })
+    for(item in wc){
+        console.log(item)
+    }
+</script> -->
+
+<!-- <script>
+    // 利于defineProperty监听某个属性变化 
+    let wc = {name:"wangcai",age:10}
+    // 监听age  如果获取age时，它会走get方法，如果设置age时，它会走set方法
+    Object.defineProperty(wc,"age",{
+        get(){
+            console.log("get....")
+        },
+        set(){
+            console.log("set...")
+        }
+    })
+    wc.age // 访问age，由于使用defiendProperty监听了age
+    // 那么当你打印age时，它会走get方法
+
+    wc.age = 100; // 设置age 给age属性重新赋值，重新赋值就会走set方法
+    
+</script> -->
+
+<!-- <script>
+    // a在什么情况下，可以等于1  等于2  等于3
+    var i = 0; 
+    Object.defineProperty(window,'a',{  // 向GO中添加a
+        get(){  
+            return ++i;
+            // return 666;
+        }
+    })
+    // 下面我们去使用a的时候，它肯定会走get函数
+    // a  先去VO中找  没有  去GO中找  找到  访问时  
+    // 调用get函数  返回什么  a就是什么
+    // console.log(a)
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+
+
+
+
+
+
+
+
+

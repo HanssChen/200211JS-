@@ -1,0 +1,139 @@
+<!-- <script>
+    // 类 构造器 都有一个叫prototype属性  指向原型对象
+    // 原型对象默认是浏览器创建的
+    // 一个构造器本质是函数  函数在JS中也是对象
+    function Fn(){
+        // this.xx = xx表示给对象添加私有属性
+        this.x = 10;
+        this.y = 20;
+    }
+    // 是把Fn当成一个对象  给这个对象上添加n这个属性 值是1000
+    Fn.n = 1000;
+    // 是把Fn当成一个对象  给这个对象添加say这个方法
+    Fn.say = function(){
+        console.log("hello")
+    }
+    // 是把Fn当成一个类（构造器）
+    // 给Fn的原型对象上添加sum属性  sum属性是公共的
+    Fn.prototype.sum = function(){
+        return this.x + this.y;
+    }
+    // new Fn 创建一个对象  f1表示这个对象
+    // f1: 
+    //    私：x:10  y:20   公：sum:f 
+    let f1 =new Fn;
+    f1.say()
+    Fn.sum()
+
+    // 一个函数有四种角色：
+    // 1） 普通函数  function f(){}  f()
+    // 2） 方法  var o = {g:function(){ }}  o.g()
+    // 3） 类  function Fn(){}  new Fn()
+    // 4） 对象  function Gn(){}  Gn.a = 1;  Gn.b = 2;
+
+
+</script> -->
+
+
+
+<!-- <script>
+    // Fn:  普通函数   类    对象
+    function Fn(){
+        this.x = 10;  // 给new出来的Fn的对象添加私有属性
+        this.y = 20;
+    }
+    Fn.n = 1000;   // Fn充当了对象  
+    Fn.say = function(){  // Fn充当了对象   Fn本身就是一个对象  和f1没有一点关系
+        console.log("hello")
+    }
+    Fn.prototype.sum = function(){  // Fn充当类  原型对象上添加sum属性
+        return this.x + this.y;
+    }
+    // new Fn 创建一个对象  f1表示这个对象
+    // f1: 
+    //    私：x:10  y:20   公：sum:f 
+    let f1 =new Fn;
+    f1.say() // say is not a function
+
+</script> -->
+
+<!-- <script>
+    function Fn(){
+        this.x = 10;  
+        this.y = 20;
+    }
+    // 下面两行代码是给Fn这个对象添加一个n属性，添加一个say方法
+    Fn.n = 1000;   
+    Fn.say = function(){  
+        console.log("hello")
+    }
+    // 这个是Fn是一个构造器，给原型对象上面添加sum方法 
+    Fn.prototype.sum = function(){  
+        return this.x + this.y;
+    }
+    let f1 =new Fn;
+    // Fn是一个对象   Fn这个对象中找sum
+    // Fn中并没有添加sum方法
+    Fn.sum() // Fn.sum is not a function
+</script> -->
+
+<!-- <script>
+    function Fn(){
+        this.x = 10;  
+        this.y = 20;
+    }
+    Fn.n = 1000;   
+    Fn.say = function(){  
+        console.log("hello")
+    }
+    Fn.prototype.sum = function(){  
+        return this.x + this.y;
+    }
+    let f1 =new Fn;
+    Fn.sum() 
+</script> -->
+
+<script>
+    function Foo(){
+        getName = function(){
+            console.log(1)
+        }
+        return this;
+    }
+    Foo.getName = function(){  // 把Foo当成对象 给它上面添加getName属性
+        console.log(2)
+    }
+    Foo.prototype.getName = function(){
+        console.log(3)
+    }
+    var getName = function(){  // 执行到这一行时，重新给getName赋值
+        console.log(4)
+    }
+    function getName(){
+        console.log(5)
+    }
+    Foo.getName();  // 2  Foo.getName()   Foo是对象
+    getName();  // 函数整个提升，var getName由于getName提升过  就不再提升  
+    Foo().getName();   // Foo() 得到window   注意Foo中重新给全局的getName赋值了
+    getName();
+    // .的优先级是高于new的优先级    要么是new Foo  要么是Foo.getName()
+    new Foo.getName(); // 2  先算了Foo.getName();  Foo当成对象  
+    // new Foo()是一个函数调用  getName()也是函数调用  优先级相同  从左到右运算
+    new Foo().getName(); // 3  先算了new Foo()  得到一个对象  私：无    公：getName
+    // new Foo()是函数调用     getName()也是函数调用    剩了new 和 .   .的优先级高于new
+    // 先算.  然后算new 
+    new new Foo().getName();   // ???? 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
