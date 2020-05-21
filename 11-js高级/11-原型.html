@@ -236,14 +236,19 @@
     console.log(f1.a)
 </script> -->
 
-<script>
+<!-- <script>
+    // 类  构造器   构造器中肯定有一个prototype属性  指向原型对象
     function fun() {
+        // 给对象添加私有属性
         this.a = 0;
         this.b = function () {
             alert(this.a)
         }
     }
-    fun.prototype = {
+    // fun.prototype得到原型对象 默认原型对象是浏览器创建的
+    // = 赋值运算符   {} 赋给值给fun.prototype
+    // 用了一个新的对象赋值给了fun的原型对象
+    fun.prototype = {  // {} 里面也有一个__proto__指向Object的原型对象
         b:function(){
             this.a = 20;
             alert(this.a)
@@ -253,7 +258,247 @@
             alert(this.a)
         }
     }
+    // new的时候，肯定得到一个对象   my_fun里面的私有属性有a 和 b
+    // 只要是一个对象 它里面肯定有一个__proto__ 指向原型对象
     var my_fun = new fun();
-    my_fun.b();
-    my_fun.c();
-</script>
+    // 对于my_fun来说  私有属性  a:0  b:function(){}
+    // 对于my_fun来说  公有属性  b:function(){}  c:function(){}
+
+    // 先去私有属性中找 找到了 b调用了 前面是my_fun 意味着b函数中的this是my_fun
+    // b:function(){ alert(this.a) }  this是my_fun  my_fun.a   alert(0)
+    // alert()出来的东西是一个字符串 它是toStirng之后的结果 
+    // alert({name:"wangcai"}) // [object Object]
+
+    // console.log({name:"xx"})  log是什么打印什么  是对象就打印出来对象
+    // console.log({}.toString());  // [object Object]
+    // alert(123)
+    // alert([1,2,3]) // 是toStirng之后的结果   1,2,3
+
+    my_fun.b();  // 结果是一个字符串的 "0"
+
+    // my_fun.c();
+</script> -->
+
+<!-- <script>
+    // 类  构造器  prototype  指向原型对象   默认情况下原型对象是浏览器创建的
+    function fun() {
+        // 给对象添加私有属性
+        this.a = 0;
+        this.b = function () {
+            alert(this.a) // alert的结果是把里面的内容toString之后的结果 0===>"0"
+        }
+    }
+    // = 赋值  先看后面  {}  {}赋值给fun.prototype  
+    // prototype 默认指向浏览器创建的原型对象
+    // fun.prototype = {}  把一个新的对象赋值给了fun的原型对象
+    fun.prototype = {   // {} 就是新的fun的原型对象   
+        b:function(){    // 新的原型对象里面有一个__proto__属性  指向了Object的原型对象
+            this.a = 20;
+            alert(this.a)
+        },
+        c:function(){
+            this.a = 30;
+            alert(this.a) // "30"
+        }
+    }
+    // new一个类  得到一个对象  my_fun就是一个新的对象
+    // 对象是属性的无序集合 （私有的属性和公有属性）
+    // 私有：a:0==>a:30  b:f
+    // 公有：b:f  c:f
+    // my_fun中的也有一个__proto__  指向新的原型对象
+    var my_fun = new fun();
+    my_fun.b();  // "0"
+    my_fun.c();  // "30"
+    my_fun.b();  // "30"
+</script> -->
+
+<!-- <script>
+    function C1(name){  // 形参的name就是und
+        if(name){ // und ----》false
+            this.name = name; // 不走了  没有设置私有属性
+        }
+    }
+    function C2(name){  // name是und  
+        this.name = name;   // this.name是设置私有属性 只不过name的属性值是und
+    }
+    function C3(name){  // name是und 
+        // name || "join";   und不能确定整体的值  整体的值是"join"
+        // this.name = "join"
+        this.name = name || "join";
+    }
+    C1.prototype.name = "Tom";
+    C2.prototype.name = "Tom";
+    C3.prototype.name = "Tom";
+    // (new C1().name)  new C1()  得到一个对象  new的时候没有传递参数给形参name
+    // 私：无
+    // 公：name:"Tom"
+    // .name  先去私有中找  无   然后去公有中找 找到了是Tom   ====> Tom 
+
+    // (new C2().name)  new C2() 得到一个对象  new的时候没有传递参数给形参name
+    // 私：name:und
+    // 公：name:"Tom"
+    // .name  先去私有中找  有  值是und     ====>  und
+
+    // (new C3().name)   new C3()  得到一个对象   new的时候没有传递参数给形参name
+    // 私：name:"join"
+    // 公：name:"Tom"
+    // .name  先去私有中找  有  值是"join"  ====>  "join"
+
+    // "Tom"+undefined+"join"  字符串在拼接时，如果不是字符串，隐式转换成字符串
+    // undefined ===> "undefined"
+    alert((new C1().name) + (new C2().name) + (new C3().name)); // Tomundefinedjoin
+</script> -->
+
+<!-- <script>
+    function Person(){  // 构造器
+        // 1)创建一个空对象   2)让this指向这个空对象  3)返回这个对象
+        this.name = "wangcai";  // 设置私有属性
+    }
+    // 给原型对象上面添加一个属性叫getName  
+    Person.prototype.getName = function(){   // 设置公有属性
+        console.log(this.name);
+        console.log(this.age)
+    }
+    Person.prototype.age = 100;  // 设置公有属性
+
+    // p1  私：name:"wangcai"    公：getName:f   age:100
+    let p1 = new Person;
+    // p1.xx = xx  设置私有属性
+    p1.age = 9;  // 设置p1私有属性
+    // p1  私：name:"wangcai"  age:9    公：getName:f   age:100
+
+    // p1.getName()  找getName  
+    p1.getName() // "wangcai"  9
+    console.log(p1.age)  // 9
+
+    // p2  私：name:"wangcai"    公：getName:f   age:100
+    let p2 = new Person;
+    console.log(p2.age) // 100
+</script> -->
+
+<!-- <script>
+    // 做一个小小的面试题：让a在什么情况下，可以让它等于1也等于2也等于3
+    //  a==1  ==比较运算符  如果a也是一个number  直接比较 相等就是true  否则就是false
+    //  如果a不是number  两边的数据类型不一致  先转化成相同的数据类型  然后才开始比较
+
+    // 如果a是一个对象，先把a转成字符串 "xx"=1  一个是字符串一个是数字  然后再把字符串转成数字
+    
+    // 对象和数据比较，先把对象转成字符串，再转成数字  最终还是数字和数字进行比较
+
+    // 转成字符串，它默认会调用toString方法   这个方法是在Object的原型对象上面 
+
+    // 对于a这个对象来说，toStirng就是它的公有属性 如果给a也添加一个toStirng的私有属性
+    // 去调用toSting时，自己有这个私有属性，就调用自己私有属性，不会调用公有属性
+
+    let a = {
+        n:0,  // n是a对象的私有属性
+        toString:function(){  // toString也是a的私有属性
+            console.log("xxx")
+        }
+    }
+    // console.log(a.toString()) // [object Object]   Object的原型对象上面的toStirng
+    // a.toString()
+    // a == 1  比较时，a是对象，先转成字符串，调用toSting方法
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+<!-- <script>
+    let a = {
+        n:0,  // n是a对象的私有属性 ====> n:1 ====> n:2 ====> n:3
+        toString:function(){  // toString也是a的私有属性
+            // console.log("xxx")
+            // console.log(this.n)
+            // console.log(++this.n)
+            // return 100;
+            return ++this.n
+        }
+    }
+    console.log(a.toString()) // 1
+    console.log(a.toString()) // 2
+    console.log(a.toString()) // 3
+    // if(a==1 && a==2 && a==3){
+    //     console.log("hello a")
+    // }
+</script> -->
+
+<!-- <script>
+    let a = {
+        n:0,  
+        toString:function(){ 
+            return ++this.n
+        }
+    }
+    // a==1 调用toString()  "1" ===> 1
+    // a==2 调用toStirng()  "2" ===> 2
+    // a==3 调用toStirng()  "2" ===> 3
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+<!-- <script>
+    let a = [1,2,3];
+    console.log(a.shift()) // 1
+    console.log(a) // [2, 3]
+
+    console.log(a.shift()) // 2
+    console.log(a) // [3]
+
+    console.log(a.shift()) // 3
+    console.log(a) // []
+
+    // shift是用来删除一个元素  改变原数组
+    // shift函数返回值是被删除的元素
+</script> -->
+
+<!-- <script>
+    let a = [1,2,3]
+    a.toString = a.shift; // 给a设置私有属性toStirng
+    // 把shift方法赋值给toStirng 
+    // 你toSting一次就相当于shift了一次
+
+    // a==1  会toStirng  相当于shift  1 == 1
+    // a==2  会toStirng  相当于shift  2 == 2
+    // a==3  会toStirng  相当于shift  3 == 3
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+<!-- <script>
+    // a == 1  判断是否相等
+    // 在JS中判断是否相等  满足运算符两侧的数据类型一致
+    // 如果a是一个对象  数据类型不一致
+    // 隐式转化数据类型  a对象先转成字符串  然后转成数字
+    // a转成字符串的时 会调用toStirng方法  位于Objec原型对象上的
+    // 给a添加一个私有的toSting方法  它就会调用私有的toStirng方法
+
+    // 方法一：
+    var a  = {
+        i:0,
+        toString(){
+            return ++this.i
+        }
+    }
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+<!-- <script>
+    // 方法二：
+    let a = [1,2,3]
+    // 给a对象上添加一个私有属性toString
+    a.toString = a.shift
+    if(a==1 && a==2 && a==3){
+        console.log("hello a")
+    }
+</script> -->
+
+
+
+
+
+
