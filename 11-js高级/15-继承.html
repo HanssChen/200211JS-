@@ -1,0 +1,136 @@
+<!-- <script>
+    // 任何一门面向对象的编程语言都有如下特点：
+    // 封装，继承，多态，抽象
+
+    // 封装：代码封装到一个函数或类中
+    // 多态：在JS中体现的并不明显
+    // 继承：子类继续父类中的属性
+
+    // 接下来就说一下JS中的继承  要有子类和父类
+
+    // ==========================> 原型继承
+    // 特点：原型继承同时继承了父类的公有属性和私有属性
+    function Parent(){ // 父类
+        this.x = 100; // 给父类创建出来的对象添加x私有属性
+    }
+    Parent.prototype.getX = function(){ // // 给父类创建出来的对象添加getX公有属性
+        return this.x;
+    }
+
+    function Child(){  // 子类
+        this.y = 200; // 给子类创建出来的对象添加y私有属性
+    }
+    // 让子类继续父类
+    // new Parent  创建了一个对象  私：x=100  公：getX = f
+    // Child.prototype = new Parent  让Child子类它的prototype重新指向新的对象
+    // 新的对象就是Child的原型对象
+    Child.prototype = new Parent;  // 原型继承
+    Child.prototype.getY = function(){
+        return this.y
+    }
+    let c = new Child();
+    console.log(c.x)
+    console.log(c.getX())
+</script> -->
+
+<!-- <script>
+    // ===================> call继承
+    // 特点:只会继承父的私有属性
+
+    // JS中的继承有多种  call继承，只会继承父的私有属性，不能继承父的公有属性
+    function Parent(){ // 父类
+        this.x = 100; // 给父类创建出来的对象添加x私有属性
+    }
+    Parent.prototype.getX = function(){ // // 给父类创建出来的对象添加getX公有属性
+        return this.x;
+    }
+    function Child(){
+        // Child中的this指向一个空的对象
+        // c也是指向这个对象
+        // Parent此时是一个函数  call就是让Parent中的this指向这个空对象
+        Parent.call(this) 
+        // 给这个对象添加y的属性
+        this.y = 200; 
+    }
+    let c = new Child;
+    console.log(c.x)
+</script> -->
+
+<!-- <script>
+    // ======================= 组合式继承（call继承+原型继承）
+    function Parent(){ // 父类
+        this.x = 100; // 给父类创建出来的对象添加x私有属性
+    }
+    Parent.prototype.getX = function(){ // // 给父类创建出来的对象添加getX公有属性
+        return this.x;
+    }
+    function Child(){
+        Parent.call(this) // 继承父的私有属性
+        this.y = 200; 
+    }
+    // Object.create 为了不影响父的原型对象  copy一份赋值给Child.prototype
+    Child.prototype = Object.create(Parent.prototype); // 继承父的公有属性
+    Child.prototype.constructor = Child; // 手动修改constructor指向
+    let c = new Child();
+    console.log(c.x)
+    console.log(c.getX())
+</script> -->
+
+<script>
+    // 在JS中，一函数可以充当一个类
+    // 但是在其它语言中，一个类是通过class来定义的
+    // JS为了和其它语言保持一样，在ES6中也提出了使用class定义类的
+    // class定义的类仅仅是一个语法糖
+
+    // 定义一个类  最后还是需要转化成函数
+    class Parent{
+        constructor(){
+            this.x = 100; // 定义私有属性
+        }
+        // 等价于Parent.prototype.getX = function(){} 
+        getX(){ // 定义公有属性
+            return this.x; 
+        }
+    }
+    // extends Parent 可以继承上面的getX这个公有属性
+    class Child extends Parent{
+        constructor(){
+            super(); // 类似于我们前面写的call继承
+            this.y = 200;
+        }
+        getY(){
+            return this.y
+        }
+    }
+    let c = new Child();
+    console.log(c.x)
+    console.log(c.getX())
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
