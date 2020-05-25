@@ -1,49 +1,47 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld/> -->
-    <!-- <Demo01></Demo01> -->
-    <!-- <Demo02></Demo02> -->
-    <!-- <Demo03></Demo03> -->
-    <!-- <Demo04></Demo04> -->
-    <!-- <Demo05></Demo05> -->
-    <!-- <Demo06></Demo06> -->
-    <Demo07></Demo07>
-  </div>
+<section class="todoapp">
+		<AddTodo></AddTodo>
+		<section class="main" style="">
+			<input type="checkbox" class="toggle-all" @click="toggleAllTodo(!isAllDone)" :checked="isAllDone"> 
+      
+				<ul class="todo-list">
+          <!-- <ListTodo :class="{completed:item.done}" v-for="(item,index) in todos" :todo="item" :key="index"></ListTodo> -->
+          <ListTodo :class="{completed:item.done}" v-for="(item,index) in filterTodo" :todo="item" :key="index"></ListTodo>
+				</ul>
+			</section> 
+			<footer class="footer" style="">
+				<span class="todo-count"><strong>{{unDoneNumber}}</strong> 未完成</span> 
+				<ul class="filters">
+					<li><a href="" :class="{selected:visibility=='all'}" @click.prevent="changeVisibility('all')">all</a></li>
+					<li><a href=""  :class="{selected:visibility=='active'}"  @click.prevent="changeVisibility('active')">active</a></li>
+					<li><a href=""  :class="{selected:visibility=='completed'}"  @click.prevent="changeVisibility('completed')">completed</a></li>
+				</ul> 
+				<!-- <button @click="delDone" class="clear-completed" v-show="todos.length > unDoneNumber">clear completed</button> -->
+				<button @click="delDone" class="clear-completed" v-show="DoneNumber>0">clear completed</button>
+			</footer>
+	</section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Demo01 from './components/Demo01.vue'
-import Demo02 from './components/Demo02.vue'
-import Demo03 from './components/Demo03.vue'
-import Demo04 from './components/Demo04.vue'
-import Demo05 from './components/Demo05.vue'
-import Demo06 from './components/Demo06.vue'
-import Demo07 from './components/Demo07.vue'
-
+import "@/assets/todo-mvc.css"
+import ListTodo from "./components/ListTodo"
+import AddTodo from "./components/AddTodo"
+import { mapState, mapGetters,mapMutations } from "vuex"
 export default {
   name: 'App',
+  computed: {
+    ...mapState(["todos","visibility"]),
+    ...mapGetters(["isAllDone","unDoneNumber","filterTodo","DoneNumber"])
+  },
+  methods: {
+    ...mapMutations(['toggleAllTodo',"delDone","changeVisibility"])
+  },
   components: {
-    HelloWorld,
-    Demo01,
-    Demo02,
-    Demo03,
-    Demo04,
-    Demo05,
-    Demo06,
-    Demo07,
+    ListTodo,
+    AddTodo
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

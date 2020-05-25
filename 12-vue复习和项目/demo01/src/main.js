@@ -1,39 +1,43 @@
-// 是项目的入口文件
-import Vue from 'vue'  // ES6中的模块化  node是使用了commontjs的模块化  let fs = require("fs")
-import App from './App.vue' // 加了./表示引入自定义模块
+import Vue from 'vue' 
+import App from './App.vue' 
+import store from "./store/index"
 
-// 阻止启动生生消息   
 Vue.config.productionTip = false
 
-// 自定义全局指令
-Vue.directive('upper-world',(el,binding)=>{
-  el.textContent = binding.value.toUpperCase();
-})
-
-// new Vue   Vue是构造器  function Vue(options){}
-// new Vue 得到的就是一个对象  根组件 
-// $mount  手动挂载  
-// render: h => h(App),
-
-/* 
-  render: function(createElement){
-    return createElement(App)  // 使用js对象描述dom结构
-  }
-  -------------
-  render(createElement){
-    return createElement(App)
-  }
-  -------------
-  render(h){
-    return h(App)
-  }
-  -------------
-  render:h=>h(App)
- */
 new Vue({
   render: h => h(App),
+  store
 }).$mount('#app')
 
-// 项目要进行打包：
-// 在内存中打包   npm run serve  打成一个js文件
-// 在硬盘上打包   npm run build  打成一个js文件  直接插入到html文件中
+/* 
+  // http://todomvc.com/
+
+
+  把上午的内容通过todomvc作一个总结。  todo案例非常经典。
+
+  如果一个todo都做不出来的，不要再想写项目。
+
+  数据：
+    todos[{text:"睡觉",done:false},{text:"打游戏",done:true}]
+    visibility: all completed acitve
+
+  功能：
+    显示todos数据  <---
+    添加一个todos  <---
+    删除一个todos   <---
+    修改某一项的状态：完成，没有完成之间切换   <---
+    批量修改状态:全部完成，全部未完成   <---
+    统计没有完成的数量    <---
+    批量删除已经完成的   <---
+    三种状态的筛选 <---
+    编辑todos的内容   <--- 自已看一下
+    本地存储  <--- 
+
+  拆分组件：
+    AddTodo
+    ListTodo
+      todoItem
+      todoTtem
+      .....
+    Footer
+ */

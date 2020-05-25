@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义动画</title>
+    <style>
+        div{
+            width:100px; 
+            height:100px; 
+            background:red;
+            animation: fangda 3s;
+        }
+        @keyframes fangda{
+            0%{
+                transform: scale(0);
+            }
+            25%{
+                transform: scale(0.2);
+            }
+            50%{
+                transform: scale(0.4);
+            }
+            75%{
+                transform: scale(0.6);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+    </style>
+    <!-- 
+        一上来就动的动画 
+        过渡动画：transition
+        变形动画：transform
+        自定义动画：animation
+
+        要使用animation先定义关键贞  通过@keyframes来定义
+     -->
+</head>
+<body>
+    <div></div>
+</body>
+</html>
