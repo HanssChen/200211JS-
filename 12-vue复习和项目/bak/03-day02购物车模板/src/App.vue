@@ -1,17 +1,16 @@
 <template>
     <div id="app">
-        <!-- <Demo01></Demo01> -->
-        <Father></Father>
+        <Cart />
     </div>
 </template>
 
 <script>
-    import Demo01 from "./components/Demo01"
-    import Father from "./components/Father"
+    import Cart from './components/Cart'
+
     export default {
         name: 'app',
         components: {
-            Father
+            Cart
         }
     }
 </script>
