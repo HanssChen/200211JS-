@@ -1,13 +1,12 @@
 <template>
   <div class="productWrapper">
-    <div v-for="(product) in products" :key="product.id">
+    <div v-for="(product) in products" :key="product.id" class="infoWrapper">
       <div class="imageWrapper">
         <div class="LazyLoad is-visible">
           <img class="image" :src="product.small_image" alt />
         </div>
       </div>
-      <div class="infoWrapper">
-        <div class="nameWrapper">
+      <div class="nameWrapper">
           <div class="name">
             <span class="nameTag nameText">{{product.product_name}}</span>
           </div>
@@ -62,7 +61,6 @@
             </svg>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -77,158 +75,156 @@ export default {
 </script>
 
 <style scoped>
-.productWrapper {
-  position: relative;
-  padding: 0.8125rem 0;
-  background: #fff;
-}
+    .productWrapper {
+        position: relative;
+        padding: 0.8125rem 0;
+        background: #FFF;
+    }
 
-.productWrapper + .productWrapper {
-  border-top: solid 1px #eeeeee;
-}
+    .productWrapper + .productWrapper {
+        border-top: solid 1px #EEEEEE;
+    }
 
-.imageWrapper {
-  position: absolute;
-  left: 0;
-  top: 0.2375rem;
-  width: 4.0625rem;
-  height: 4.0625rem;
-  overflow: hidden;
-  border-radius: 4px;
-}
+    .imageWrapper {
+        position: absolute;
+        left: 0;
+        top: 0.2375rem;
+        width: 4.0625rem;
+        height: 4.0625rem;
+        overflow: hidden;
+        border-radius: 4px;
+    }
 
-.image {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+    .image {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 
-.noticeGreen,
-.noticeGray {
-  position: absolute;
-  height: 100%;
-  text-align: center;
-}
+    .noticeGreen, .noticeGray {
+        position: absolute;
+        height: 100%;
+        text-align: center;
+    }
 
-.noticeGreen {
-  background: #76da96;
-  color: #fff;
-}
+    .noticeGreen {
+        background: #76DA96;
+        color: #FFF;
+    }
 
-.noticeGray {
-  background: rgba(255, 255, 255, 0.6);
-}
+    .noticeGray {
+        background: rgba(255, 255, 255, 0.6);
+    }
 
-.noticeGray span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  display: inline-block;
-  width: 80%;
-  text-align: center;
-  color: #fff;
-  font-size: 0.75rem;
-  height: 1.25rem;
-  line-height: 1.25rem;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 1.25rem;
-}
+    .noticeGray span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: inline-block;
+        width: 80%;
+        text-align: center;
+        color: #FFF;
+        font-size: 0.75rem;
+        height: 1.25rem;
+        line-height: 1.25rem;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 1.25rem;
+    }
 
-.infoWrapper {
-  position: relative;
-  padding: 0 0.625rem 0.4rem 4.6625rem;
-  border-bottom: 1px solid #e0e0e0;
-}
+    .infoWrapper {
+        position: relative;
+        padding: 0 0.625rem 0.4rem 4.6625rem;
+        border-bottom: 1px solid #e0e0e0;
+    }
 
-.nameWrapper {
-  min-height: 2.1875rem;
-}
+    .nameWrapper {
+        min-height: 2.1875rem;
+    }
 
-.name {
-  line-height: 1.25rem;
-  word-break: break-all;
-  font-size: 0.9375rem;
-  color: #333333;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.name .nameTag {
-  margin-right: 0.125rem;
-  vertical-align: middle;
-}
-.name .nameText {
-  vertical-align: middle;
-}
+    .name {
+        line-height: 1.25rem;
+        word-break: break-all;
+        font-size: 0.9375rem;
+        color: #333333;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .name .nameTag {
+        margin-right: 0.125rem;
+        vertical-align: middle;
+    }
+    .name .nameText {
+        vertical-align: middle;
+    }
 
-.spec {
-  min-height: 1.25rem;
-  line-height: 1.25rem;
-  font-size: 0.75rem;
-  color: #999999;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
+    .spec {
+        min-height: 1.25rem;
+        line-height: 1.25rem;
+        font-size: 0.75rem;
+        color: #999999;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
-.tagsWrapper {
-  margin-top: 0.1875rem;
-  max-height: 1.0625rem;
-  line-height: 0.8125rem;
-  overflow: hidden;
-}
+    .tagsWrapper {
+        margin-top: 0.1875rem;
+        max-height: 1.0625rem;
+        line-height: 0.8125rem;
+        overflow: hidden;
+    }
 
-.H1B9Rvu {
-  height: 1rem;
-}
+    .H1B9Rvu {
+        height: 1rem;
+    }
 
-.tag + .tag {
-  margin-left: 0.3125rem;
-}
+    .tag + .tag {
+        margin-left: 0.3125rem;
+    }
 
-.priceWrapper {
-  position: relative;
-}
+    .priceWrapper {
+        position: relative;
+    }
 
-.price {
-  display: inline-block;
-  height: 1.875rem;
-  line-height: 1.875rem;
-  font-weight: bold;
-  font-size: 0.75rem;
-  color: #fe6263;
-}
+    .price {
+        display: inline-block;
+        height: 1.875rem;
+        line-height: 1.875rem;
+        font-weight: bold;
+        font-size: 0.75rem;
+        color: #FE6263;
+    }
 
-.originPrice {
-  display: inline-block;
-  margin-left: 0.3125rem;
-  height: 1.875rem;
-  line-height: 1.875rem;
-  text-decoration: line-through;
-  font-size: 0.6875rem;
-  color: #b2b2b2;
-}
+    .originPrice {
+        display: inline-block;
+        margin-left: 0.3125rem;
+        height: 1.875rem;
+        line-height: 1.875rem;
+        text-decoration: line-through;
+        font-size: 0.6875rem;
+        color: #B2B2B2;
+    }
 
-.iconCartWrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1.875rem;
-}
+    .iconCartWrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1.875rem;
+    }
 
-.icon {
-  fill: #999;
-  width: 1rem;
-  height: 1rem;
-}
+    .icon {
+        fill: #999;
+        width: 1rem;
+        height: 1rem;
+    }
 
-.iconCart {
-  display: block;
-  width: 1.875rem;
-  height: 1.875rem;
-}
+    .iconCart {
+        display: block;
+        width: 1.875rem;
+        height: 1.875rem;
+    }
 </style>
-
 

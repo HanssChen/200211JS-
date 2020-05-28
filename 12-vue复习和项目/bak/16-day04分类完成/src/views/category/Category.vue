@@ -96,62 +96,61 @@ export default {
   }
 };
 </script>
+<style scoped>
+    #category {
+        width: 100%;
+        height: 100%;
+        background-color: #F5F5F5;
+        overflow: hidden;
+    }
 
-<style lang="less" scoped>
-#category {
-  width: 100%;
-  height: 100%;
-  background-color: #f5f5f5;
-  overflow: hidden;
-}
+    .listWrapper {
+        display: flex;
+        position: absolute;
+        top: 2.75rem;
+        bottom: 3rem;
+        width: 100%;
+        overflow: hidden;
+    }
 
-.listWrapper {
-  display: flex;
-  position: absolute;
-  top: 2.75rem;
-  bottom: 3rem;
-  width: 100%;
-  overflow: hidden;
-}
+    .leftWrapper {
+        background-color: #F4F4F4;
+        width: 5.3125rem;
+        flex: 0 0 5.3125rem;
+    }
 
-.leftWrapper {
-  background-color: #f4f4f4;
-  width: 5.3125rem;
-  flex: 0 0 5.3125rem;
-}
+    .categoryItem {
+        padding: 0.75rem 0;
+        border-bottom: solid 1px #E8E9E8;
+        position: relative;
+    }
 
-.categoryItem {
-  padding: 0.75rem 0;
-  border-bottom: solid 1px #e8e9e8;
-  position: relative;
-}
+    .categoryItem .textWrapper {
+        line-height: 1.25rem;
+        border-left: solid 0.1875rem transparent;
+        padding: 0.3125rem 0.6875rem;
+        font-size: 0.8125rem;
+        color: #666666;
+    }
 
-.categoryItem .textWrapper {
-  line-height: 1.25rem;
-  border-left: solid 0.1875rem transparent;
-  padding: 0.3125rem 0.6875rem;
-  font-size: 0.8125rem;
-  color: #666666;
-}
+    .categoryItem.selected {
+        background: #FFF;
+    }
 
-.categoryItem.selected {
-  background: #fff;
-}
+    .categoryItem.selected .textWrapper {
+        border-left-color: #3cb963;
+        font-weight: bold;
+        font-size: 0.875rem;
+        color: #333333;
+    }
 
-.categoryItem.selected .textWrapper {
-  border-left-color: #3cb963;
-  font-weight: bold;
-  font-size: 0.875rem;
-  color: #333333;
-}
+    @media (min-width: 960px) {
+        .wrapper {
+            border-right: 1px solid #E8E9E8;
+        }
 
-@media (min-width: 960px) {
-  .wrapper {
-    border-right: 1px solid #e8e9e8;
-  }
-
-  .wrapper .categoryItem {
-    background: #fff;
-  }
-}
+        .wrapper .categoryItem {
+            background: #fff;
+        }
+    }
 </style>
