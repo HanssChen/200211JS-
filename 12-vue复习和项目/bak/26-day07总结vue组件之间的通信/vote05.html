@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .container{
+            margin: 20px auto;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ccc;
+        }
+        .container header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 40px;
+        }
+        .container header h3, .container header span{
+            font-size: 22px;
+        }
+        .container main{
+            margin: 10px auto;
+        }
+        .container main p {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-vote title="你支持旺财当班长吗？"></my-vote>
+        <my-vote title="你支持小强当班长吗？"></my-vote>
+    </div>
+
+    <template id="voteTemplate">
+        
+    </template>
+
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const VoteFooter = {
+            template:`
+                <footer>
+                    <button type="button" class="btn btn-success" @click="func('sup')">支持</button>
+                    <button type="button" class="btn btn-danger"  @click="func('opp')">反对</button>
+                </footer>
+            `,
+            methods: {
+                func(type){
+                    // 发布  通知自定义事件执行  type就是发布事件时，携带的数据
+                    this.$emit("xxx",type)
+                }   
+            }
+        };
+        const VoteMain = {
+            template:`
+                <main>
+                    <p>支持人数：{{supnum}}人</p>
+                    <p>反对人数：{{supnum}}人</p>
+                    <p>支持率：{{rate}}</p>
+                </main>
+            `,
+            props: ["supnum","oppnum"],
+            computed: {
+                rate(){
+                    let { supnum, oppnum } = this;
+                    let total = supnum+oppnum;
+                    if(total === 0) return "--"
+                    return (supnum / total *100).toFixed(2) + "%"
+                }
+            }
+        }
+        const MyVote = {
+            template: `
+                <div class="container">
+                    <header>
+                        <h3>{{title}}</h3>
+                        <span>【{{supNum+oppNum}}】</span>
+                    </header>
+                    <vote-main :supnum="supNum" :oppnum="oppNum"></vote-main>
+                    <vote-footer @xxx="handle"></vote-footer>
+                </div>
+            `,
+            data(){
+                return{
+                    supNum:1,
+                    oppNum:1
+                }
+            },
+            props: ["title"],
+            methods: {
+                handle(type){
+                    // console.log("....")
+                    type === 'sup' ? this.supNum++ : this.oppNum++;
+                }
+            },
+            components:{
+                VoteFooter,
+                VoteMain
+            }
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                MyVote
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    在votefooter组件中点击按钮，要改变父组件中的数据，通过自定义事件，也叫发布订阅。
+
+    先写一个自定义事件，也叫先订阅一下，如下：
+        <vote-footer @xxx="handle"></vote-footer>  在这个组件上面订阅了一个事件
+
+    
+ -->

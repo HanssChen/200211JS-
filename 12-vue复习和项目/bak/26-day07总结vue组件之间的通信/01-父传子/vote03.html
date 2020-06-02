@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .container{
+            margin: 20px auto;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ccc;
+        }
+        .container header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 40px;
+        }
+        .container header h3, .container header span{
+            font-size: 22px;
+        }
+        .container main{
+            margin: 10px auto;
+        }
+        .container main p {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-vote title="你支持旺财当班长吗？" :supnum="5" :oppnum="5"></my-vote>
+        <my-vote title="你支持小强当班长吗？" :sup-num="10" ></my-vote>
+    </div>
+
+    <template id="voteTemplate">
+        <div class="container">
+            <header>
+                <h3>{{atitle}}</h3>
+                <span>【{{supNum+oppNum}}】</span>
+            </header>
+            <main>
+                <p>支持人数：{{supNum}}人</p>
+                <p>反对人数：{{oppNum}}人</p>
+                <p>支持率：{{rate}}</p>
+            </main>
+            <footer>
+                <button type="button" class="btn btn-success" @click="handle('sup')">支持</button>
+                <button type="button" class="btn btn-danger"  @click="handle('opp')">反对</button>
+            </footer>
+        </div>
+    </template>
+
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const MyVote = {
+            template:"#voteTemplate",
+            props:{
+                title:String,
+                supnum:Number,
+                oppnum:Number
+            },
+            data(){
+                return{ 
+                    atitle:this.title,  // data中定义atitle数据  值是接收过来的title
+                    supNum:this.supnum,  
+                    oppNum:this.oppnum 
+                }
+            },
+            computed: {
+                rate(){
+                    // data中的数据是挂载到实例上面的
+                    let { supNum, oppNum }= this;
+                    let total = supNum + oppNum;
+                    if(total === 0) return "--"
+                    return (supNum / total * 100).toFixed(2)+"%"
+                }
+            },
+            methods: {
+                handle(type){
+                    if(type=="sup"){
+                        this.supNum++
+                    }else{  
+                        this.oppNum++
+                    }
+                }
+            },
+            created () {
+                console.log(this) // this表示组件实例
+            },
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                MyVote
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    
+ -->

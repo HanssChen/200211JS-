@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .container{
+            margin: 20px auto;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ccc;
+        }
+        .container header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 40px;
+        }
+        .container header h3, .container header span{
+            font-size: 22px;
+        }
+        .container main{
+            margin: 10px auto;
+        }
+        .container main p {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-vote title="你支持旺财当班长吗？" :sup-num="20" :opp-num="15"></my-vote>
+        <my-vote title="你支持小强当班长吗？" :sup-num="10" ></my-vote>
+    </div>
+
+    <template id="voteTemplate">
+        <div class="container">
+            <header>
+                <h3>{{title2}}</h3>
+                <span>【0】</span>
+            </header>
+            <main>
+                <p>支持人数：0人</p>
+                <p>反对人数：0人</p>
+                <p>支持率：0.00%</p>
+            </main>
+            <footer>
+                <button type="button" class="btn btn-success">支持</button>
+                <button type="button" class="btn btn-danger">反对</button>
+            </footer>
+        </div>
+    </template>
+
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const MyVote = {
+            template:"#voteTemplate",
+            props:{
+                title:String,
+                supNum:Number,
+                oppNum:Number
+            },
+            data(){
+                return{ 
+                    // 父传子  父传给子的数据不建议直接去修改之，如果确实要修改这个数据，可以把这个接收到的
+                    // 数据赋给组件的data或computed，data和computed中的数据是可以直接操作
+                    title2:this.title
+                }
+            },
+            created () {
+                console.log(this) // this表示组件实例
+            },
+            mounted () {
+                // console.log(this.title)  // 获取
+
+                // 接收过来的属性是挂载到this的实例上面  也就意味着  可以通过this实例获取属性
+                // this.title = "hello world~"  // 设置
+
+                // setTimeout(()=>{
+                //     this.title = "hello world~"
+                // },3000)
+
+                setTimeout(()=>{
+                    this.title2 = "hello world~666" // 修改data中的数据  完全OK
+                },3000)
+            }
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                MyVote
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+注意点：
+    1）以于属性名的写法，不要有大写，可以使用全小写或中划线命名，如果是中划线命名，接收时需要把中划线变成小驼峰
+    2）父传给子的数据，不能修改
+    3）data中的数据不能和props接收的数据同名   是因为data中的数据会挂载到组件实例上面  props中接收的数据也会挂载到组件实例上面
+
+父传给子的数据，不能修改：
+    尝试修改之，如下：
+        mounted () {
+            this.title = "hello world~"  // 设置
+        }
+        
+        测试可以修改OK，但是控制台报错了，如下：
+           Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "title"
+        
+    vue中通过props接收的数据不要修改，vue是不推荐。如果确实要修改它，可以在data中定义一个数据，值是props接收过来的数据。
+    父传给子的数据，可以认为是只读数据，不能修改
+    
+ -->
