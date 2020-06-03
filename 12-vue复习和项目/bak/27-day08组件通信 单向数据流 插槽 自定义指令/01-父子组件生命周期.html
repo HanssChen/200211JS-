@@ -1,4 +1,40 @@
-<!DOCTYPE html>
+vue是单向数据流 和 react一样，react也是单向数据流。
+意思：只有父通过属性把数据传递给子，子通过props进行接收，如果父中的数据变了，父的更新，会使用新的数据流动到子组件中，这个过程是不单向的。
+
+vue的父子组件生命周期钩子函数执行顺序，可以分成4个部分：
+    第1个加载渲染时：
+        父beforeCreate ==> 父created ==> 父的beforeMount =
+        => 子beforeCreate ==> 子created ==> 子beforeMount =
+        => 子mounted ==>父mounted
+    子组件更新时（子组件中的状态变了，要更新视图）：
+        父beforeUpdate ==> 子beforeUpdate ==> 子updated ==> 父的updated
+    父组件更新时（父中的状态改变了，如果状态没有通过属性传递给子）
+        父beforeUpdate ==> 父的updated
+    销毁时 父beforeDestroy ==> 子beforeDestroy ==> 子destroyed ==> 父detroyed
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -110,41 +146,13 @@
         })
     </script>
 </body>
-</html>
+</html> -->
 
 <!-- 
-在votefooter组件中点击按钮，要改变父组件中的数据，通过自定义事件，也叫发布订阅。
+    在votefooter组件中点击按钮，要改变父组件中的数据，通过自定义事件，也叫发布订阅。
 
-先写一个自定义事件，也叫先订阅一下，如下：
-    <vote-footer @xxx="handle"></vote-footer>  在这个组件上面订阅了一个事件
+    先写一个自定义事件，也叫先订阅一下，如下：
+        <vote-footer @xxx="handle"></vote-footer>  在这个组件上面订阅了一个事件
 
-关于修改了父组件中的数据，组件的渲染问题：
-    在myvote组件中有两个数据，一个是supNum，一个是oppNum。
-    我们把上面的两个数组传递给了votemian组件。
-    votemain组件中获取父传递的数据（状态）。
-    --------------------
-    当在votefooter组件中基于发布订阅修改了父组件中的状态，
-    当父中的数据修改了，vue中数据是核心，数据修改了，会自动地更新视图，
-    也就说父组件会重新渲染，父组件重新渲染对对应的子组件也会重新渲染，
-    此时父组件可以把最新的状态基于属性再次传递给votemain组件。
-
-    父组件的重新渲染，势必会导致子组件的渲染。
-
-前提：父中的数据传递给了子
-    父组件中有一个子组件，第一加载父组件，父组件有一个生命周期：
-        beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-                                                    |        
-        在render时，发现有子组件，先渲染子组件，也就是走子组件的生命周期
-            beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-
-    当父组件重新渲染（当改变了父组件中的数据，父组件就会重新渲染）
-        beforeUpdate==>[render]==>updated
-                          |
-        在render时，发现有子组件，先渲染子组件，也就是走子组件的生命周期
-            beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-
-        在子组件渲染完毕后，再去渲染父组件
-
-vue 父子组件的生命周期顺序 面试常考 
-
+    
  -->

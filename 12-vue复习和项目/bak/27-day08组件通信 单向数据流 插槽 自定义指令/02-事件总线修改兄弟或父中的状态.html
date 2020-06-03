@@ -34,13 +34,10 @@
         <my-vote title="你支持旺财当班长吗？"></my-vote>
         <my-vote title="你支持小强当班长吗？"></my-vote>
     </div>
-
-    <template id="voteTemplate">
-        
-    </template>
-
     <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
     <script>
+        let EventBus = new Vue; // 此时vue对象充当事件总线 不再是根组件
+
         const VoteFooter = {
             template:`
                 <footer>
@@ -50,8 +47,7 @@
             `,
             methods: {
                 func(type){
-                    // 发布  通知自定义事件执行  type就是发布事件时，携带的数据
-                    this.$emit("xxx",type)
+                  EventBus.$emit("xxx",type)
                 }   
             }
         };
@@ -59,11 +55,16 @@
             template:`
                 <main>
                     <p>支持人数：{{supnum}}人</p>
-                    <p>反对人数：{{supnum}}人</p>
+                    <p>反对人数：{{oppnum}}人</p>
                     <p>支持率：{{rate}}</p>
                 </main>
             `,
-            props: ["supnum","oppnum"],
+            data(){
+                return{
+                    supnum:0,
+                    oppnum:0
+                }
+            },
             computed: {
                 rate(){
                     let { supnum, oppnum } = this;
@@ -71,6 +72,15 @@
                     if(total === 0) return "--"
                     return (supnum / total *100).toFixed(2) + "%"
                 }
+            },
+            methods:{
+                handleMain(type){
+                    type === "sup" ? this.supnum++ : this.oppnum++;
+                }
+            },
+            created () {
+                // 把改变当前组件状态的方法扔到事件总结中
+                EventBus.$on("xxx",this.handleMain)
             }
         }
         const MyVote = {
@@ -78,24 +88,25 @@
                 <div class="container">
                     <header>
                         <h3>{{title}}</h3>
-                        <span>【{{supNum+oppNum}}】</span>
+                        <span>【{{count}}】</span>
                     </header>
-                    <vote-main :supnum="supNum" :oppnum="oppNum"></vote-main>
-                    <vote-footer @xxx="handle"></vote-footer>
+                    <vote-main></vote-main>
+                    <vote-footer></vote-footer>
                 </div>
             `,
             data(){
                 return{
-                    supNum:1,
-                    oppNum:1
+                   count:0
                 }
             },
             props: ["title"],
             methods: {
-                handle(type){
-                    // console.log("....")
-                    type === 'sup' ? this.supNum++ : this.oppNum++;
+                handleVote(){
+                    this.count++;
                 }
+            },
+            created () {
+                EventBus.$on("xxx",this.handleVote); // 把修改状态的方法扔到事件总线中
             },
             components:{
                 VoteFooter,
@@ -113,38 +124,16 @@
 </html>
 
 <!-- 
-在votefooter组件中点击按钮，要改变父组件中的数据，通过自定义事件，也叫发布订阅。
+    EventBus  event是事件的意思  bus公交的意思   翻译成事件总线
+        所谓的事件总线也是基于发布订阅的
 
-先写一个自定义事件，也叫先订阅一下，如下：
-    <vote-footer @xxx="handle"></vote-footer>  在这个组件上面订阅了一个事件
+    eventbus思想：
+        1）创建一个总的事件总线   说白了就是一个vue实例   new Vue()
+        2）MyVote组件中有自己的状态  也可以有修改状态的方法   状态在data中  可以修改
+           VoteMain组件也有自己的状态  也有对应修改状态的方法  
+        3）把修改状态的方法统一放到部的事件总线中
+        4）由于事件总线不属于任何一个组件，VoteFooter就可以从事件池拿出对应的方法，执行它
 
-关于修改了父组件中的数据，组件的渲染问题：
-    在myvote组件中有两个数据，一个是supNum，一个是oppNum。
-    我们把上面的两个数组传递给了votemian组件。
-    votemain组件中获取父传递的数据（状态）。
-    --------------------
-    当在votefooter组件中基于发布订阅修改了父组件中的状态，
-    当父中的数据修改了，vue中数据是核心，数据修改了，会自动地更新视图，
-    也就说父组件会重新渲染，父组件重新渲染对对应的子组件也会重新渲染，
-    此时父组件可以把最新的状态基于属性再次传递给votemain组件。
-
-    父组件的重新渲染，势必会导致子组件的渲染。
-
-前提：父中的数据传递给了子
-    父组件中有一个子组件，第一加载父组件，父组件有一个生命周期：
-        beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-                                                    |        
-        在render时，发现有子组件，先渲染子组件，也就是走子组件的生命周期
-            beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-
-    当父组件重新渲染（当改变了父组件中的数据，父组件就会重新渲染）
-        beforeUpdate==>[render]==>updated
-                          |
-        在render时，发现有子组件，先渲染子组件，也就是走子组件的生命周期
-            beforeCreate==>created==>beforeMounnt==>[render]==>mounted
-
-        在子组件渲染完毕后，再去渲染父组件
-
-vue 父子组件的生命周期顺序 面试常考 
+    后端编程中有很多的设计模式，对于前端来说，有两个模式必须掌握，一个是发布订阅模式，一个是观察者模式，这两个设计模式在前端中无处不在。
 
  -->

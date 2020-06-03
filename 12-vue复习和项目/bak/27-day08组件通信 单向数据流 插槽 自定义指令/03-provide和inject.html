@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .container{
+            margin: 20px auto;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ccc;
+        }
+        .container header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 40px;
+        }
+        .container header h3, .container header span{
+            font-size: 22px;
+        }
+        .container main{
+            margin: 10px auto;
+        }
+        .container main p {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-vote title="你支持旺财当班长吗？"></my-vote>
+        <my-vote title="你支持小强当班长吗？"></my-vote>
+    </div>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const VoteFooter = {
+            template:`
+                <footer>
+                    <button type="button" class="btn btn-success" @click="handle('sup')">支持</button>
+                    <button type="button" class="btn btn-danger"  @click="handle('opp')">反对</button>
+                </footer>
+            `,
+            inject:["handle"]
+        };
+        const VoteMain = {
+            template:`
+                <main>
+                    <p>支持人数：{{obj.supNum}}人</p>
+                    <p>反对人数：{{obj.oppNum}}人</p>
+                    <p>支持率：--</p>
+                </main>
+            `,
+           inject:["obj"]
+        }
+        const MyVote = {  // 让MyVote充当祖先组件
+            template: `
+                <div class="container">
+                    <header>
+                        <h3>{{title}}</h3>
+                        <span>【{{obj.supNum+obj.oppNum}}】</span>
+                    </header>
+                    <vote-main></vote-main>
+                    <vote-footer></vote-footer>
+                </div>
+            `,
+            data(){  // data中的数据仅仅是当前组件中的数据  
+                return{
+                    obj:{   // 当前组件中有一个obj对象  
+                        supNum:0,
+                        oppNum:0
+                    }
+                }
+            },
+            provide(){
+                // 此方法只有第一次加载组件的时候执行一次
+                return{
+                    obj:this.obj,
+                    handle:this.handleVote
+                }
+            },
+            props: ["title"],
+            methods: {
+                handleVote(type){
+                    type === "sup" ? this.obj.supNum++ : this.obj.oppNum++
+                }
+            },
+            components:{
+                VoteFooter,
+                VoteMain
+            }
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                MyVote
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    provide(提供)  inject(注入) 也是vue中组件通信的方式之一。
+
+    假如让所有需要通信的组件共同具有一个祖先组件，了有祖先组件，就可以使用
+    provied和inject进行通信了。
+
+    把状态或操作状态的方法统一放到祖先组件中，通过provide放入。
+    后代组件要想使用状态或使用方法，通过inject进行注入。
+
+ -->
