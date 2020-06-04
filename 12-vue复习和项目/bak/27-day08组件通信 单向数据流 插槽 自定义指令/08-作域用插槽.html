@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+        <page>
+            <!-- 将要被插入到插槽的内容，它里面也有数据。数据是写死的吗？ -->
+            <!-- 为了更加灵活定制组件，这个数据也可以写活 -->
+            <!-- v-slot="abc"  v-slot后面随便写一个名字 通过slot传递的数据都会作来abc这个对象的属性 -->
+            <template v-slot="abc">
+                <header>{{abc.xxx}}</header>
+            </template>
+        </page>
+    </div>
+    <template id="page">
+        <div class="box">
+            <h1>这是全局组件的模板</h1>
+            <slot :xxx="xxx"></slot>
+        </div>
+    </template>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        Vue.component("page",{  
+            template:"#page",
+            data(){
+                return{
+                    xxx:"我是头部666"
+                }
+            }
+        })
+        let vm = new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+作用域插槽：
+
+
+
+--------------------------
+插槽：
+    匿名插槽  <slot><slot>    直接把组件中内容插入到插槽中
+    具名插槽  模板中可以写多个插槽，给插槽起上不同的名字，使用组件时，给不同的插槽中插入不同的内容
+    作用域插槽  要在使用组件时 这里面的使用真实数据 数据可以通过插槽传入  <slot :xxx="xxx"></slot>
+--------------------------
+--------------------------
+
+ -->

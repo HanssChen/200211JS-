@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+       <mybutton> 小小的button <div>hello</div> </mybutton>
+       <h3>-----------------</h3>
+       <mybutton>
+           <h3>88888</h3>
+       </mybutton>
+       <h3>-----------------</h3>
+       <mybutton></mybutton>
+    </div>
+    <template id="mybutton">
+        <div>
+            <!-- <slot></slot> 它就代表了 当前组件包含的所有的结构 -->
+            <slot></slot>
+            <i>我是了个button组件</i>
+            <!-- 如果有多个匿名插槽 组件中包含的内容会依次插入到多个匿名插槽中 -->
+            <slot></slot>
+            <!-- 也可以给插槽指定默认值 -->
+            <slot>我是默认的内容</slot>
+        </div>
+    </template>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        Vue.component("mybutton",{  
+            template:"#mybutton",
+        })
+        let vm = new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+匿名插槽注意细节：
+    1）可以有多个匿名插槽  组件中包含的内容依次插入到这些匿名插槽中
+    2）匿名插槽可以有默认值  如果组件中没有包含内容，插槽中插入的就是默认值
+--------------------------
+插槽：
+    匿名插槽  <slot><slot>    直接把组件中内容插入到插槽中
+    具名插槽  模板中可以写多个插槽，给插槽起上不同的名字，使用组件时，给不同的插槽中插入不同的内容
+    作用域插槽  要在使用组件时 这里面的使用真实数据 数据可以通过插槽传入  <slot :xxx="xxx"></slot>
+--------------------------
+--------------------------
+
+ -->

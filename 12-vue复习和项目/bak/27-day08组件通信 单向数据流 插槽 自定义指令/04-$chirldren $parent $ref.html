@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <style>
+        .container{
+            margin: 20px auto;
+            padding: 10px;
+            width: 400px;
+            border: 1px solid #ccc;
+        }
+        .container header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 40px;
+        }
+        .container header h3, .container header span{
+            font-size: 22px;
+        }
+        .container main{
+            margin: 10px auto;
+        }
+        .container main p {
+            line-height: 35px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <my-vote title="你支持旺财当班长吗？"></my-vote>
+        <my-vote title="你支持小强当班长吗？"></my-vote>
+    </div>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        const VoteFooter = {
+            template:`
+                <footer>
+                    <button type="button" class="btn btn-success" ref="supBtn" @click="handle(1)">支持</button>
+                    <button type="button" class="btn btn-danger" ref="supBtn"  @click="handle(0)">反对</button>
+                </footer>
+            `,
+            data(){
+                return{
+                    a:1,
+                    b:2
+                }
+            },
+            methods:{
+                handle(type){
+                    // 得到父组件实例就意味着，可以获取父组件中的数据和方法
+                    type === 1 ? this.$parent.supNum++ : this.$parent.oppNum++;
+                    // console.log("...")
+                }
+            },
+            mounted () {
+                // 如果ref写在了一个变通的标签上面的，我们可以通过this.$refs.xxx获取所谓的dom元素
+                // console.log(this.$refs.supBtn)
+            }
+        };
+        const VoteMain = {
+            template:`
+                <main>
+                    <p>支持人数：{{$parent.supNum}}人</p>
+                    <p>反对人数：{{$parent.oppNum}}人</p>
+                    <p>支持率：--</p>
+                </main>
+            `,
+        }
+        const MyVote = {  
+            template: `
+                <div class="container">
+                    <header>
+                        <h3>{{title}}</h3>
+                        <span>【{{supNum+oppNum}}】</span>
+                    </header>
+                    <vote-main></vote-main>
+                    <vote-footer ref="AAA"></vote-footer>
+                </div>
+            `,
+            data(){ 
+                return{
+                    supNum:0,
+                    oppNum:0
+                }
+            },
+            props: ["title"],
+            mounted () {
+                // 如果ref写在组件上面  通过this.$refs.xxx获取的是组件实例
+                // 得到了组件实例，就意思可以得到实例上面的数据和方法
+                // console.log(this.$refs.AAA)
+                // console.log(this.$refs.AAA.a)
+                // console.log(this.$refs.AAA.b)
+                // console.log(this.$refs.AAA.handle())
+
+                // ---------------- 获取所有的子组件实例
+                console.log(this.$children[1].a)
+                console.log(this.$children[1].b)
+            },
+            components:{
+                VoteFooter,
+                VoteMain
+            }
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                MyVote
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+    ref  
+        1）可以给一个普通的标签上面的写一个ref  类似于id  通过this.$refs.xxx 获取dom元素
+        2）可以给一个组件上面加一个ref 通过this.$refs.xxx 获取的组件实例  数据和操作数据的方法都是挂载到组件实例上面  得到组件实例后，就可以得到这个实例上面的数据和操作数据的方法
+
+    如果在一个组件中使用ref，那么就可以获取这个组件中的数据和方法。ref 和 this.$refs.xx 也是vue中通信的一种方式
+
+    $parent  获取父组件实例  你得到父组件实例 就意味着 你可以得到父组件中的数据和操作数据的方法
+        在子组件中可以通过$parent获取父组件实例  得到父组件实例就意味可以拿父组件中的数据和方法
+
+    $children  在一个父组件中获取所有的子组件实例 就意味着我可以非常方便获取子组件中的数据和操作数据的方法
+
+--------------------------
+vue组件通信方案：
+    属性传递+props
+    自定义事件+$emit()  发布订阅
+    Vuex 
+    EventBus
+    provide inject 
+    $refs  ref 
+    $parent  
+    $children 
+
+--------------------------
+父子通信：props  发布订阅  $refs  $parent  $children
+祖先通信：provide  inject 
+让组件能够公用一个事件池: EventBus
+更加方便的通信方式：vuex
+不太算是的：localstroage / sessionstroage 
+没有说到的：$arrts  $listeners
+--------------------------
+
+ -->

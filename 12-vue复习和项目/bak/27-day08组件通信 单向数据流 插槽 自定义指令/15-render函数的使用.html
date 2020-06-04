@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+      <abc></abc>
+    </div>
+    <!-- 叫做一个组件中的模板 -->
+    <template id="abc">
+        <div>
+            我是一个div 
+            <p>我是一个p标签</p>
+        </div>
+    </template>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        let abc = {  // 局部组件  在vue中通常需要给一个组件指定模板  模板也是vue中一个亮点
+            // template:"#abc",  // 注释了这一行代码，就意味着，没有模板
+            // render:function(createElement){
+            //    return createElement("div",null,["我是一个div",createElement("p",null,"我是一个p标签")])
+            // }
+            // render:function(h){
+            //    return h("div",null,["我是一个div",createElement("p",null,"我是一个p标签")])
+            // }
+            //  render:(h)=>{
+            //    return h("div",null,["我是一个div",createElement("p",null,"我是一个p标签")])
+            // }
+            //  render:h=>{
+            //    return h("div",null,["我是一个div",createElement("p",null,"我是一个p标签")])
+            // }
+            
+            // 第一个参数是标签名  第二个参数是行内属性  第三个参数是这个标签中的内容
+            render:h=> h("div",null,["我是一个div",createElement("p",null,"我是一个p标签")])
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                abc
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+一个组件中要么指定模板，要么指定render函数。看一下render函数怎么玩？
+
+常规写法：
+let mylevel = {  // 局部组件
+    // template:"#level",  // 指定组件所对应的模板
+    render:function(createElement){
+    },
+    props: ["level"]
+}
+
+上面的写法，使用ES6进行简化，如下：
+render(createElement){
+},
+
+进一步简化：
+render(h){
+    return h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+},
+
+再进一步简化：
+ render:h => h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+--------------------------
+ -->

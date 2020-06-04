@@ -8,32 +8,26 @@
 </head>
 <body>
     <div id="app">
-      <mylevel :level="1">
-          hello 你好~
-      </mylevel>
-      <h3>--------------</h3>
-      <mylevel :level="2">
-        hello 你好~
-    </mylevel>
-    <h3>--------------</h3>
-    <mylevel :level="3">
-        hello 你好~
-    </mylevel>
+        <page>
+            <header>这是头部</header>
+            <footer>我是底部</footer>
+        </page>
     </div>
+    <template id="page">
+        <div class="box">
+            <h1>这是全局组件的模板</h1>
+            <!-- 如果这么写，它会把page组件中所有的内容都插入到匿名插槽中 -->
+            <!-- 达不到更好定制组件的目的 -->
+            <slot></slot>
+        </div>
+    </template>
     <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
     <script>
-        let mylevel = {  // 局部组件
-            render: function (h) {
-                // $slots.default 表示默认插槽
-                return h("h"+this.level,null,this.$slots.default)
-            },
-            props: ["level"]
-        }
+        Vue.component("page",{  
+            template:"#page"
+        })
         let vm = new Vue({
-            el:"#app",
-            components: {
-                mylevel
-            }
+            el:"#app"
         })
     </script>
 </body>
@@ -41,5 +35,12 @@
 
 <!-- 
 --------------------------
+具名插槽：
+    说白了，就是给插槽起一个名字。
+
+
 --------------------------
+--------------------------
+--------------------------
+
  -->

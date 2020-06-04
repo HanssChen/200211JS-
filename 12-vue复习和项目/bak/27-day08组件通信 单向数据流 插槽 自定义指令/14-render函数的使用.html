@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+      <mylevel :level="1">
+          hello 你好~
+      </mylevel>
+    </div>
+    <!-- <template id="level">
+        <div>
+            <h1 v-if="level == 1"> <slot></slot> </h1>
+            <h2 v-if="level == 2"> <slot></slot> </h2>
+            <h3 v-if="level == 3"> <slot></slot> </h3>
+            <h4 v-if="level == 4"> <slot></slot> </h4>
+            <h5 v-if="level == 5"> <slot></slot> </h5>
+            <h6 v-if="level == 6"> <slot></slot> </h6>
+        </div>
+    </template> -->
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        let mylevel = {  // 局部组件
+            // template:"#level",  // 指定组件所对应的模板
+            // render:function(createElement){
+            // },
+            // render(createElement){
+            //    return createElement("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+            // },
+            // render(h){
+            //    return h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+            // },
+            render:h => h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+            ,
+            props: ["level"]
+        }
+        let vm = new Vue({
+            el:"#app",
+            components: {
+                mylevel
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+一个组件中要么指定模板，要么指定render函数。看一下render函数怎么玩？
+
+常规写法：
+let mylevel = {  // 局部组件
+    // template:"#level",  // 指定组件所对应的模板
+    render:function(createElement){
+    },
+    props: ["level"]
+}
+
+上面的写法，使用ES6进行简化，如下：
+render(createElement){
+},
+
+进一步简化：
+render(h){
+    return h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+},
+
+再进一步简化：
+ render:h => h("div",null,["我是一个div",createElement("p",null,["我是一个p标签",createElement("span",null,"我是一个span标签")])])
+--------------------------
+ -->

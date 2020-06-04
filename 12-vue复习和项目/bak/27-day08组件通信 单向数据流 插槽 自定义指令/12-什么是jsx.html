@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+      
+    </div>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+       
+        let vm = new Vue({
+            el:"#app",
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+jsx:
+    javascrpt and xml
+
+    javascript  xml???
+
+xml也是一种标签语言，和HTML类似，
+    不同：html中的标签是固定死的  h1  h3  p  div  span
+         xml标签不是固定死的  你想写什么标签就写什么  <student></student>  <father></father>
+            在xml中它们就叫标签  不是组件
+   
+之前xml是用来客户端和服务器之间数据传输的一种数据格式，后来有一个更好替代方案就是josn。
+
+json的优点：
+    1）操作方便   你就像操作JS对象一样就OK了
+    2）数据量小     
+
+    如传递一个学生的信息，使用xml如下：
+        <studentList>
+            <student>
+                <id>001</id>
+                <name>wangcai</name>
+                <age>100</age>
+            </student>
+        </studentList>
+        得到xml数据后，需要解析，解析的目录就是为了得到里面的数据  和操作dom有点类似
+    如果通过json进行传输，如下：
+        [studentList:[{"id":001,"name":"wangcai","age":100}]]
+        studentList[0].name 
+
+--------------------------
+jsx:
+    javascrpt and xml   在标签中可以写js代码
+
+    vue: 模板 组件实例  样式   结构写在模板中  模板中可以绑定数据  模板中可以写指令  简单 
+    react: jsx  没有模板的概念   把js代码写在标签中  难  灵活 
+
+    后来在vue中也可以写jsx，是借鉴了react中的思想。
+
+--------------------------
+--------------------------
+ -->

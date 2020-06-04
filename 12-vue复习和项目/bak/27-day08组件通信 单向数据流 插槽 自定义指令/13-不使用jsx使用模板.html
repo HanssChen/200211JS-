@@ -16,17 +16,24 @@
         hello 你好~
     </mylevel>
     <h3>--------------</h3>
-    <mylevel :level="3">
+      <mylevel :level="3">
         hello 你好~
     </mylevel>
     </div>
+    <template id="level">
+        <div>
+            <h1 v-if="level == 1"> <slot></slot> </h1>
+            <h2 v-if="level == 2"> <slot></slot> </h2>
+            <h3 v-if="level == 3"> <slot></slot> </h3>
+            <h4 v-if="level == 4"> <slot></slot> </h4>
+            <h5 v-if="level == 5"> <slot></slot> </h5>
+            <h6 v-if="level == 6"> <slot></slot> </h6>
+        </div>
+    </template>
     <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
     <script>
         let mylevel = {  // 局部组件
-            render: function (h) {
-                // $slots.default 表示默认插槽
-                return h("h"+this.level,null,this.$slots.default)
-            },
+            template:"#level",
             props: ["level"]
         }
         let vm = new Vue({

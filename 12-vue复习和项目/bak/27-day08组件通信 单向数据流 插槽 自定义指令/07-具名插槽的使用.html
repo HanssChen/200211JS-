@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+        <page>
+            <header slot="header">这是头部</header>
+            <footer slot="footer">我是底部</footer>
+        </page>
+        <h3>------------------------</h3>
+        <page>
+            <!-- 按理说下面的写法OK -->
+            <!-- <header v-slot:header>这是头部</header> -->
+            <!-- <footer v-slot:footer>我是底部</footer> -->
+            
+            <!-- 具名插槽  注意：1）需要给插槽指定名字  2）插入内容时通过slot指定内容插入到哪个插槽  或 通过v-slot指定 v-slot需要多写一个template标签 -->
+            <template v-slot:header>
+                <header>这是头部</header>
+            </template>
+            <template v-slot:footer>
+                <header>这是头部</header>
+            </template>
+        </page>
+    </div>
+    <template id="page">
+        <div class="box">
+            <slot name="header"></slot>
+            <h1>这是全局组件的模板</h1>
+            <slot name="footer"></slot>
+        </div>
+    </template>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        Vue.component("page",{  
+            template:"#page"
+        })
+        let vm = new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+具名插槽：
+    说白了，就是给插槽起一个名字。
+
+
+--------------------------
+--------------------------
+--------------------------
+
+ -->
