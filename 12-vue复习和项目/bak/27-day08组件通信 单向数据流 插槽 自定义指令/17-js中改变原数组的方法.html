@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/reset.min.css">
+</head>
+<body>
+    <div id="app">
+     
+    </div>
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP" src="https://lib.baomitu.com/vue/2.6.11/vue.js"></script>
+    <script>
+        let arr = ["a","b","c"];
+        arr.pop();
+        console.log(arr)  //  [ "a", "b" ]
+    </script>
+</body>
+</html>
+
+<!-- 
+--------------------------
+数组是对象，对象中有很多的方法：
+    有些方法是可以改变原数组。
+--------------------------
+改变原数组的：
+    shift：将第一个元素删除并且返回删除元素，空即为undefined
+    unshift：向数组开头添加元素，并返回新的长度
+    pop：删除最后一个并返回删除的元素
+    push：向数组末尾添加元素，并返回新的长度
+    reverse：颠倒数组顺序
+    sort：对数组排序
+    splice:splice(start,length,item)删，增，替换数组元素，返回被删除数组，无删除则不返回
+
+不改变原数组的：
+    concat：连接多个数组，返回新的数组
+    join：将数组中所有元素以参数作为分隔符放入一个字符
+    slice：slice(start,end)，返回选定元素
+    map,filter,forEach,some,every等不改变原数组
+
+ -->
