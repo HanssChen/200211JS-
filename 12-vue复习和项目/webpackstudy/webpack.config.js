@@ -9,6 +9,7 @@
 const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode:"development", // 采用开发模式打包（代码不压缩） 现在不管是生产模式还是开发模式，我们都是打包到硬盘上，如何打包到内存中不先管
@@ -44,13 +45,36 @@ module.exports = {
                 removeComments: true,  // 在内存中html中就没有注释 
                 collapseWhitespace:true, // 清理html中的空格、换行符
                 minifyCSS:true, // 压缩内部样式
-                removeEmptyElements:true, // 清除掉空标签
+                // removeEmptyElements:true, // 清除掉空标签
                 // .... 
             }
         }),
         // 第一次打包把之前打过的包清空掉
-        new CleanWebpackPlugin()
-    ]
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].min.css',
+        }),
+    ],
+    module:{  // 配置加载器--loader
+        rules:[  // 模块规则：使用加载器（默认是从右向左执行，从下向上）
+            {
+                test:/\.(css|less)$/i,  // js中的正则表达式  各位哪天抽空去找个文档看一下
+                use:[
+                    // "style-loader",  // 把css代码插入到head标签中  
+                    MiniCssExtractPlugin.loader,  // MiniCssExtractPlugin插件中自带loader 这个loader可以把css抽离出去
+                    "css-loader",  // 翻译成让webapck识别的代码
+                    "postcss-loader", // 设置css3属性中的中前缀(处理兼容 需要搭配autoprefixer使用) 
+                    // "less-loader", // 把less代码翻译成css代码
+                    {
+                        loader:"less-loader",
+                        options:{
+                            // 专门针对less-loader进行配置
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 }
 
 
