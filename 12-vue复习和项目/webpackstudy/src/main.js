@@ -5,7 +5,7 @@ const { add } = require("./A") // commonjs中的导入
 console.log(add(2,1))  // 3
 console.log(sub(2,1))  // 1
 
-console.log("hello 你好~ 666")
+console.log("789456123我们学习了html-webpack-plugin插件和clean-webpack-plugin这个插件")
 
 
 // 前端的模块化也是有一个发展史  可以搜一下
