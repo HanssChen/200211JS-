@@ -1,78 +1,94 @@
-/* 
-    在webpack.config.js中自定义webpack的配置，以后使用webpack命令打包时，就按照我们这个
-    配置进行打包。这个文件叫，必须叫webpack.config.js 或 webpackfile.js
-
-    webpack本身就是基于node开发，所以它里面的模块化规范是commonjs规范。
-
-    node是后端，在后端并没有火起来，但是在前端火起来。
- */
 const path = require("path");
 const htmlWebpackPlugin = require("html-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');  // 压缩js  如果你压缩了css 即使在生产模式下 js它不会压缩了 需要我们手动压缩
 module.exports = {
-    mode:"development", // 采用开发模式打包（代码不压缩） 现在不管是生产模式还是开发模式，我们都是打包到硬盘上，如何打包到内存中不先管
-    // mode:"production", // 生产模式打包，代码是压缩的
-    // 设置要打包的入口（真实项目开发，代码基本上都是放在src下面的）
+    // mode:"development", 
+    mode:"production",  // 只有在生产模式下，才考虑js和css压缩问题
     entry:"./src/main.js",
-    // 配置打包后的出口
     output:{
-        // 配置文件名  
-        filename:"bundle.[hash].js",  // [hash]打包的时候会随机在名字中生成唯一的哈希值，保证每一次打包出来的文件是不一样的
-        // 配置打包后的文件输出到什么位置 通常使用绝对路径
+        filename:"bundle.[hash].js", 
         path:path.resolve(__dirname,"dist")
     },
-    // 配置webapck-dev-server
     devServer:{
-        port:"8080", // 托管内存中的包的端口  
-        compress:true, // 开启gzip压缩
-        open:true,  // 自动打开浏览器
-        contentBase:path.resolve(__dirname,"dist"), // 指定资源的访问路径
-        hot:true, // 开启热更新
-        // 配置代理跨域   如果后端没有配置cors  写vue项目可以在devServer中配置代理跨域
+        port:"8080", 
+        compress:true, 
+        open:true,  
+        contentBase:path.resolve(__dirname,"dist"), 
+        hot:true, 
     },
-    plugins:[  // webpack中的plugins是一个数组，里面可以配置很多的插件
-        new htmlWebpackPlugin({  // 插件需要new一下
-            // 指定模板的位置
+    plugins:[  
+        new htmlWebpackPlugin({ 
             template:"./public/index.html",
-            // 打包生成的文件名  localhost:8080/
             filename:"index.html",
-            // 是否把打包好的资源插入到页面中，是否设置hash值（作用是清缓存）
-            // 和上面output中的filename中配置的hash值的作用是一样的
             hash:true,
             minify:{
-                removeComments: true,  // 在内存中html中就没有注释 
-                collapseWhitespace:true, // 清理html中的空格、换行符
-                minifyCSS:true, // 压缩内部样式
-                // removeEmptyElements:true, // 清除掉空标签
-                // .... 
+                removeComments: true,  
+                collapseWhitespace:true, 
+                minifyCSS:true, 
             }
         }),
-        // 第一次打包把之前打过的包清空掉
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].min.css',
         }),
     ],
-    module:{  // 配置加载器--loader
-        rules:[  // 模块规则：使用加载器（默认是从右向左执行，从下向上）
+    module:{  
+        rules:[  
             {
-                test:/\.(css|less)$/i,  // js中的正则表达式  各位哪天抽空去找个文档看一下
+                test:/\.(css|less)$/i, 
                 use:[
-                    // "style-loader",  // 把css代码插入到head标签中  
-                    MiniCssExtractPlugin.loader,  // MiniCssExtractPlugin插件中自带loader 这个loader可以把css抽离出去
-                    "css-loader",  // 翻译成让webapck识别的代码
-                    "postcss-loader", // 设置css3属性中的中前缀(处理兼容 需要搭配autoprefixer使用) 
-                    // "less-loader", // 把less代码翻译成css代码
+                    MiniCssExtractPlugin.loader,  
+                    "css-loader",  
+                    "postcss-loader", 
                     {
                         loader:"less-loader",
                         options:{
-                            // 专门针对less-loader进行配置
                         }
                     }
                 ]
+            },
+            // {
+            //     test:/\.(jpg|png|gif|webp|ico)$/i,
+            //     use:["file-loader"]  // 不管图片大小，都是原样输出
+            // },
+            {
+                test:/\.(jpg|png|gif|webp|ico)$/i,  // 使用urlloader可以把图片转成字符串
+                use:{
+                    loader:"url-loader",  
+                    options:{
+                        limit:38*1024  // 如果图片小于38k，就把图片转成base64编码,如果大于38k,就原样输出
+                    }
+                }
+            },
+            {
+                test:/\.(svg|ttf|eot|woff2)$/i,
+                use:["url-loader"]
+            },
+            {
+                test:/\.(mp3|ogg|wav)$/i,
+                use:["url-loader"]
+            },
+            {
+                test:/\.(mp4|avi|ogv)$/i,
+                use:["url-loader"]
+            },
+            {
+                test:/\.vue)$/i,
+                use:["vue-loader"]
             }
+        ]
+    },
+    optimization:{ // 设置优化项
+        minimizer: [  // 设置压缩方式
+            new OptimizeCSSAssetsPlugin(), // 压缩css  注意 如果你压缩了css  js它就不压缩
+            new UglifyJsPlugin({   // 压缩js
+                cache: true,  // 是否使用缓存
+                parallel: true,  // 是否是并发编译 
+                sourceMap: true // 是否启动源码映射 （方便调试）
+            }),
         ]
     }
 }

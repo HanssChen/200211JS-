@@ -12,6 +12,8 @@
 // import "./static/css/index.css"
 
 // ------------------------ 导入less
-import "./static/less/index.less"
+// import "./static/less/index.less"
+
+import App from "./views/App.vue"
 
 

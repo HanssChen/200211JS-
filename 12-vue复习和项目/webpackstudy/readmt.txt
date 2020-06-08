@@ -1,5 +1,9 @@
 vue全家桶：vue.js + vue-router + vuex + es6 + vue-cli + webpack + ui库
 
+webpack也是属于vue技术栈，现在开发项目，基本上离不开webpack。
+
+不会webpack，也是可以写项目的，webpack是前端比较高级的课程。
+
 ----------------------------------------
 vue中的数据通信：
     1）props  发布订阅（自定义事件）  $parent  $children
@@ -84,7 +88,13 @@ webpack是基于node的，走的是commonjs模块化，不是ES6。
 如何配置：
     在项目的根目录下面，创建一个webpack.config.js，把所有的配置写在这个文件中
 
-    
+----------------------------------------
+为什么通过vue脚手架创建的项目没有webpack.config.js？
+答：vuecli2.x版本中是有这个配置文件，在vuecli3.x  4.x中隐藏了这个配置文件
+    如果说你想基于vuecli的配置上再进行配置，可以创建一个vue.config.js。 
+    打包的时候，它会把vue.config.js中的配置合并到它内部的webpack.config.js中去。
+
+    通常可以在vue.config.js中配置跨域。
 ----------------------------------------
 复习一下上次的webpack:
     1) 什么是webpack? webpack有什么用？
@@ -113,7 +123,7 @@ webpack是基于node的，走的是commonjs模块化，不是ES6。
 打包（编译）模式，分两种：
     1）开发模式打包（我们开发过程需要不断地打包（.vue文件浏览器不认识，就需要通过打包让浏览器认识））
         通常开发模式打包，是把包打包到内存（npm run serve 打好包了，包存在内存中，把内存中的包通过express托管起来，提供一个url，通过url访问内存中的项目）。
-        至于如何在内存中打上一个包，通过一个url访问呢？先不说
+        至于如何在内存中打上一个包，通过一个url访问呢？先不说  .vue 
     2）生产模式打包（项目开发完毕了，就打包生成一个dist目录，dist目录就是我们项目要上线的文件夹）
 
     开发模式打包 打包出来的文件不会压缩 方便我们读取。  开发模式打的包叫bundle.js 
@@ -157,6 +167,8 @@ webpack是基于node的，走的是commonjs模块化，不是ES6。
     2）开发相关的配置
     3）生产相关的配置
 
+通过webpack命令webpack通过把打包好的代码生成到硬盘上的。
+
 ----------------------------------------
 webpack的缺点：
     大 
@@ -187,6 +199,10 @@ webpack-dev-server:
           自动监听代码是否改变了，如果代码改变了，自动在内存中打包。
           帮我们自己打开浏览器
           ...
+        
+    vue中代理跨域也是基于这个webpack-dev-server。
+
+运行webpack-dev-server 就是在内存中打包。
 ----------------------------------------
 要使用上面的三个模块，肯定是要安装，问：安装成开发依赖？还是安装成生产依赖？
 答：npm i html-webpack-plugin clean-webpack-plugin webpack-dev-server -D 
@@ -294,10 +310,65 @@ postcss-loader的插件。我们需要创建postcss.config.js，在这个js
 上面的配置，是把css处理成了内部样式，但是我们项目中通常是抽离成外部样式，vue脚手架，它通过npm run build打包出来的
 就是一个css文件夹，也就是把css抽离出去了。
 
+为什么需要抽离？
+答：不抽离也可以。通过vuecli创建的项目，然后通过npm run build 进行打包 生成的目录结构
+    |-js 
+    |-css 
+    |-images
+    index.html  
+
+如果不抽离，那么打包好的是把css放到了html中的，导致html文件非常大，web的三层结构。
+
 怎么抽离？
 答：npm i mini-css-extract-plugin -D  
 
 ----------------------------------------
+项目上线时，需要把css,js压缩处理，让它的体积变的非常小。 也是使用几个插件来实现的。
+压缩css:
+    optimize-css-assets-webpack-plugin
+压缩js:
+    uglifyjs-webpack-plugin
+
+使用production模式，默认情况下，就把js压缩了，但是你如果使用optimize-css-assets-webpack-plugin压缩了css。
+那么即使在production模式，js也不压缩，需要通过uglifyjs-webpack-plugin。
+
+安装：  
+    npm i optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin -D
+----------------------------------------
+webapck处理图片：
+    默认情况下，webpack不能处理图片，靠loader。
+    file-loader 
+    url-loader  url-loader是比file-loader强一点loader 
+
+安装：npm i file-loader url-laoader -D   
+
+项目中什么时候用到图片：
+    1）html中<img>
+    2) css中背景图
+    3）js中也可以创建一个图片  Image()   let img = new Image()   img.src = "xxx"
+----------------------------------------
+webapck到底认识什么？
+答：默认情况下，它只认识低级的js代码。 高级一点的js代码就处理不了，如class，let [a,b] = [1,2]... 
+
+----------------------------------------
+要学习webpack，你需要会一点node，会一点正则表达式。
+
+----------------------------------------
+ file-loader  和 url-loader 不同？
+ 答：大家自己查一下。 url-loader比file强大。
+    使用url-loader可以把图片转成base64编码（字符串）
+----------------------------------------
+作业：
+    1）如果项目中有.vue文件，怎么让webpack识别.vue文件   "vue-loader"
+    2）使用vue-cli创建一个项目  配置代理跨域   没有cors
+
+        你使用express创建一个项目  不要配置cors   写一个接口 
+        使用vue-cli创建一个项目，安装axios，请求你的接口，此时肯定有跨域问题 
+        怎么解决： 
+            1）cors  后端做 
+            2）代理   需要配置webpack中的dev-server  你需要配置  在项目的根目录下面创建一个vue.config.js 
+            3）json 
+
 ----------------------------------------
 ----------------------------------------
 ----------------------------------------
