@@ -1,0 +1,65 @@
+<!-- 
+    前端有三大框架：
+        vue 
+        react  vue中有的  react中基本上都有
+            facebook 开源的
+        angular 
+
+    官网：
+        英文官网：https://reactjs.org/
+        中文官网：https://react.docschina.org/
+
+    介绍：
+        React用于构建用户界面的 JavaScript 框架。
+
+    react特点：
+        声明式
+        组件化
+        一次学习，随处编写(客户端渲染/服务端渲染/原生app)
+        单向数据流 
+        高效 和 vue一样  使用了虚拟dom 
+        ...
+
+    react是一种思想：
+        react.js  和  vue.js 一样  用来写webapp的
+        reactNative  写原生app
+
+    声明式和命令式：
+        命令式：操作dom  for(let i=0; i<10; i++){...}
+        声明式：虚拟dom  arr.forEach((item,index)=>{})
+
+    vue和react对比：
+        vue 入门非常简单
+        react 比vue难一点
+
+    引入相关的库：
+        react.js   react的核心库  和vue.js一样
+        react-dom.js  提供操作dom的react护展库
+        babel.js 解析jsx语法为纯js语法（js高级语法转成js低级语法）
+
+    在react中没有模板，vue中每一个组件对应的一个模板，react中没有模板，它是jsx。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入react核心库 -->
+    <script src="./js/react.development.js"></script>
+    <!-- 引入react-dom 用于操作dom -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- 引入babel 用于解析jsx为js -->
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- script标签必须指定为babel，因为我们写的是jsx，需要借助babel进行翻译 -->
+    <script type="text/babel">
+        // 创建一个jsx 虚拟DOM
+        let vDOM = <h1>Hello React~</h1>
+        // 需要react把虚拟DOM渲染到页面上，变成真实DOM
+        ReactDOM.render(vDOM,document.getElementById("app")); 
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!-- 
+    组件：
+        和vue一样，react是组件化开发的。
+
+    要装一个react的调试工具，vue-dev-tools。
+
+    谷歌浏览器：我的不能用  下去想办法把这个调试工具安装一下。
+
+    火狐浏览器：不需要翻墙 
+
+    在vue写法组件：
+        1）一个vue组件就是一个js对象，在js对象指定template模板
+        2）vue脚手架中写  单文件组件  .vue 
+
+    在react写法组件：
+        1）一个函数就是一个组件 function
+        2）一个类可以是一个组件 class
+
+    通过工厂函数和ES6中的类定义组件的区别：
+        1）通过函数定义组件是没有状态的，vue中组件中有一个data，data中的数据就是状态，在react中通过函数定义的组件是没有状态的，也就是说通过函数只能定义简单的，没有状态的组件。
+        2）通过类定义的组件是有状态的，通常复杂的组件定义类的形式
+
+    在vue中定义一个组件可以指定模板，在react中没有模板的概念，在react中定义组件，组件内容使用jsx。
+
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        // 通过函数的形式定义组件
+        function MyComponent(){
+            return(
+                <div>
+                    <h2>我是通过函数创建组件，是没有状态的</h2>
+                    <Hi></Hi>
+                </div>
+            )
+        }
+        function Hi(){
+            return(
+                <h3>这是一个Hi组件</h3>
+            )
+        }
+        ReactDOM.render(<MyComponent />,document.getElementById("app"));
+    </script>
+</body>
+</html>

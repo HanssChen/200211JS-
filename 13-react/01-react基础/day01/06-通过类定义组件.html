@@ -1,0 +1,54 @@
+<!-- 
+    用的最多的是通过类定义组件。
+
+    通过类定义组件注意细节：
+        1）需要继承React.Component
+        2）通过render渲染一个jsx
+        3）渲染标签时，首字母是小写，它当成html标签，如果没有html标签就报错了。
+        4）如果遇到了一个标签是大写，它会当成组件。组件名首字母通常大写  小写是html标签  大写是React组件
+        5）jsx中需要使用一个根标签包起来
+
+    强调：
+        1）组件名必须首字母大写  如果小写  react会当成html标签
+        2）虚拟DOM元素只能有一个根元素
+        3）虚拟DOM使用时，可以使用双标签，也可以使用单标签，但是必须有结束的/ 
+    
+    ReactDOM.render可以渲染一个JSX，也可以渲染一个组件。
+
+    render函数渲染类组件标签的基本流程：
+        1）React内部会创建组件实例对象  因为一个虚拟DOM就是JS对象
+        2）调用render()得到虚拟DOM，解析成真实DOM
+        3）插入到指定页面元素的内部
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class MyComponent extends React.Component{
+            render(){
+                return (
+                    <div>
+                        <h1>我们通过类创建的组件</h1>
+                        <Haha />
+                    </div>
+                )
+            }
+        }
+        class Haha extends React.Component{
+            render(){
+                return <p>Haha组件</p>
+            }
+        }
+        ReactDOM.render(<MyComponent />,document.getElementById("app"));
+    </script>
+</body>
+</html>

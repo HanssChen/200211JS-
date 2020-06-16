@@ -1,0 +1,65 @@
+<!-- 
+    现在我们一堆数据，我们想渲染到页面上。
+        vue:  data中准备数据   模板中通过v-for渲染
+        react: jsx
+
+    在JSX要写JS代码，需要写在{}中，也就是{}中放js代码。
+
+    如果放注释，注释也是js代码，也需要通过{}包起来
+
+    react中没有指令。循环通过map。
+
+    jsx中还有非常多的注意细节，边学边补充jsx中的语法。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        let data = ["angular","vue","react","jq"]
+        let a = "xxx"
+        // let vDOM = (
+        //     <div>
+        //         <h2>前端常见的js框架列表</h2>
+        //         <ul>
+        //             { /* 这里面放注释 */ }
+        //             {a}
+        //             {data}
+        //         </ul>
+        //     </div>
+        // )
+        // let vDOM = (
+        //     <div>
+        //         <h2>前端常见的js框架列表</h2>
+        //         <ul>
+        //             {
+        //                 data.map((item,index)=>{
+        //                     return <li key={index}>{item}</li>
+        //                 })
+        //             }
+        //         </ul>
+        //     </div>
+        // )
+        let vDOM = (
+            <div>
+                <h2>前端常见的js框架列表</h2>
+                <ul>
+                    { /* shift+alt+a 注释  简写 */ }
+                    {
+                        data.map((item,index)=><li key={index}>{item}</li>)
+                    }
+                </ul>
+            </div>
+        )
+        ReactDOM.render(vDOM,document.getElementById("app"))
+    </script>
+</body>
+</html>

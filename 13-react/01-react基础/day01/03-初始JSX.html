@@ -1,0 +1,67 @@
+<!-- 
+    不需要jsx也可以写东西，只不过非常不方便。
+
+    jsx:
+        JavaScript XML    按理说应该是javascrpt html
+
+    什么是XML：
+        客户端和服务器通常的数据格式，只不现在用的不多了，现在都是json这种数据格式。
+
+        和Html类似，只不过，它的标签自己定义，如<student></student>
+
+    jsx本质还是React.createElement() 写法的语法糖，用来简化创建虚拟DOM对象的。
+
+    写了一个JSX：let vDOM = <h1>hello jsx</h1>  如何理解这行一行代码：
+    1）它不是字符串，也不是html，你可以叫它为jsx元素，或叫虚拟DOM。
+    2）它需要知道最终它会产生一个JS对象，因为虚拟DOM就是一个JS对象。
+
+    JSX中都可以写什么标签：可以写任意的HTML标签
+    JSX中都可以写什么属性：可以写任意的HTML标签中的属性
+
+
+    babel.min.js的作用：
+        浏览器肯定是不能识别jsx代码，需要通过babel转译成js代码
+        所以说script标签需要指定 type="text/babel"
+
+    通过React.createElement()或jsx可以创建一个虚拟DOM，有了虚拟DOM需要渲染成真实DOM，通过ReactDOM.render可以渲染成真实DOM。
+
+    ReactDOM.render(参数一，参数二)  render函数里面有两个参数：
+        参数一：通过js或jsx创建的虚拟DOM
+        参数二：用来包含虚拟DOM的真实DOM，通过就是一个DOM
+
+    在react中创建一个虚拟DOM有两种方式：
+        方式一：通过js   React.createElement()  vue中有h也是就createElemnt
+        方式二：通过jsx  
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <div id="app2"></div>
+    <!-- 如果不写type 默认就是：type="text/javascript" -->
+    <script type="text/javascript">
+        let myId = "xxx"
+        let myData = "h1中的span"
+        let vDom = React.createElement("h1",{id:myId},React.createElement("span",{},myData))
+        ReactDOM.render(vDom,document.getElementById("app"))
+    </script>
+    <!-- 上面是js写法，比较复杂，可以通过jsx进行简化 -->
+    <script type="text/babel">
+        // jsx对象  jsx元素  虚拟DOM
+        let vDom2 = (
+            <div>
+                <h3 id="yyy"><span>h3中的span</span></h3>
+            </div>
+        );
+        ReactDOM.render(vDom2,document.getElementById("app2"))
+    </script>
+</body>
+</html>

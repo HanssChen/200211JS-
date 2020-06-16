@@ -1,0 +1,50 @@
+<!-- 
+    真实DOM：
+        页面上每一个元素都是一个对象，对象是属性的无序集合，一个元素对象是特别庞大的，这个元素对象就是真实DOM，操作真实DOM，性能非常底下。
+    
+    虚拟DOM：
+        使用JS对象模拟一个DOM元素，虚拟DOM对象中，没有过多的属性，操作时，非常简单，有很多算法，等虚拟DOM操作完毕后，再渲染成真实DOM。
+
+    虚拟DOM说白了就是一个JS对象。
+
+    创建虚拟DOM：
+        React.createElement('h1',{id:"xxx"},'hello');
+
+    最终虚拟DOM还是需要转化成真实DOM，因为浏览器只认识真实DOM。
+
+    写代码时，我们只需要操作虚拟DOM相关的数据，react会帮我们自动转换，数据变了，视图就会更新，我们不需要管，react都我们我们处理好的。
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <h1 id="btn">hello</h1>
+    <script>
+        // 获取真实COM
+        let h1 = document.getElementById("btn")
+        console.dir(h1)
+    </script>
+    <script type="text/babel">
+        let h11 = React.createElement("h1",{id:"xxx"},"hello11");
+        // console.log(h11)
+        // 把虚拟DOM渲染成真实DOM
+        // ReactDOM.render(h11,document.getElementById("app")); 
+
+        // 上面是创建一个虚拟dom 
+        // 那什么又是jsx 
+        // 使用createElement创建页面结构非常复杂 
+        // jsx就是createElement的语法糖 
+        let h111 = <h1>hello111</h1>  // jsx 也是虚拟DOM
+        ReactDOM.render(h111,document.getElementById("app")); 
+
+    </script>
+</body>
+</html>
