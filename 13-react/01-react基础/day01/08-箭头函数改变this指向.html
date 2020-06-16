@@ -1,0 +1,42 @@
+<!-- 
+    在一个类组件中使用方法时，需要注意this指向问题，解决：
+        1）在constructor中手动改变方法中this的指向
+        2）使用箭头函数
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class Weather extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    isHot:false
+                }
+            }
+            clickHandle=()=>{
+                // 箭头函数中的this向上推一级
+                // 箭头函数中此this还是表示组件对象
+                let { isHot } = this.state
+                this.setState({
+                    isHot:!isHot
+                })
+            }
+            render(){
+                let { isHot } = this.state
+                return <h1 onClick={this.clickHandle}>今天天气很{isHot?"炎热":"凉爽"} </h1>
+            }
+        }
+        ReactDOM.render(<Weather />,document.getElementById("app"));
+    </script>
+</body>
+</html>

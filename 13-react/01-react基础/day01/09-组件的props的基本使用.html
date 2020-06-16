@@ -1,0 +1,83 @@
+<!-- 
+    一个组件中除了状态，还有属性，就是props。
+
+    和vue一样，react中也可以通过父组件传递数据给子组件。
+    答：通过props。
+
+    每一个组件中都有一个props属性，是properties的简写。
+
+    作用：通过标签属性从组件外向组件内传递变化的数据。
+
+    注意：和vue一个，不要修改props数据。
+
+    在vue中说过props是接收数据。在react中也是同样道理。
+
+    在vue一个，接收的数据，可以对它进行校验，如下：
+    在vue中校验如下：
+        props:{
+            name:{
+                type:String,
+                require:true
+            },
+            age:{
+                type:Numbetr
+            }
+        }
+    在react中需要借助一个包，叫prop-types.js。
+        老写法（不需要prop-types.j）：
+            Person.propTypes = {
+                name:React.PropTypes.String.isReqiured
+                age:React.PropTypes.number
+            }
+        新写法（需要prop-types.j）：
+            Person.propTypes = {
+                name:PropTypes.String.isReqiured
+                age:PropTypes.number
+            }
+    和vue一样，可以指定属性的默认值：
+        Person.defaultProps = {
+            age:18 
+            sex:"人妖"
+        }
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+    <!-- 引入prop-types，用于限制传递属性类型，必要性等等 -->
+    <script src="./js/prop-types.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class Person extends React.Component{
+            render(){
+                // console.log(this.props);
+                let {name,age,sex} = this.props
+                return (
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age}</li>
+                    </ul>
+                )
+            }
+        }
+        // 对接收的数据进行校验
+        Person.propTypes = {
+            name:PropTypes.string.isRequired,
+            age:PropTypes.number,
+            sex:PropTypes.string
+        }
+        // 给Person传递数据
+        // name="wangcai" age={10}   没有加{} 表示传递是的字符串
+        // 加了{} 表示传递的就是number的10
+        ReactDOM.render(<Person name="wangcai" age={10} sex="女"/>,document.getElementById("app"));
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+ <!-- 
+    ref的新语法之createRef方式：
+        在React中，有一个方法，叫createRef()，调用这个方法，创建一个用于保存ref的容器，且该容器是专人专用，只能保存一个ref。
+    
+    ref的基本使用：
+        1）在标签上写一个ref="xxx"  在方法中通过this.refs.xxx获取此DOM元素
+        2）ref的值也可以是回调函数  ref={ (abc)=>{  } }    abc表示当前的dom元素  可以把dom元素挂载到组件对象上
+        3）通过 myRef = React.createRef(); 创建一个容器，在标签上使用myRef, ref={ this.myRef }，在方法中通过this.myRef.current获取DOM元素
+
+    老版本写法：
+        在标签上写一个ref="xxx"  在方法中通过this.refs.xxx获取此DOM元素
+
+    新版本写法：
+        使用React.createRef() 创建用于保存dom元素的ref对象   myRef = React.createRef();
+        通过ref标签属性将DOM元素对象保存在ref对象的current属性上  <input type="text" ref={ this.myRef }/>
+        通过this.myRef.current获取DOM元素
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script src="./js/react.development.js"></script>
+     <script src="./js/react-dom.development.js"></script>
+     <script src="./js/babel.min.js"></script>
+     <!-- 引入prop-types，用于限制传递属性类型，必要性等等 -->
+     <script src="./js/prop-types.js"></script>
+ </head>
+ <body>
+     <div id="app"></div>
+     <script type="text/babel">
+        class MyComponent extends React.Component{
+            // 此处的myRef也是组件对象对象的属性  获取时通过this.myRef来获取
+            myRef = React.createRef(); // 创建一个容器
+            clickHandle =()=>{
+                // console.log(this.myRef) // {current: input}
+                alert(this.myRef.current.value)
+            }
+            blurHandle =(event)=>{
+                alert(event.target.value)
+            }
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref={ this.myRef }/>
+                        <input type="text" placeholder="失去焦点获取输入框中的内容" onBlur={this.blurHandle}/>
+                        <button onClick={this.clickHandle}>获取输入框中的内容</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById("app"));
+     </script>
+ </body>
+ </html>

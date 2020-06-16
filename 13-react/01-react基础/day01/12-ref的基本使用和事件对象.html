@@ -1,0 +1,51 @@
+<!-- 
+    在vue，可以对输入框进行双向数据绑定。通过v-model。绑一个data中的数据，输入框中的变了，data中的数据也变，也就是说只需要拿到data中的数据就OK了。
+
+    在react中没有所谓的双向数据绑定。可以通过ref获取一个dom元素，然后获取dom元素中的数据。
+
+    在一个普通的标签上，写一个ref，通过this.refs.xxx获取dom元素。
+
+    还有一种获取输入框内容的方法：通过事件对象
+
+    在react中获取一个输入框中的内容：
+        1）通过ref起一个名字   然后通过this.refs.xxx获取dom元素  
+        2）通过事件对象
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script src="./js/react.development.js"></script>
+     <script src="./js/react-dom.development.js"></script>
+     <script src="./js/babel.min.js"></script>
+     <!-- 引入prop-types，用于限制传递属性类型，必要性等等 -->
+     <script src="./js/prop-types.js"></script>
+ </head>
+ <body>
+     <div id="app"></div>
+     <script type="text/babel">
+        class MyComponent extends React.Component{
+            clickHandle =()=>{
+                // 通过this.refs.inp.value 获取框中的内容
+                alert(this.refs.inp.value)
+            }
+            blurHandle =(event)=>{
+                // event 是事件对象
+                alert(event.target.value)
+            }
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref="inp"/>
+                        <input type="text" placeholder="失去焦点获取输入框中的内容" onBlur={this.blurHandle}/>
+                        <button onClick={this.clickHandle}>获取输入框中的内容</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById("app"));
+     </script>
+ </body>
+ </html>

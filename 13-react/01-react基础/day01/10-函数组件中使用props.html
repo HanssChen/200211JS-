@@ -1,0 +1,58 @@
+<!-- 
+    和vue一样，可以指定属性的默认值：
+        Person.defaultProps = {
+            age:18 
+            sex:"人妖"
+        }
+
+    函数级别的组件中没有this，函数组件的组件中的this是undefined。
+    也就是说不能通过this.props获取数据。怎么获取？
+    答：通过形参获取。
+
+    不管是函数级别的组件还是类级别的组件，校验都是一样的。
+
+    对于一个类组件来说，它的数据源有两个：
+        1）状态
+        2）属性
+
+    对于一个函数组件来说，它的数据只有一个：
+        1）属性
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+    <!-- 引入prop-types，用于限制传递属性类型，必要性等等 -->
+    <script src="./js/prop-types.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        function Person({name,age,sex}){
+            console.log(this)
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>性别：{age}</li>
+                    <li>年龄：{sex}</li>
+                </ul>
+            )
+        }
+        // 对接收的数据进行校验
+        Person.propTypes = {
+            name:PropTypes.string.isRequired,
+            age:PropTypes.number,
+            sex:PropTypes.string
+        }
+        // 给Person传递数据
+        // name="wangcai" age={10}   没有加{} 表示传递是的字符串
+        // 加了{} 表示传递的就是number的10
+        ReactDOM.render(<Person name="wangcai" age={10} sex="女"/>,document.getElementById("app"));
+    </script>
+</body>
+</html>

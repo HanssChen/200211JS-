@@ -1,0 +1,47 @@
+ <!-- 
+    ref的新语法之回调ref方法：
+        ref属性后面也可以跟一个回调函数，这个回调函数在组件被挂载时，立即执行。
+        回调函数中有一个参数，这个参数就代表dom元素（组件）
+        <input type="text" ref={ (inp)=>{ console.log(inp) } }/>
+
+    <input type="text" ref={ (inp)=>{ this.xxx=inp } }/>
+        jsx中this表示组件对象
+        后面的this.xxx = inp 表示把inputdom元素赋值给当前组件对象的xxx属性
+        也就是是当前组件对象上面有一个xxx属性，这个xxx属性对应的值就是inputDOM元素
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <script src="./js/react.development.js"></script>
+     <script src="./js/react-dom.development.js"></script>
+     <script src="./js/babel.min.js"></script>
+     <!-- 引入prop-types，用于限制传递属性类型，必要性等等 -->
+     <script src="./js/prop-types.js"></script>
+ </head>
+ <body>
+     <div id="app"></div>
+     <script type="text/babel">
+        class MyComponent extends React.Component{
+            clickHandle =()=>{
+                alert(this.xxx.value)
+            }
+            blurHandle =(event)=>{
+                alert(event.target.value)
+            }
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref={ (inp)=>{ this.xxx=inp } }/>
+                        <input type="text" placeholder="失去焦点获取输入框中的内容" onBlur={this.blurHandle}/>
+                        <button onClick={this.clickHandle}>获取输入框中的内容</button>
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<MyComponent/>,document.getElementById("app"));
+     </script>
+ </body>
+ </html>
