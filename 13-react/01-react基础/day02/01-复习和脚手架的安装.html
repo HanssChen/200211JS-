@@ -1,0 +1,126 @@
+<!-- 
+    什么是构建用户界面？
+        构造用户界面就是写css写动画  错的
+        不是指显示的效果，而是指如何将数据渲染到页面上，说白了，就是将页面变成动态的，至于页面的展示效果，react概不负责。
+
+    FaceBook出品   后台硬   13年   FaceBook内部项目   开源
+
+    正确认识react:
+        react是一种思想，分web版本的React.js和原生App的React Native。 现在Flutter。
+        通常说的React指的React.js    RN指React Native 
+
+        React和React Native 95%语法都是一样的
+
+    React技术栈：react.js+react-router+redux+es6+webpck+axios+ui
+        
+    Vue技术栈：vue.js+vue-router+vuex+webpack+es6+axios+ui
+
+    对比react和vue:
+        相同点：
+            都是JS框架  都有自己的技术栈
+            组件化
+            Virtual DOM  
+            数据驱动DOM  核心是状态（数据）
+            ... 
+        不同点：
+            vue 模板   vs    JSX
+            维护团队  
+            vue学习成本低   react学习成本高
+ -->
+ <!-- 
+     要使用react:
+        1）在web页面上引用使用  <script></script>
+            react.js    react-dom.js     babel.js 
+        2）真实荐中都是基于脚手架开发  
+            安装：npm install -g create-react-app
+            创建项目：create-react-app my-app
+            运行项目：npm statr 
+  -->
+ <!-- 
+    虚拟DOM:
+        React.CreateElment()
+        JSX  仅仅是语法糖
+
+    渲染虚拟DOM：
+        ReactDOM.render()
+
+    组件化开发：
+        函数组件  没有状态
+        类组件   有状态 
+
+    初始化状态的两种方式：
+        contructor(props){
+            super(props)
+            this.state = {
+                num:10
+            }
+        }
+        state = {
+            num:10
+        }
+
+    通常是事件修改状态：
+        合成事件  也叫自定义事件    onXxx = {this.f1}
+
+    类中的方法，它里面的this是Undefiend，解决this指向问题：
+        1）后动通过bind绑定
+        2）箭头函数 
+
+    修改状态：
+        通过setState()进行修改
+
+    属性：
+        在使用组件的地方通过属性可以把数据传递给组件中，组件内部可以通过this.props进行接收
+
+    校验属性：
+        通过props-typs.js  
+
+    有了状态和了属性，完成小案例，todomvc。
+
+    在react中，数据通信没有vue中那么多方案。父传子，通过属性传递，子中通过props接口。子中要修改父中的数据，也是把修改数据的方法定义好，传递到子中，子中进行调用。
+
+  -->
+
+  <!-- 
+      npm 是一个工具  管理第三模块
+
+      yarm 也是一样的  
+        npm i yarm -g    安装这个yarm这个工具
+        yarm add jquery    
+        ... 
+
+      cnpm  也是同理 
+   -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
