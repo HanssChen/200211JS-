@@ -1,0 +1,96 @@
+<!-- 
+    react中ajax
+
+    ajax发展历史：
+        1）原生的ajax   回调函数
+        2）jq中的ajax   回调函数
+        3）axios  （是基于原生ajax进行二次封装，内部使用了promise）
+        4）fetch  不是ajax  但是也可以发送请求  和ajax是并行   也是浏览器内部的小服务员  天生是基于promise
+
+    ajax已死   fetch永生
+
+    react本身是用于构建用户界面的，不包含发送ajax请求。但是前端应用都需要通过ajax请求后台接口得到json数据，只有得到数据，react才能去构建用户界面。
+
+    react中要想发送ajax请求，也是需要借助ajax库，可以自己封装，也可以使用第三方，最最常用的第三方：axios
+
+    axios好处：
+        1）轻量级  
+        2）是基于原生ajax进行封装 
+        3）是基于promise     async   await 
+        4）支持前端和服务端   
+
+    fetch特点：
+        1）仅仅支持新版浏览器  老版浏览器不支持
+        2）不再使用XmlHttpRequest对象提交请求
+        3）为了兼容低版本浏览器，可以使用兼容包 
+ 
+    做一个小案例： github   github提供了一个接口   接口可以查询最受关注的库
+        url:https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}
+        如：https://api.github.com/search/repositories?q=r&sort=starts
+
+    在vue中，是在created或monuted钩子函数中发送请求。
+
+    在react中，也是有对应钩子函数，叫componentDidMount(){}
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        class App extends React.Component{
+            state = {
+                repoName:"",  // 仓库的名字
+                repoUrl:"", // 仓库的地址
+                isLoading:true, // 控制是否显示loading
+                error:"", // 错误信息
+                keyWord:"react",
+            }
+            // componentDidMount 是一个钩子函数，是React.Componen定义好了
+            // 我们只不过是在重写了父函数中的componentDidMount 
+            // 所以说，不需要写成箭头函数，它里面的this也是组件对象
+            // 这样说：钩函数不要写成箭头函数的形式，它里面的this正常
+            componentDidMount(){
+                const url = `https://api.github.com/search/repositories?q=${this.state.keyWord}&sort=starts`;
+                axios.get(url).then((value)=>{
+                    console.log(value)
+                    // name是仓库的名字  html_url仓库的地址
+                    let { full_name,html_url } = value.data.items[0];  // 排名第1的仓库
+                    this.setState({
+                        repoName:full_name,
+                        repoUrl:html_url,
+                        isLoading:false
+                    })
+                }).catch((reason)=>{
+                    // console.log(reason)
+                    this.setState({
+                        error:reason.message,
+                        isLoading:false
+                    })
+                })
+            }
+            render(){
+                let { repoName,repoUrl,isLoading,keyWord,error } = this.state
+                if(isLoading){
+                    return <h1>正在加载中...</h1>
+                }else if(repoName && repoUrl && !error){
+                    return <h1>在github上{this.state.keyWord}仓库中，点赞最多的是<a href={repoUrl}>{this.state.repoName}</a> </h1>
+                }else{
+                    return <h1 style={{color:"red"}}>{error}</h1>
+                }
+                
+            }
+        }
+        ReactDOM.render(<App />,document.getElementById("app")); 
+    </script>
+</body>
+</html>

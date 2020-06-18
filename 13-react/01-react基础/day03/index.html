@@ -1,0 +1,59 @@
+<!-- 
+
+    react中组件间通信常见方案：
+        1）通过props传递
+        2）基于pubsub 发布订阅
+        3）基于上下文   后面说   用的不多
+        4）使用redux   类似于vuex   把状态放到一个公共的地方   通过某种方式去使用和操作状态
+
+    通过props传递：
+        1）共同的数据放在父组件上，每个组件特有数据放到组件内部
+        2）通过props可以传递数据，也可以传递方法
+        3）数据或方法只能一层一层传递，不能跨层传递
+        4）对于数据传递    父组件传递数组给子组件  子组件通过this.props接收使用
+        5）对于函数传递    父组件把函数传给子组件  子组件调用函数   实现修改父组件状态
+        缺点：只能一级一级传递，兄弟之间想通信，必须借助共同的父组件
+
+    基于pubsub 发布订阅：
+        1）需要借助第三方库 
+        2）订阅   PubSub.subscribe("xxx",function(data){})
+        3）发布   PubSub.publish("xxx",data)
+        优点：对组件关系没有限制  
+        缺点：写多了，状态不好管理，容易乱   并不是集中式管理 
+
+    redux:
+        实现任意组件意通信，类似于vuex
+        缺点：不好学  有点难  比vuex难    vuex也是借鉴了redux的思想
+
+    上下文通信：大家自己了解一下，用的不多
+
+    问：说一下react中通信方案都有哪些，它们有什么不同？
+    答：
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- import css -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- import js -->
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/pubsub.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+      
+    </script>
+</body>
+
+</html>
