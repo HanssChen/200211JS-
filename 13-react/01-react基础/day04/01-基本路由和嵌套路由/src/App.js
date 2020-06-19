@@ -1,0 +1,26 @@
+import React,{ Component } from "react"; 
+import { Route, Link } from "react-router-dom"
+
+import Home from "./components/Home";
+import List from "./components/List";
+import User from "./components/User";
+
+export default class App extends Component{
+    render(){
+        return(
+            <div>
+                <h3>App</h3>
+                <ul>
+                    <li><Link to="/">首页</Link></li>
+                    <li><Link to="/list">列表页</Link></li>
+                    <li><Link to={{pathname:"/user",search:"?username=admin"}}>用户中心</Link></li>
+                </ul>
+
+                {/* 路由规则，每一个Route组件就是一条规则 */}
+                <Route path="/" exact component={Home}></Route>
+                <Route path="/list" component={List}></Route>
+                <Route path="/user" component={User}></Route>
+            </div>
+        )
+    }
+}

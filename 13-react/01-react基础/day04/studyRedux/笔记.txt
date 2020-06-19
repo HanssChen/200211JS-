@@ -1,0 +1,104 @@
+react技术栈：
+    react.js + react-router-dom + axios + webpack + es6 + redux
+    redux在上面的技术栈中是最难的一个环节。
+
+redux是什么:
+    和vuex中一个，这是一个状态管理机。追踪到状态的变化。
+    redux并不是专门应用到react的，你可以在任何地方使用，甚至你可以在原生js中使用redux，你还可以在jq中使用redux，你还可以在vue中使用rudex。
+    redux是一个独立的状态管理器。
+
+为什么需要redux?
+    为什么需要vuex?  京东买菜   cartshop   userinfo    没有vuex，这两个状态管理非常麻烦。
+    随着SPA应用开发越来越复杂，状态管理非常难搞，不好控制，redux试图让state的变化可以预测，对状态进行集中式处理。
+
+三大原则：
+    单一数据源：整个应用state被存储在store中。
+    state是只读的：只能获取状态，不能直接修改状态。
+    通过reducer进行状态的修改：reducer需要接收一个指令（action），对于reducer来说，它要接收一个老状态和一个action，返回一个新的状态。
+
+记死了，在你学redux时，有任何的疑问，就回头看上面的三个原则。
+
+---------------------------------
+使用redux:
+    1）直接在下载一个redux.js  然后在script标签中引入使用
+    2）在脚手架中使用
+
+直接在下载一个redux.js  然后在script标签中引入使用：
+    <script src="./js/redux.js"></script>
+
+---------------------------------
+redux的核心是仓库：
+    和vuex一样，它们的核心都是store。
+
+在redux如何创建一个仓库：
+    redux提供了一个叫createStore api就可以创建一个仓库。
+    直接创建仓库时，需要给仓库配一个管理员，管理员叫reducer。
+
+---------------------------------
+action:
+    action表示要执行的动作，本质是一个JS对象，但是这个对象必须要有一个叫type属性，用来描述这个动作。
+
+---------------------------------
+reducer:
+    根据不同的action完成state的变化。你要想改变状态，你需要编写reducer。
+
+    reducer接收一个老状态和action，然后返回新的state。
+
+如何写reducer:
+    reducer是一个函数，接收两个参数，一个是老状态，一个是action，返回一个新状态。
+
+    state=initState 表示旧状态
+    action 表示新状态
+    reducer必须要返回一个和初始状态有相同数据结的对象，不要直接修改state。
+    必须要写上一个default，如果action处理不了，还是返回老状态。
+
+    function reducer(state=initState, action){
+        switch(action.type){  // 根据不同的action进行不同的操作
+            case "INCREMENT":
+                return {count:state.count+1};
+            case "DECREMENT":
+                return {count:state.count-1};
+            default:
+                return state;
+        }
+    }
+---------------------------------
+---------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
