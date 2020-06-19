@@ -12,9 +12,9 @@ redux是什么:
     随着SPA应用开发越来越复杂，状态管理非常难搞，不好控制，redux试图让state的变化可以预测，对状态进行集中式处理。
 
 三大原则：
-    单一数据源：整个应用state被存储在store中。
-    state是只读的：只能获取状态，不能直接修改状态。
-    通过reducer进行状态的修改：reducer需要接收一个指令（action），对于reducer来说，它要接收一个老状态和一个action，返回一个新的状态。
+    1）单一数据源：整个应用state被存储在store中。
+    2）state是只读的：只能获取状态，不能直接修改状态。
+    3）通过reducer进行状态的修改：reducer需要接收一个指令（action），对于reducer来说，它要接收一个老状态和一个action，返回一个新的状态。
 
 记死了，在你学redux时，有任何的疑问，就回头看上面的三个原则。
 
@@ -63,6 +63,49 @@ reducer:
         }
     }
 ---------------------------------
+学习redux，你站在两个层面来学习：
+    1）创建store
+    2）使用store
+
+---------------------------------
+创建store:
+    let store = Redux.createStore(reducer)
+
+---------------------------------
+使用store:
+    dispatch   用于派发某个action
+    getState   获取状态
+    subscribe  订阅  一旦状态发生变化  就会执行回调函数
+
+---------------------------------
+以store.dispatch(increment)简单分析它的执行流程：
+    当执行store.dispatch(increment)代码时，就会调用reducer。
+    此时，increate对象中的type是"INCREMENT",在调用reducer时会执行下面代码：return {count:state.count+1};
+    老状态是{count:0},在+1后，返回新的对象{count:1}
+
+当以再次store.dispatch(increment)，重复刚才的操作：
+    需要调用reducer，此时state是上一步修改后的状态，{count:1}
+    increate对象中的type是"INCREMENT",在调用reducer时会执行下面代码：return {count:state.count+1};
+    返回{count:2}
+
+.... 
+
+---------------------------------
+
+redux也有和vuex类似的调试工具，叫redux-devtools。 
+
+下载安装：
+    1）翻墙去谷歌商店下载
+    2）百度搜索
+    3）火狐浏览器可以直接下载
+
+配置：
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
+    let store = Redux.createStore(
+        reducer,
+        composeEnhancers()   // 启动redux调试
+    ); 
+
 ---------------------------------
 
 
