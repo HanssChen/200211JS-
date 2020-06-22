@@ -1,62 +1,18 @@
 <!-- 
-    react是用于构建用户界面。
-
-    问：react本身有状态管理机制？
-    答：有 有 有   
-
-    问：vue本身有状态管理机制？
-    答：有 有 有
-
-    问：vue和react本身就有状态管理机制，为什么还需要vuex或redux?
-    答：让状态集中管理，方便追踪。vuex或redux是集中管理状态的工具。
-
-    react和redux是黄金搭档。  redux是一个独立的JS库。
-
-    react-redux:将react和redux连接起来，是redux的作者为react库专门封装的。
-
-    我们需要知道：
-        react.js
-        redux.js
-        react-redux
-
-    如何使用react-redux？
-    答：会难一点。
-
-    组件分类：
-        容器组件（智能组件）  smart components
-        展示组件（木偶组件，笨拙组件） dumb components
-
-    笨拙组件:
-        只负责UI的呈现。不带有任何的业务逻辑。
-        没有状态   
-        数据源来自this.props 
-        不使用redux中提供的api
-
-    智能组件：
-        负责状态的管理和逻辑。不负责UI的呈现。
-        有状态。
-        使用redux中提供的api
-
-    通常情况下，页面级的组件都是智能组件，笨拙组件指页面中某个部分。
-
-    react-redux规定，所有笨拙组件都由用户提供，智能组件由react-redux自动生成。
-    生成的规则 ，还是需要写相应代码来完成的。
-
-    通常，是智能组件，放到containers文件中人，有些人也叫pages。
-    如果是笨拙组件，通常放到components文件夹中
-
-    
+   在redux中提供了一个合并reducer的api，叫combinReducer，用于合并reducer。
 
 
  -->
  <!DOCTYPE html>
  <html lang="en">
+ 
  <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Document</title>
      <script src="./js/redux.js"></script>
  </head>
+ 
  <body>
      <script>
          let initState = {
