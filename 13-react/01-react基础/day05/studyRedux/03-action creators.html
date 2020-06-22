@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/redux.js"></script>
+</head>
+<body>
+    <script>
+        let initState = {
+            num:10
+        }
+
+        // let increment = {     // action
+        //     type:"INCREMENT",
+        //     step:3
+        // }
+        // let decrement = {     // action
+        //     type:"DECREMENT",
+        //     step:3
+        // }
+
+        function increment(step){   // action creator  用于生产action
+            return {   // action    action是一个对象
+                type:"INCREMENT",
+                step
+            }
+        }
+        function decrement(step){   // action creator  用于生产action
+            return {   // action    action是一个对象
+                type:"DECREMENT",
+                step
+            }
+        }
+
+        function reducer(oldState=initState,action){   // reducer接收的是一个action  不是action creator
+            switch(action.type){
+                case "INCREMENT":
+                    return { num:oldState.num+action.step }
+                case "DECREMENT":
+                    return { num:oldState.num-action.step }
+                default:
+                    return oldState
+            }
+            return newState;
+        }
+        
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
+        let store = Redux.createStore(
+            reducer,
+            composeEnhancers()   // 启动redux调试
+        )
+
+        store.subscribe(()=>{  
+            console.log(store.getState().num) 
+        })
+
+        store.dispatch(increment(1)); 
+        store.dispatch(increment(2)); 
+        store.dispatch(increment(3)); 
+        store.dispatch(decrement(4)); 
+
+    </script>
+</body>
+</html>

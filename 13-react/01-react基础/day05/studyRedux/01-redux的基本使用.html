@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/redux.js"></script>
+</head>
+<body>
+    <script>
+        // console.log(Redux)
+        // 创建仓库前，准备状态
+        const initState = {
+            count:0
+        }
+        // 准备action
+        const increment = {
+            type:"INCREMENT" 
+        }
+        const decrement = {
+            type:"DECREMENT"
+        }
+        // 准备reducer
+        function reducer(state=initState, action){
+            switch(action.type){  // 根据不同的action进行不同的操作
+                case "INCREMENT":
+                    return {count:state.count+1};
+                case "DECREMENT":
+                    return {count:state.count-1};
+                default:
+                    return state;
+            }
+        }
+        
+        const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
+        let store = Redux.createStore(
+            reducer,
+            composeEnhancers()   // 启动redux调试
+        );  //  Expected the reducer to be a function.
+        // console.log(store)
+
+        // 订阅
+        store.subscribe(()=>{
+            // 只要state发生变化，就执行此处的代码
+            console.log("现在的状态是：",store.getState())
+        })
+
+        // 通过dispatch一个action完成状态的修改
+        store.dispatch(increment);
+        store.dispatch(increment);
+        store.dispatch(increment);
+        store.dispatch(increment);
+        store.dispatch(increment);
+    </script>
+</body>
+</html>

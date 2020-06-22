@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/redux.js"></script>
+</head>
+<body>
+    <script>
+        // state放在{}中  和vuex一样
+        let initState = {
+            num:10
+        }
+
+        // action本质也是一个对象  
+        let increment = {
+            type:"INCREMENT"
+        }
+        let decrement = {
+            type:"DECREMENT"
+        }
+
+        // 管理员  reducer  本质是一个纯函数
+        function reducer(oldState=initState,action){
+            switch(action.type){
+                case "INCREMENT":
+                    return { num:oldState.num+1 }
+                case "DECREMENT":
+                    return { num:oldState.num-1 }
+                default:
+                    return oldState
+            }
+            return newState;
+        }
+        
+        // 创建store
+        let store = Redux.createStore(reducer)
+
+        // 使用store
+        // 1）如何获取状态  2）修改修改  
+        // getState   dispatch一个action    subscribe
+
+        // console.log(store.getState().num)   // 获取状态
+
+        // 修改状态 dispath一个action
+        // store.dispatch(increment);
+        // console.log(store.getState().num) 
+
+        // store.dispatch(increment);
+        // console.log(store.getState().num) 
+
+        // 当状态修改了，想获取最新的状态 先订阅  subscribe()
+        store.subscribe(()=>{  // 只要状态发生了改变  自动执行回调函数
+            console.log(store.getState().num) 
+        })
+
+        store.dispatch(increment); // 发布
+        store.dispatch(increment); // 发布
+        store.dispatch(increment); // 发布
+        store.dispatch(decrement); // 发布
+
+    </script>
+</body>
+</html>
