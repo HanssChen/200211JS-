@@ -1,0 +1,73 @@
+------------------------
+react.js
+    构建用户界面   核心：组件/state/props/ref/事件/表单的受控和非受控/生命周期/上下文/hooks/... 
+    基于react.js的框架  DVA
+
+redux
+    集中式状态管理JS库   通常和react配合使用
+    基于redux也有些状态管理JS库。 
+
+如何把react和redux结合起来使用：react-redux。
+
+react-redux:
+    两类：
+        1）展示型组件
+        2）容器型组件
+    核心：
+        1）connect方法  把展示型组件变成容器型组件
+        2）Provider组件   让后代组件可以访问到store
+    三个1：
+        1个开发思想   smart组件    dumb组件
+        1个方法  connect(mapStateToProps,mapDispatchToProps)(展示型组件)
+        1个组件  Provider组件  
+
+
+------------------------
+react组件：
+    App
+      |--Counter
+            |--Show
+            |--Add
+            |--Sub
+
+------------------------
+redux:
+    1)准备store
+    2)之前是使用store   现在需要在react中使用store  需要react-redux 
+
+准备store:
+    action   reducer   ininState  
+
+------------------------
+现在react中的组件OK了，redux中的storeOK了，
+可以在组件中直接引入store，有了store就可以getState,dispatch。
+
+------------------------
+react-redux:
+    3个1
+
+使用Provider组件：
+    
+------------------------
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

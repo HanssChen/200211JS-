@@ -4,9 +4,7 @@ import reducer from "../reducers/index"
 import thunkMiddleware from "redux-thunk"
 
 const state = {
-    counter:99,
-    loading:false,
-    films:[]
+    counter:99
 }
 
 // 需要对createStore进行增强

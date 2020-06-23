@@ -1,0 +1,115 @@
+----------------------------
+yarn的使用
+
+全局安装yarn:  npm i yarn -g 
+
+换源：yarn config set registry https://registry.npm.taobao.org/
+
+安装所有依赖：yarn install  
+
+安装某个依赖：yarn install redux -S
+
+切记：npm 和 yarn 不要混用   不要一会npm   一会yarn  要用哪个就用到底
+----------------------------
+
+在vuex中，通过mutation来操作仓库中的状态。如果有异步，操作actions，actions本质还是commit一个mutations。
+
+在redux中也一样，为了更好维护和追踪状态的变化，对于异步的处理也是一样的。
+
+----------------------------
+安装：npm i redux react-redux -S
+
+----------------------------
+目标：完成计算器案例
+
+组件划分：
+    App
+    |- Counter   智能
+        |-Show   展示组件
+        |-Add    展示组件
+        |-Sub    展示组件
+
+创建store:
+    1)准备action creator
+    2)准备初始化状态   创建store时初始化状态    创建reducer时初始化状态
+    3)准备reducer
+    4)创建store 
+
+现目前为止：
+    1）react已准备好  核心是组件
+    2）redux中的store也创建好了  
+
+    将react和redux连接起来，使用react-redux。
+
+react-redux中有一个方法，叫connect。可以把展示组件变成智能组件，connect本意是连接的意思。
+
+----------------------------
+当前定义的组件，有Counter，Show, Add, Sub 都是展示组件。
+我们想法：Counter是智能组件，其它的是展示组件。
+
+思路：如何把Counter组件变成智能组件。通过connect把这个组件和store连接起来。
+
+connect到底连接了store中什么？
+1）state  
+2）操作状态的方法
+
+问：state中哪？
+答：redux中的store中
+
+问：操作state的方法在哪？
+答：redux
+
+----------------------------
+找到Counter组件，把Conter组件变成智能组件。
+
+connect方法的使用：
+    connect(mapStateToProps,mapDispatchToProps)(展示组件);
+
+mapStateToProps():
+    建立state对象到组件Props对象的映射。
+
+mapDispatchToProps():
+    建立展示组件的参数到store.dispath方法的映射    dispatch(incremnt(1))
+
+在具体映射时，可以使用redux提供的bindAcionCreators函数。语法：
+bindActionCreators(actionCreators,dispatch)
+
+
+报错了：connectAdvanced.js:245 Uncaught Error: Could not find "store" in the context of "Connect(Counter)". 
+
+----------------------------
+Provider组件：
+    Provider组件，就是给后代组件提供store对象。
+
+问：这个组件应该在哪用？
+答：入口中
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

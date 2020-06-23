@@ -117,10 +117,7 @@ applyMiddleware是redux中的方法，作用是将所有的中间件组成一个
 当你使用了redux-thunk中间件，那么你action就可以写成函数形式。
 
 ------------------------
-第一步：定义了一个Movie组件
-第二步：找个电影接口   
-第三步：films影片内容    loading状态
-第四小：针对不同的状态  定义不同的reducer  定义不同的action
+
 
 
 
