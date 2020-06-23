@@ -1,0 +1,144 @@
+------------------------
+react.js
+    构建用户界面   核心：组件/state/props/ref/事件/表单的受控和非受控/生命周期/上下文/hooks/... 
+    基于react.js的框架  DVA
+
+redux
+    集中式状态管理JS库   通常和react配合使用
+    基于redux也有些状态管理JS库。 
+
+如何把react和redux结合起来使用：react-redux。
+
+react-redux:
+    两类：
+        1）展示型组件
+        2）容器型组件
+    核心：
+        1）connect方法  把展示型组件变成容器型组件
+        2）Provider组件   让后代组件可以访问到store
+    三个1：
+        1个开发思想   smart组件    dumb组件
+        1个方法  connect(mapStateToProps,mapDispatchToProps)(展示型组件)
+        1个组件  Provider组件  
+
+
+------------------------
+react组件：
+    App
+      |--Counter
+            |--Show
+            |--Add
+            |--Sub
+
+------------------------
+redux:
+    1)准备store
+    2)之前是使用store   现在需要在react中使用store  需要react-redux 
+
+准备store:
+    action   reducer   ininState  
+
+------------------------
+现在react中的组件OK了，redux中的storeOK了，
+可以在组件中直接引入store，有了store就可以getState,dispatch。
+
+------------------------
+react-redux:
+    3个1
+
+------------------------
+在vuex中，状态也是保存在store中，通过mutations修改状态。
+如果有异步操作，如ajax请求数据，通常会把异步操作写在actions中，但是actoins中还需要commit()一个mutation。
+
+在react中，向reducer发送一个action，这个action可以是同步的action，也可能是异步的action。‘’
+
+同步的action creator:
+    action发出后，reducer立即就算出新的state，这叫同步。
+    同步的action creator只需要返回一个包含type属性的对象就OK了。
+
+异步的action creator:
+    action发出后，过一段时间再执行reducer，这就是异步。
+
+在开发webapp时，最典型异步应用就是通过axios获取数据。
+
+------------------------
+定义一个组件：AsyncAdd.js  
+
+在Conter组件中引入
+
+------------------------
+问：这个异步+的操作和同步+的操作 对 state的修改是否一样。
+答：操作提同一个state，及时是异步的，也不需要单独定义INCRMENT了。
+
+问：如何实现异步的action?
+答：在异步的action中，其实应该返回一个函数，在函数中去调用同步action。这个函数会自动获取dispath和getState。
+
+
+------------------------
+Error: Actions must be plain objects. Use custom middleware for async actions.
+原因：action必须是一个纯JS对象，如果是异步action。请使用中间件来解决。说明redux默认是不支持异步的actons定义。
+
+------------------------
+middleware: 中间件
+
+在什么地方，你听过中间件：epxress  body-parser中间件  
+
+中间件本质就是一个函数，对store.dispatch进行增强。在发出actoin和执行reducer这两步之间，添加其它功能。
+
+------------------------
+现在有没有成熟中间件来处理这种情况？
+答：有的  redux-thunk
+
+如何使用中间件？
+
+------------------------
+redux-thunk就是一个非常好用的中间件，可以让action创建函数先不返回一个aciont对象，而是
+返回一个函数，函数传递两两个参数（dispath,getState）。说白了就是一个异步的action.
+
+------------------------
+安装：yarn add redux-thunk -S 
+
+------------------------
+如何使用redux-thunk这个中间件，目的是让dispath可以派发异步的action。
+答：redux中提供了一个方法，叫applyMiddleware。
+
+------------------------
+applyMiddleware是redux中的方法，作用是将所有的中间件组成一个数组，依次执行。
+
+需要在创建store时，使用中间件，如下：看代码
+
+------------------------
+在使用redux是如果有异步操作，一般来说，需要定义两个action creator 
+1)一个是同步的action
+2)一个是异步的action   在异步的，去调用同步的action
+
+还需要使用redux-thunk中间件。 
+------------------------
+当你使用了redux-thunk中间件，那么你action就可以写成函数形式。
+
+------------------------
+第一步：定义了一个Movie组件
+第二步：找个电影接口   
+第三步：films影片内容    loading状态
+第四小：针对不同的状态  定义不同的reducer  定义不同的action
+------------------------
+------------------------
+------------------------
+------------------------
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
