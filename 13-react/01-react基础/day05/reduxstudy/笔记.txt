@@ -1,49 +1,96 @@
-刚才把所有的常量都定义在不同的文件下，如下：
-export function toggleLoading(flag){  
-    return{
-        type:"TOGGLE_LOADING",
-        flag
-    }
-}
--------------------
-export default function loading(state=false,action){
-    switch(action.type){
-        case "TOGGLE_LOADING":
-            return action.flag;
-        default:
-            return state
-    }
-}
+什么时候用到git:    
+    项目1个人开发：git
+    多人协作开发：肯定要用到git
 
--------------------------
-通常会把这些常量定义在单独的文件中，和vuex中的mution-types一个道理。
+git两大作用：
+    1）版本控制
+    2）协作开发   远程仓库
 
-常量也要集中式管理，放到constants文件中。
--------------------------
+git基本操作：
+    本地仓库：git init    git clone
+    远程仓库: github   gitee  coding   自已搭建git服务器
 
-总结：
-    redux:  
-        createStore  ----> store  | getState/dispath/subscribe
-        applyMiddware   使用redux中间件   redux-thunk
-        combineReducers   合并多个reducer为一个reducer
-        ...
+--------------------------------------
+什么时候会用到分支：
+    多人协作开发时，普通都会使用到分支管理。
 
-    store:
-        创建store 通过createStore   准备：state  action  reducer 
-        使用store getState/dispath/subscribe
-    
-    在react中使用redux，需要借助react-redux: 
-        把react和redux连接起来  
-        3个1：
-            1个思想：组件分类思想
-            1个方法：connect(mapStateToProps,{actions})(展示组件)
-            1个组件：Provider  包在App组件外  可以让后代组件访问到store
+--------------------------------------
+修改webpack的配置：
+    1）在vue中是通过vue.config.js来修改
+    2）使用 react-scripts-rewired 和 customize-cra 来自定义 create-react-app 的 webpack 配置。
 
-强调：redux通常用在大中型webapp项目中，如果是小型的webapp，能不使用就不使用。
+使用：https://www.cnblogs.com/beyonds/p/11441914.html
 
+安装：yarn add react-scripts-rewired customize-cra
 
+改写package.json 的启动命令:
+    "scripts": {
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
+        "eject": "react-scripts eject"
+    },
 
+根目录会多一个配置文件config-overrides.js （如果没有，手动新建）:
+const { override, fixBabelImports } = require('customize-cra');
 
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+    })
+);
 
+需要借助一个第三方模块，叫babel-plugin-import。实现按需导入。
 
+配置如下：
+const { override, fixBabelImports } = require('customize-cra');
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: "css",
+    })
+);
 
+只要动了配置webpack的文件，一定要重启服务器，否则配置文件不生效。
+--------------------------------------
+
+修改antd中的主题颜色：
+    1）安装less  less-loader  
+        yarn add less less-loader
+    2）找到webpack配置文件 
+
+配置如下：
+const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: "css",
+    }),
+    addLessLoader({
+        javascriptEnabled: true,
+        modifyVars: {
+            '@primary-color': '#FF0000'
+        }
+    }),
+);
+
+一定要重启服务。
+--------------------------------------
+一级中路由：
+    登录  /login
+    后台首页面   /admin    
+
+安装react-router-dom    yarn add react-router-dom 
+使用到的组件：
+    <BrowserRouter> <App> </BrowserRouter>
+    <Route><Route>  规则  匹配到组件放到Route所在位置
+    <Link>  a标签  路由跳转
+    <Switch>   只匹配第1个
+
+    配置式路由  /  编程式路由（history）
+
+--------------------------------------

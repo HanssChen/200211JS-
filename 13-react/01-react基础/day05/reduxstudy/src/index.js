@@ -1,13 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from "react-redux"
-import store from "./store/index"
-import App from './App';
+/* 打包入口 */
+import ReactDOM from "react-dom"
+import React from "react" 
+import App from "./App.jsx"
 
-// ReactDOM.render  渲染JSX或组件
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />,document.getElementById("root"))
+
