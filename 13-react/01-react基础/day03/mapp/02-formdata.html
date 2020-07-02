@@ -1,0 +1,45 @@
+
+<!-- <form action="http://localhost:8080/api/adduser" method="post">
+    用户名：<input type="text" name="user">  <br>
+    密码：<input type="text" name="password">  <br>
+    <input type="submit">
+</form> -->
+
+<script>
+    let formData = new FormData();
+    formData.append("user","lisi");
+    formData.append("password","123456");
+
+    // formData通常需要配合ajax或fetch 
+    (async ()=>{
+        try{
+            let res = await fetch("http://localhost:8080/api/adduser",{
+                method:"POST",
+                body:formData
+            })
+            let {ok, data} = await res.json();
+            if(ok){
+                console.log(data)
+                console.log("添加成功")
+            }else{
+                console.log("出错了")
+            }
+        }catch(err){
+            console.log("出错了")
+        }
+    })()
+</script>
+
+
+<script>
+    // formData 是一个容器 
+
+    // 问：可以向服务器提交数据，通常是Post请求，都有哪些方式可以发送post请求？
+    // 答：表单   ajax   postman   fetch    原生App也有Post请求方式   桌面软件也有POST请求方案
+
+    // 你要把数据扔给服务器，你需要把数据装到一个容器中，这个容器就是formdata。
+    // 不管是表单，还是ajax，发送post请求，都需要把数据装到formdata容器中
+
+    // 表单：
+
+</script>

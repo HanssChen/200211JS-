@@ -1,0 +1,164 @@
+什么时候用到git:    
+    项目1个人开发：git
+    多人协作开发：肯定要用到git
+
+git两大作用：
+    1）版本控制
+    2）协作开发   远程仓库
+
+git基本操作：
+    本地仓库：git init    git clone
+    远程仓库: github   gitee  coding   自已搭建git服务器
+
+--------------------------------------
+什么时候会用到分支：
+    多人协作开发时，普通都会使用到分支管理。
+
+--------------------------------------
+修改webpack的配置：
+    1）在vue中是通过vue.config.js来修改
+    2）使用 react-scripts-rewired 和 customize-cra 来自定义 create-react-app 的 webpack 配置。
+
+使用：https://www.cnblogs.com/beyonds/p/11441914.html
+
+安装：yarn add react-scripts-rewired customize-cra
+
+改写package.json 的启动命令:
+    "scripts": {
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
+        "test": "react-app-rewired test",
+        "eject": "react-scripts eject"
+    },
+
+根目录会多一个配置文件config-overrides.js （如果没有，手动新建）:
+const { override, fixBabelImports } = require('customize-cra');
+
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+    })
+);
+
+需要借助一个第三方模块，叫babel-plugin-import。实现按需导入。
+
+配置如下：
+const { override, fixBabelImports } = require('customize-cra');
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: "css",
+    })
+);
+
+只要动了配置webpack的文件，一定要重启服务器，否则配置文件不生效。
+--------------------------------------
+
+修改antd中的主题颜色：
+    1）安装less  less-loader  
+        yarn add less less-loader
+    2）找到webpack配置文件 
+
+配置如下：
+const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+module.exports = override(
+    fixBabelImports('import', { //配置按需加载
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: "css",
+    }),
+    addLessLoader({
+        javascriptEnabled: true,
+        modifyVars: {
+            '@primary-color': '#FF0000'
+        }
+    }),
+);
+
+一定要重启服务。
+--------------------------------------
+一级中路由：
+    登录  /login
+    后台首页面   /admin    
+
+安装react-router-dom    yarn add react-router-dom 
+使用到的组件：
+    <BrowserRouter> <App> </BrowserRouter>
+    <Route><Route>  规则  匹配到组件放到Route所在位置
+    <Link>  a标签  路由跳转
+    <Switch>   只匹配第1个
+
+    配置式路由  /  编程式路由（history）
+
+--------------------------------------
+
+二级路由：
+    Home界面   /home   home.jsx
+
+    分类管理   /category   category.jsx
+    商品管理   /product   product.jsx
+        三级路由：
+            主界面   /product/index  index.jsx
+            添加/更新   /product/saveupdata   add-update.jsx
+            详情    /product/detail   detail.jsx 
+    用户管理   /user   user.jsx
+    权限管理   /role  role.jsx
+
+--------------------------------------
+天气接口：  jsonp发出的
+    http://api.map.baidu.com/telematics/v3/weather?location=郑州&output=json&ak=3p49MVra6urFRGOT9s8UBWr2
+
+
+问：都有什么东西可以发出请求？
+答：浏览器  img src   a href   script src    ajax     爬虫   postman    app...
+
+jsonp请求：
+    说到json:想到跨域
+    原理：script  src发出请求   不是ajax请求    src发出的请求有跨域问题吗？  没有
+
+不是ajax请求，不能使用axios。axios对原生的ajax的封装。
+
+--------------------------------------
+
+发出jonsp请求：
+    jsonp  模块     发出jonsp请求。
+    安装：yarn add jsonp  
+
+
+--------------------------------------
+商品管理： 
+    商品列表  （查）
+    添加商品  （增）
+    更新商品  （改）
+    删除商品  （删）
+
+    /product   商品列表 （有列表基本上都有详情）
+    /product/addupdate   添加商品（修改）
+    /product/detail  商品详情  
+
+准备组件
+
+搭建路由  
+
+{
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    isLeaf: false,
+    children：[
+            {
+                label: `${targetOption.label} Dynamic 1`,
+                value: 'dynamic1',
+                isLeaf: true,
+            },
+            {
+                label: `${targetOption.label} Dynamic 2`,
+                value: 'dynamic2',
+                isLeaf: true,
+            },
+    ]
+}
+
+

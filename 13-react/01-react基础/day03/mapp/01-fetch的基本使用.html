@@ -1,0 +1,42 @@
+<script>
+// ------------------------ fetch的基本使用
+// /public/users.txt  --->  http://localhost:3002/public/users.txt
+// fetch("/data/users.json").then(res=>{
+//   // console.log(res)
+//   let {ok} = res;
+//   if(ok){
+//     alert("成功")
+//   }else{
+//     alert("失败")
+//   }
+
+//   // console.log(res.json())   promise
+
+//   // 无法解析对方的数据  也可能失败
+//   res.json().then((data)=>{
+//     console.log(data)
+//   },(err)=>{
+//     alert("失败")
+//   })
+// },err=>{
+//   console.log(err)
+// })
+
+// ----------------------------------
+// .json  json方式解析  非常多
+// .blob   不解析  天然二进制   src="blob"
+// .formData   
+// .text  文本
+// .arrayBuffer   把数据解析成二进制数组
+
+// ----------------------------------
+(async ()=>{
+    try{
+        let res = await fetch("/data/users.json");
+        let data = await res.json();
+        console.log(data)
+    }catch(err){
+        alert("有错")
+    }
+})()
+</script>
