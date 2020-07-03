@@ -1,0 +1,5 @@
+<!--pages/cart/cart.wxml-->
+<text>购物车</text>
+
+<!-- 渲染出电影数据 -->
+<text wx:for="{{films}}">{{item.name}}</text>

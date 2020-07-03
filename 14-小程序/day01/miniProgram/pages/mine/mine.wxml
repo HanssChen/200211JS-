@@ -1,0 +1,65 @@
+<!--pages/mine/mine.wxml-->
+<text class="box">我的</text>
+
+<!-- 1）数据绑定 -->
+<text>{{message}}</text>
+
+<!-- 2）列表渲染 -->
+<view wx:for="{{listArr}}" wx:key="index">{{item}}</view>
+
+<!-- 3）事件 -->
+<view>当前计数：{{number}}</view>
+<button size="mini" bind:tap="increment">加1</button>
+<button size="mini" bind:tap="decrement">减1</button>
+
+<!-- 4）MVVM -->
+
+<!-- 5）各种配置(json) -->
+<!-- 为什么小程序需要配置 -->
+<!-- 提升开发效率/项目风格一致 -->
+<!-- 导航栏/TabBar/页面路由等 -->
+
+<!-- 6）都有哪些配置 -->
+<!-- a）project.config.json 项目配置 -->
+<!-- b) sitemap.json 类似于SEO -->
+<!-- c) app.json 项目的全局配置 -->
+<!-- d) page.json 当前页面的配置 -->
+<!-- e) component.json 当前组件的配置 -->
+
+<!-- 7) app.json 全局配置-->
+<!-- pages  页面列表 -->
+<!-- window  全局默认窗口 -->
+<!-- tabBar  底部tab栏 -->
+
+<!-- 8）page.json 页面级配置 -->
+<!-- 如果没有，就使用全局配置，如果有就使用页面级配置 -->
+
+<!-- 9）小程序的执行流程 -->
+<!-- 
+  a) 下载小程序包
+  b) 启动小程序
+  c) 加载并解析app.json
+  d) 注册App()  执行App生命周期函数
+  e) 加载自定义组件代码 注册自定义组件 分别处理下面三个东西
+     ==>加载解析page.json
+     ==>加载渲染page.wxml
+     ==>注册Page() 执行Page的生命周期
+ -->
+
+ <!-- 10）执行App生命周期函数 -->
+ <!-- 
+   onLaunch: 小程序初始化完调用  只调用1次   1)获取用户信息 ...
+   onShow: 从后台切到前台调用  1)判断你是从哪个场景进来的
+   onHide: 从前台切到后台调用  
+   onError: 有错误时，就调用
+  -->
+
+  <!-- 11）打开一个小程序场景 -->
+  <!-- a) 小程序列表中 -->
+  <!-- b) 群聊窗口中打开小程序 -->
+  <!-- b) 扫一扫 -->
+  <!-- b) 另一个小程序中打开 -->
+
+   <!-- 12）执行Page的生命周期 -->
+
+   
