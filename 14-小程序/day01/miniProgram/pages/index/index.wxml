@@ -1,0 +1,88 @@
+<!-- WXML基本格式 -->
+<!-- 1）可以写成单标签，也可以写成双标签 -->
+<!-- 2）标签必须闭合  和react比较像 -->
+<!-- 3）区分大小写  class  Class -->
+
+<!-- WXML中展示数据 -->
+<!-- 一般情况下，页面中的数据都不是写死的，和vue一样，通过Mustache语法（双大括号） -->
+
+<text>\n---------5，模板 ---------\n</text>
+
+
+<text>\n---------4，block ---------\n</text>
+<!-- block没有任何语义 -->
+<view wx:if="{{true}}">
+  <view>张三</view>
+  <view>10</view>
+</view>
+<block wx:if="{{true}}">
+  <view>张三</view>
+  <view>10</view>
+</block>
+
+<view wx:for="{{['周杰伦','刘德华','黎明']}}">
+  <view>序号：{{index}}</view>
+  <view>姓名：{{item}}</view>
+</view>
+
+<block wx:for="{{['周杰伦','刘德华','黎明']}}">
+  <view>序号：{{index}}</view>
+  <view>姓名：{{item}}</view>
+</block>
+
+
+<text>\n---------3，列表渲染 ---------\n</text>
+<view>
+	<!-- 遍历数组 -->
+	<view wx:for="{{['wangcai','xiaoqiang','zhangsan','lisi']}}" wx:key="{{index}}">{{index}}:{{item}}</view>
+	<!-- 遍历字符串 -->
+	<view  wx:for="你好 小程序  hello" wx:key="{{index}}">{{index}}:{{item}}</view>
+  <!-- 遍历对象(之前是是能遍历对象) -->
+  <view wx:for="{{ {name:'xxx',age:10} }}">{{index}} : {{item}}</view>
+  <!-- 遍历数字 -->
+  <view wx:for="{{5}}" wx:key="{{index}}">{{index}}:{{item}}</view>
+  <!-- 指定item或index的别名 -->
+  <view 
+    wx:for="{{['周杰伦','刘德华','黎明']}}" 
+    wx:key="{{index}}"
+    wx:for-item="singer"
+    wx:for-index="i"
+    wx:key="i"
+  >{{i}}:{{singer}}</view>
+</view>
+
+
+<text>\n---------2，逻辑判断 ---------\n</text>
+
+<!-- wx:if 控制是的一个组件是否渲染 -->
+<view>
+	<button bindtap="f1">控制</button>
+	<view style="background-color:red; width:100px; height:100px" wx:if="{{isShow}}">是否渲染</view>
+
+	<!-- 多选一  多个条件判断 -->
+	<button size="mini" type="primary" bindtap="onIncrement">+10</button>
+	<view>我的成绩：{{score}}</view>
+	<view wx:if="{{score >= 90}}">优秀</view>
+	<view wx:elif="{{score >= 80}}">良好</view>
+	<view wx:elif="{{score >= 60}}">及格</view>
+	<view wx:else>不及格</view>
+
+	<!-- hidden属性控制盒子的显示和隐藏 -->
+	<view>
+		<button size="mini" type="primary" bindtap="onToggle">切换</button>
+		<view hidden="{{isHidden}}" style="background-color:green; width:100px; height:100px">是否隐藏</view>
+	</view>
+</view>
+
+<text>\n---------1，Mustache语法---------\n</text>
+<view>
+	<!-- 1.1 数据展示 -->
+	<view>{{message}}</view>
+	<view>{{message}} {{site}}</view>
+	<view>变化的身高:{{height}}</view>
+	<view>变化的年龄:{{age}}</view>
+
+	<!-- 1.2 表达式（任何有值的都是表达式） -->
+	<view>{{age >= 18 ? "成年人":"未成年人"}}</view>
+	<view>{{age*10 + "岁"}}</view>
+</view>

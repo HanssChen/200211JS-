@@ -1,65 +1,46 @@
-<!--pages/mine/mine.wxml-->
-<text class="box">我的</text>
+<text>\n---------UI库---------\n</text>
+<!-- 扩展能力中可以找到 -->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">SearchBar</view>
+        <view class="page__desc">搜索栏</view>
+    </view>
+    <view class="page__bd">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+</view>
 
-<!-- 1）数据绑定 -->
-<text>{{message}}</text>
 
-<!-- 2）列表渲染 -->
-<view wx:for="{{listArr}}" wx:key="index">{{item}}</view>
+<text>\n---------样式导入---------\n</text>
+<!-- 有时候为了方便管理，一个页面的样式可能在不同的wxss中，此时就需要导入 -->
+<!-- 可以在一个wxss中导入另一个wxss文件：使用@import进行导入，后面必须加分号 -->
+<button>登录</button>
 
-<!-- 3）事件 -->
-<view>当前计数：{{number}}</view>
-<button size="mini" bind:tap="increment">加1</button>
-<button size="mini" bind:tap="decrement">减1</button>
+<text>\n---------小程序中的单位---------\n</text>
+<!-- 前面写的单位都是px -->
+<!-- 适配：大屏显示大盒子  小屏显示小盒子 -->
+<!-- rpx  responsive  可以根据屏幕的宽度进行自适应，默认规定屏幕宽度是750px -->
+<!-- 如 iphone6  屏幕宽度是375  共有750个物理像素 -->
+<!-- 750rpx = 375px -->
+<!-- 1物理像素 = 0.5px = 1rpx -->
+<view class="box3">px</view>
+<view class="box4">rpx</view>
 
-<!-- 4）MVVM -->
+<text>\n---------支持的选择器---------\n</text>
+<text>\n  class  \n</text>
+<text>\n  id  \n</text>
+<text>\n  element   标签选择器  \n</text>
+<text>\n  view, text  分组选择器  \n</text>
+<text>\n  ::after 伪元素 在view组件后边插件内容 \n</text>
+<text>\n  ::before 伪元素  在view组件前面插件内容 \n</text>
 
-<!-- 5）各种配置(json) -->
-<!-- 为什么小程序需要配置 -->
-<!-- 提升开发效率/项目风格一致 -->
-<!-- 导航栏/TabBar/页面路由等 -->
 
-<!-- 6）都有哪些配置 -->
-<!-- a）project.config.json 项目配置 -->
-<!-- b) sitemap.json 类似于SEO -->
-<!-- c) app.json 项目的全局配置 -->
-<!-- d) page.json 当前页面的配置 -->
-<!-- e) component.json 当前组件的配置 -->
+<text>\n---------样式的三种写法---------\n</text>
+<!-- 1）行内样式 -->
+<text style="color:red;font-size:30px">行内样式</text>
+<!-- 2）页面样式 -->
+<view class="box">外部样式</view>
+<!-- 3) 全局样式 定义在app.wxss中 -->
+<view class="main">全局样式</view>
+<!-- 优先级：行内样式 > 页面样式 > 全局样式 -->
 
-<!-- 7) app.json 全局配置-->
-<!-- pages  页面列表 -->
-<!-- window  全局默认窗口 -->
-<!-- tabBar  底部tab栏 -->
-
-<!-- 8）page.json 页面级配置 -->
-<!-- 如果没有，就使用全局配置，如果有就使用页面级配置 -->
-
-<!-- 9）小程序的执行流程 -->
-<!-- 
-  a) 下载小程序包
-  b) 启动小程序
-  c) 加载并解析app.json
-  d) 注册App()  执行App生命周期函数
-  e) 加载自定义组件代码 注册自定义组件 分别处理下面三个东西
-     ==>加载解析page.json
-     ==>加载渲染page.wxml
-     ==>注册Page() 执行Page的生命周期
- -->
-
- <!-- 10）执行App生命周期函数 -->
- <!-- 
-   onLaunch: 小程序初始化完调用  只调用1次   1)获取用户信息 ...
-   onShow: 从后台切到前台调用  1)判断你是从哪个场景进来的
-   onHide: 从前台切到后台调用  
-   onError: 有错误时，就调用
-  -->
-
-  <!-- 11）打开一个小程序场景 -->
-  <!-- a) 小程序列表中 -->
-  <!-- b) 群聊窗口中打开小程序 -->
-  <!-- b) 扫一扫 -->
-  <!-- b) 另一个小程序中打开 -->
-
-   <!-- 12）执行Page的生命周期 -->
-
-   

@@ -1,2 +1,118 @@
-<!--pages/home/home.wxml-->
-<text>Hello 小程序~</text>
+<text>\n---------组件的共同属性---------\n</text>
+<text>\n id  string  组件的唯一标识  整个页面唯一 \n</text>
+<text>\n class  string  组件的样式类  wxss文件中定义的样式 \n</text>
+<text>\n style  string  行内样式  设置样式样式 \n</text>
+<text>\n hidden  Boolean  控制组件是否显示  所有组件默认都是显示的 \n</text>
+<text>\n data-*  Any   自定义属性  \n</text>
+<text>\n bind***/catch***   EventHandler   组件的事件  \n</text>
+
+
+<text>\n---------滚动视图部分---------\n</text>
+<!-- A 水平滚动 -->
+<scroll-view class="container-x" scroll-x="true">
+  <view class="item1" wx:for="{{10}}" wx:key="{{index}}">{{item}}</view>
+</scroll-view>
+<!-- B 垂直滚动 -->
+<scroll-view class="container-y" scroll-y="true">
+  <view class="item2" wx:for="{{10}}" wx:key="{{index}}">{{item}}</view>
+</scroll-view>
+
+<text>\n---------输入框部分---------\n</text>
+<input type="text" placeholder="请输入用户名"></input>
+<input type="password" placeholder="请输入密码"></input>
+<input confirm-type="搜索"></input>
+<input 
+  bindinput=""
+  bindfocus="" 
+  bindblur=""
+  bindconfirm=""
+></input>
+
+<text>\n---------图片部分---------\n</text>
+<!-- image 组件可单可双  有默认的大小 300*240 -->
+<!-- 行内组件 -->
+
+<!-- image的基本使用 -->
+<image src="../../assets/img/m1.jpg"></image>
+<image src="/assets/img/m2.jpg"></image>
+<image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1597667518,776694662&fm=26&gp=0.jpg"></image>
+
+<!-- 拍照 或 选择照片 -->
+<button bindtap="handleChooseImgs">拍照/相册</button>
+<image src="{{imgPath}}"></image>
+
+<!-- 长按图片出现识别小程序码 -->
+<image src="/assets/img/m2.jpg" show-menu-by-longpress></image>
+
+
+<text>\n---------视图部分---------\n</text>
+<!-- view组件：块级元素 独占一行 通常是作为容器来使用 类似div -->
+<view>hello 小程序</view>
+<view class="box">hello 小程序</view>
+
+<!-- view 嵌套 -->
+<view class="box1" hover-class="hover-box1">
+  <view 
+    class="box2" 
+    hover-class="hover-box2" 
+    hover-stop-propagation="true"
+    hover-stay-time="0"
+  >box2</view>
+</view>
+
+<text>\n---------按钮部分---------\n</text>
+<!-- 默认按钮 -->
+<button>默认按钮</button>
+<!-- size 设置按钮大小 -->
+<button size="mini">MINI按钮</button>
+<button size="mini">MINI按钮</button>
+<!-- type属性 -->
+<button type="primary">登录</button>
+<button type="warn">注册</button>
+<!-- 镂空按钮 -->
+<button plain="true" type="primary">登录</button>
+<button plain="true" type="primary">登录</button>
+<!-- 不可用 -->
+<button type="primary" disabled="true">登录</button>
+<!-- loading -->
+<button type="primary" loading="true">登录</button>
+<!-- hover-class -->
+<button hover-class="pressed">默认按钮</button>
+<!-- open-type：share -->
+<button open-type="share">程序分享</button>
+<!-- open-type：contact -->
+<button open-type="contact">客服会话</button>
+<!-- open-type：getPhoneNumber -->
+<button open-type="getPhoneNumber">获取电话</button>
+
+
+<text>\n---------文本部分---------\n</text>
+<!-- 1）text组件 -->
+<!-- 作用：显示文本，类似于span，是行内元素  -->
+<text>我们text组件\n</text>
+<text>我们text组件\n</text>
+
+<!-- selecttable 文本是否可选 -->
+<text selectable="true">长按选中\n</text>
+<text selectable>长按选中\n</text>
+
+<!-- space 空格 -->
+<text space="ensp">hello 小程序 \n</text>
+<text space="emsp">hello 小程序 \n</text>
+<text space="nbsp">hello 小程序 \n</text>
+
+<!-- decode 是否解码 -->
+<text> 10 &gt; 8 \n</text>
+<text decode="true"> 10 &gt; 8 \n</text>
+<text decode="true"> &nbsp; &lt; &gt; &amp; &apos; &ensp; &emsp; \n</text>
+
+<!-- 
+小程序常用组件：
+  1）text组件
+  2）button组件
+  3）view组件
+  4）image组件
+  5）input组件
+  6）scroll-view组件
+ -->
+

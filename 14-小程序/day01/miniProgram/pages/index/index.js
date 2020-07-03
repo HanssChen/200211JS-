@@ -1,0 +1,34 @@
+Page({
+  data: {
+    message:"hello 小程序",
+    site:"http://www.baidu.com",
+    height:1,
+    age:10,
+    isShow:true,
+    score:10,
+    isHidden:true
+  },
+  onLoad(){
+    setInterval(()=>{
+      this.setData({
+        height:++this.data.height,
+        age:++this.data.age
+      })
+    },1000)
+  },
+  f1(){
+    this.setData({
+      isShow:!this.data.isShow
+    })
+  },
+  onIncrement(){
+    this.setData({
+      score:this.data.score+10
+    })
+  },
+  onToggle(){
+    this.setData({
+      isHidden:!this.data.isHidden
+    })
+  }
+})

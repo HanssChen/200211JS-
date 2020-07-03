@@ -1,11 +1,11 @@
-// pages/mine/mine.js
+// pages/template/template.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    item:{index:0,title:'牛津大学', content:'University of Oxford: The lord is my light'}
   },
 
   /**

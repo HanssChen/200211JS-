@@ -1,6 +1,8 @@
 /* pages/mine/mine.wxss */
-
+@import "./style/box3.wxss";
+@import "./style/box4.wxss";
+@import "../../style/common.wxss";
 .box{
-  background-color: red;
   font-size: 30px;
+  color: gold;
 }
