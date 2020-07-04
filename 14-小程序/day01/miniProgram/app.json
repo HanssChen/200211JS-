@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/mine/mine",
-    "pages/index/index",
-    "pages/home/home"
+    "pages/show/show",
+    "pages/net/net"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -11,8 +10,7 @@
     "navigationBarTitleText": "小程序",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents":{
-    "my-common":"/components/common/common"
+  "usingComponents": {
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

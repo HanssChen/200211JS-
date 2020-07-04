@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "my-price":"/components/price/price"
-  }
-}
