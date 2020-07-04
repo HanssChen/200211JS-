@@ -1,19 +1,18 @@
 {
   "pages": [
-    "pages/template/template",
-    "pages/index/index",
     "pages/mine/mine",
-    "pages/home/home",
-    "pages/item/item",
-    "pages/header/header",
-    "pages/footer/footer"
+    "pages/index/index",
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "backgroundColor": "#f00",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "组件学习",
+    "navigationBarTitleText": "小程序",
     "navigationBarTextStyle": "black"
+  },
+  "usingComponents":{
+    "my-common":"/components/common/common"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

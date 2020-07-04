@@ -1,34 +1,57 @@
+// pages/index/index.js
 Page({
   data: {
-    message:"hello 小程序",
-    site:"http://www.baidu.com",
-    height:1,
-    age:10,
-    isShow:true,
-    score:10,
-    isHidden:true
+    singers:["周杰伦","刘德华","黎明"],
+    currentIndex:0,
   },
-  onLoad(){
-    setInterval(()=>{
-      this.setData({
-        height:++this.data.height,
-        age:++this.data.age
-      })
-    },1000)
+  onButtonTap(event){
+    console.log(event)
+    console.log("点击了")
   },
-  f1(){
+  onTouchStart(){
+    // console.log("onTouchStart")
+  },
+  onTouchMove(){
+    // console.log("onTouchMove")
+  },
+  onTouchEnd(){
+    // console.log("onTouchEnd")
+  },
+  onTouchCancel(){
+    // console.log("onTouchCancel")
+  },
+  onTap(){
+    // console.log("onTap")
+  },
+  onLongTap(){
+    // console.log("onLongTap")
+  },
+  onClick(e){
+    console.log(e)
+    console.log("onClick")
+  },
+  onTabOne(a,b,c){
+    // 是得不到数据的
+    console.log("-------------")
+    console.log(a,b,c)
+  },
+  handleItemTap(e){
+    // console.log(e)
+    // console.log("-------------")
+
+    const index = e.currentTarget.dataset.index;
+    // console.log(index)
     this.setData({
-      isShow:!this.data.isShow
+      currentIndex:index
     })
   },
-  onIncrement(){
-    this.setData({
-      score:this.data.score+10
-    })
+  onCountry(){
+    console.log("onCountry")
   },
-  onToggle(){
-    this.setData({
-      isHidden:!this.data.isHidden
-    })
+  onPri(){
+    console.log("onPri")
+  },
+  onCity(){
+    console.log("onCity")
   }
 })

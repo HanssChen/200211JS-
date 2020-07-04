@@ -1,0 +1,5 @@
+<view class="box">
+  <image src="/assets/img/list.png"></image>
+  <view>天猫国际</view>
+  <my-price />
+</view>

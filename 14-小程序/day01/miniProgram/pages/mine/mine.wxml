@@ -1,46 +1,59 @@
-<text>\n---------UI库---------\n</text>
-<!-- 扩展能力中可以找到 -->
-<view class="page">
-    <view class="page__hd">
-        <view class="page__title">SearchBar</view>
-        <view class="page__desc">搜索栏</view>
-    </view>
-    <view class="page__bd">
-        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
-    </view>
-</view>
+<!-- 
+  自定义组件的步骤：
+    1）定义一个组件   新建的是Component
+    2) 在page页面中的json文件中把component字段设置为true
+    3）在page页面的wxml中使用组件
+ -->
 
+<!-- 1，使用自定义组件 -->
+<my-list />
+<my-list />
+<my-list />
+<my-list />
 
-<text>\n---------样式导入---------\n</text>
-<!-- 有时候为了方便管理，一个页面的样式可能在不同的wxss中，此时就需要导入 -->
-<!-- 可以在一个wxss中导入另一个wxss文件：使用@import进行导入，后面必须加分号 -->
-<button>登录</button>
+<!-- 
+  注意的细节：
+  1）自定义组件和页面所在项目根目录下不能有为 "wx-" 打头的东西，如果有就报错
+  2）如果在app.json的useingComponents声明某个组件，所有的页面和组件都可以直接使用了
+ -->
 
-<text>\n---------小程序中的单位---------\n</text>
-<!-- 前面写的单位都是px -->
-<!-- 适配：大屏显示大盒子  小屏显示小盒子 -->
-<!-- rpx  responsive  可以根据屏幕的宽度进行自适应，默认规定屏幕宽度是750px -->
-<!-- 如 iphone6  屏幕宽度是375  共有750个物理像素 -->
-<!-- 750rpx = 375px -->
-<!-- 1物理像素 = 0.5px = 1rpx -->
-<view class="box3">px</view>
-<view class="box4">rpx</view>
+ <!-- 2，使用全局组件 -->
+ <my-common />
+ <my-common />
+ <my-common />
+ <my-common />
 
-<text>\n---------支持的选择器---------\n</text>
-<text>\n  class  \n</text>
-<text>\n  id  \n</text>
-<text>\n  element   标签选择器  \n</text>
-<text>\n  view, text  分组选择器  \n</text>
-<text>\n  ::after 伪元素 在view组件后边插件内容 \n</text>
-<text>\n  ::before 伪元素  在view组件前面插件内容 \n</text>
+ <!-- 
+   3，样式问题
 
+  A——组件内的样式对外部样式的影响 
+   1）组件内class样式，只对组件的wxml内的节点起作用，对于引用组件的Page页面不生效。
+   2）组件内写样式，不要使用ID选择器，标签选择器，属性选择器
 
-<text>\n---------样式的三种写法---------\n</text>
-<!-- 1）行内样式 -->
-<text style="color:red;font-size:30px">行内样式</text>
-<!-- 2）页面样式 -->
-<view class="box">外部样式</view>
-<!-- 3) 全局样式 定义在app.wxss中 -->
-<view class="main">全局样式</view>
-<!-- 优先级：行内样式 > 页面样式 > 全局样式 -->
+  B-外部的样式 对 组件内样式 的影响  
+    1）外部使用了class样式，只对外部wxml中的节点生效，对组件内的样式不起效果
+    2）外部使用了ID选择器，属性选择器不会对组件内样式生产影响 
+    3）如果使用了标签选择器，就会对组件内的样式造成影响 
 
+  总结：
+    1）如果组件使用class写样式，组件外也使用class写样式，默认就有一个隔离效果。
+    2）如果使用ID选择器，标签选择器，属性选择器，可能造成样式的混乱，官方不推荐使用ID选择器，标签选择器，属性选择器。
+
+  -->
+
+<!-- 
+  4，组件间的通信  
+    父传子
+    子传父
+
+  父传子：properties
+  子传父：自定义事件
+
+  -->
+
+<!-- 
+  5，向组件传递样式 
+    exteralClasses 
+ -->
+  
+ 

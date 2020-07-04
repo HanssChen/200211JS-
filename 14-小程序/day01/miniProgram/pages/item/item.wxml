@@ -1,3 +1,0 @@
-<template name="item">
-  <view>我是item中的模板：{{title}}</view>
-</template>

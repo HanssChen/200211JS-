@@ -1,17 +1,66 @@
 // pages/home/home.js
 Page({
-  data:{
-    imgPath:""
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+
   },
-  handleChooseImgs(){
-    wx.chooseImage({
-      success:res=>{
-        // console.log(res.tempFilePaths)
-        let path = res.tempFilePaths; // 得到路径
-        this.setData({
-          imgPath:path
-        })
-      }
-    })
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })
