@@ -1,0 +1,16 @@
+<view class="container">
+  页面详情
+  <text>姓名：{{name}}, 年龄：{{age}}</text>
+</view>
+
+<!-- 继续跳转到评论页面 -->
+<navigator url="/pages/commont/commont">跳转到评论页面</navigator>
+
+<!-- 页面中返回 -->
+<navigator open-type="navigateBack">页面中返回</navigator>
+
+<!-- 通过一个按钮的点击事件返回 -->
+<button size="mini" bindtap="onBackBtn">返回上一级</button>
+
+
+

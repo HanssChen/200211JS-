@@ -1,0 +1,11 @@
+<text>评论页面</text>
+
+<!-- 两种实现返回的方式 -->
+<navigator open-type="navigateBack">返回</navigator>
+<button size="mini" bindtap="onBackBtn">返回上一级</button>
+<button size="mini" bindtap="onBackHome">返回首页</button>
+
+
+
+
+

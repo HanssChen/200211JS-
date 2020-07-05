@@ -1,0 +1,37 @@
+1）手机号码登录：
+https://juejin.im/auth/type/phoneNumber
+方式：POST  参数：phoneNumber, password
+
+2) 邮箱登录
+https://juejin.im/auth/type/email
+方式：POST  参数：email，password
+
+3）用户信息获取
+https://user-storage-api-ms.juejin.im/v1/getUserInfo
+方式：GET   参数： src: 'web',  device_id,  uid,  token, current_uid
+
+4） 消息中心消息条数
+https://ufp-api-ms.juejin.im/v1/getUserNotificationNum
+方式：GET  参数： src, uid, token
+
+5）首页热门推荐
+https://timeline-merger-ms.juejin.im/v1/get_entry_by_timeline
+方式：GET  参数：  src: 'web', limit, category: 'all', recomment: 1, before
+
+6）文章详情-摘要
+https://timeline-merger-ms.juejin.im/v1/get_entry_by_ids
+方式：GET  参数：  src: 'web',  entryIds
+
+7）文章详情-内容
+https://entry-view-storage-api-ms.juejin.im/v1/getEntryView
+方式：GET   参数：  src: 'web',  entryId
+
+8）获取已订阅标签
+https://gold-tag-ms.juejin.im/v1/user/${auth.uid}/subscribe
+方式：HEADER  参数： 'X-Juejin-Src': 'web',  'X-Juejin-Client': auth.clientId || '',   'X-Juejin-Token': auth.token || '',  'X-Juejin-Uid': auth.uid || '',
+
+9）获取推荐标签
+https://gold-tag-ms.juejin.im/v1/tags/type/hot/suggest/category/page/${page}/pageSize/100
+方式：HEADER  参数： 'X-Juejin-Src',  'X-Juejin-Client',   'X-Juejin-Token',  'X-Juejin-Uid', 'page'
+
+

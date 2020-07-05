@@ -1,0 +1,45 @@
+<!-- 1，页面跳转 -->
+<navigator url="/pages/detail/detail">跳转</navigator>
+
+<view>-----------------------------</view>
+<!-- 2，open-type -->
+<navigator 
+  url="/pages/detail/detail"
+  open-type="navigate"
+>跳转(open-type="navigate")</navigator>
+
+<view>-----------------------------</view>
+<!-- 关闭当前页面，跳转到应用内的某个页面。但是不允许跳转到 tabbar 页面。 -->
+<navigator 
+  url="/pages/detail/detail"
+  open-type="redirect"
+>跳转(open-type="redirect")</navigator>
+
+<view>-----------------------------</view>
+<navigator 
+  url="/pages/mine/mine"
+  open-type="switchTab"
+>跳转(open-type="switchTab")</navigator>
+
+<view>-----------------------------</view>
+<!-- 关闭所有页面，打开到应用内的某个页面 -->
+<navigator 
+  url="/pages/detail/detail"
+  open-type="reLaunch"
+>跳转(open-type="reLaunch")</navigator>
+
+<view>-----------------------------</view>
+<navigator 
+  url="/pages/detail/detail?name=wangcai&age=100"
+  open-type="navigate"
+>跳转(传递数据)</navigator>
+
+<view>-----------------------------</view>
+<view>{{site}}</view>
+
+<view>-----------------------------</view>
+
+
+
+
+
